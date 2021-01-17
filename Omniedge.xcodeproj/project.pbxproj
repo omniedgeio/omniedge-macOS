@@ -7,13 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
+		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0B9B781F25B4547A00BB415D /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B781E25B4547A00BB415D /* uninstall.sh */; };
+		0B9B784625B4609C00BB415D /* SMJobBlessUtil.py in Resources */ = {isa = PBXBuildFile; fileRef = 0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */; };
 		0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */; };
 		0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */; };
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
 		0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0B7575C325B4516E00601DC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BBF0F7725AB52FC001E9B2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B7575B725B44FF900601DC7;
+			remoteInfo = HelperTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0B7575B625B44FF900601DC7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		0B7575C525B4517B00601DC7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = io.omniedge.mac.Omniedge.HelperTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B7575BA25B44FF900601DC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0B7575C125B4507100601DC7 /* HelperTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelperTool-Info.plist"; sourceTree = "<group>"; };
+		0B7575C225B4508C00601DC7 /* Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Launchd.plist; sourceTree = "<group>"; };
+		0B9B781E25B4547A00BB415D /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SMJobBlessUtil.py; sourceTree = "<group>"; };
 		0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omniedge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -24,6 +66,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0B7575B525B44FF900601DC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0BBF0F7C25AB52FC001E9B2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,11 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B7575B925B44FF900601DC7 /* HelperTool */ = {
+			isa = PBXGroup;
+			children = (
+				0B7575BA25B44FF900601DC7 /* main.swift */,
+				0B7575C125B4507100601DC7 /* HelperTool-Info.plist */,
+				0B7575C225B4508C00601DC7 /* Launchd.plist */,
+			);
+			path = HelperTool;
+			sourceTree = "<group>";
+		};
 		0BBF0F7625AB52FC001E9B2C = {
 			isa = PBXGroup;
 			children = (
 				0BBF0F8125AB52FC001E9B2C /* Omniedge */,
+				0B7575B925B44FF900601DC7 /* HelperTool */,
 				0BBF0F8025AB52FC001E9B2C /* Products */,
+				0B9B781E25B4547A00BB415D /* uninstall.sh */,
+				0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */,
+				0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,6 +137,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0B7575B725B44FF900601DC7 /* HelperTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B7575BC25B44FF900601DC7 /* Build configuration list for PBXNativeTarget "HelperTool" */;
+			buildPhases = (
+				0B7575B425B44FF900601DC7 /* Sources */,
+				0B7575B525B44FF900601DC7 /* Frameworks */,
+				0B7575B625B44FF900601DC7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelperTool;
+			productName = HelperTool;
+			productReference = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */;
+			productType = "com.apple.product-type.tool";
+		};
 		0BBF0F7E25AB52FC001E9B2C /* Omniedge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BBF0F8F25AB52FD001E9B2C /* Build configuration list for PBXNativeTarget "Omniedge" */;
@@ -81,10 +161,12 @@
 				0BBF0F7B25AB52FC001E9B2C /* Sources */,
 				0BBF0F7C25AB52FC001E9B2C /* Frameworks */,
 				0BBF0F7D25AB52FC001E9B2C /* Resources */,
+				0B7575C525B4517B00601DC7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0B7575C425B4516E00601DC7 /* PBXTargetDependency */,
 			);
 			name = Omniedge;
 			productName = Omniedge;
@@ -100,6 +182,9 @@
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					0B7575B725B44FF900601DC7 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					0BBF0F7E25AB52FC001E9B2C = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -119,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				0BBF0F7E25AB52FC001E9B2C /* Omniedge */,
+				0B7575B725B44FF900601DC7 /* HelperTool */,
 			);
 		};
 /* End PBXProject section */
@@ -130,12 +216,22 @@
 			files = (
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
 				0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */,
+				0B9B784625B4609C00BB415D /* SMJobBlessUtil.py in Resources */,
+				0B9B781F25B4547A00BB415D /* uninstall.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0B7575B425B44FF900601DC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B7575BB25B44FF900601DC7 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0BBF0F7B25AB52FC001E9B2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,6 +242,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0B7575C425B4516E00601DC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B7575B725B44FF900601DC7 /* HelperTool */;
+			targetProxy = 0B7575C325B4516E00601DC7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0BBF0F8825AB52FD001E9B2C /* Main.storyboard */ = {
@@ -159,6 +263,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0B7575BD25B44FF900601DC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3EC9QNH85N;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					HelperTool/Launchd.plist,
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"HelperTool/HelperTool-Info.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge.HelperTool;
+				PRODUCT_NAME = io.omniedge.mac.Omniedge.HelperTool;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0B7575BE25B44FF900601DC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3EC9QNH85N;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					HelperTool/Launchd.plist,
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					"HelperTool/HelperTool-Info.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge.HelperTool;
+				PRODUCT_NAME = io.omniedge.mac.Omniedge.HelperTool;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		0BBF0F8D25AB52FD001E9B2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -319,6 +471,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B7575BC25B44FF900601DC7 /* Build configuration list for PBXNativeTarget "HelperTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B7575BD25B44FF900601DC7 /* Debug */,
+				0B7575BE25B44FF900601DC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0BBF0F7A25AB52FC001E9B2C /* Build configuration list for PBXProject "Omniedge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
