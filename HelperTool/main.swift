@@ -7,5 +7,10 @@
 
 import Foundation
 
+NSLog("Hello,Log!")
 print("Hello, World!")
 
+XPCServer.shared.start()
+
+
+RunLoop.current.run()

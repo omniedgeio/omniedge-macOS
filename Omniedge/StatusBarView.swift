@@ -62,7 +62,10 @@ struct StatusBarView: View {
             .frame(height: 180.0)
             
             
-            
+            Divider()
+            Button(action: testXPC) {
+                Text("Test XPC")
+            }
             
         }
         
@@ -72,7 +75,9 @@ struct StatusBarView: View {
         
     }
 }
-
+func testXPC(){
+    
+}
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         Group {

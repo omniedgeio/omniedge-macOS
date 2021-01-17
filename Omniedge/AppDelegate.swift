@@ -21,7 +21,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        guard let auth = Util.askAuthorization() else {
+            fatalError("Authorization not acquired.")
+        }
+        
+        Util.blessHelper(label: Constant.helperMachLabel, authorization: auth)
+        XPCClient().start()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -39,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem?.menu = menu
         }
         
-//        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
+        //        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
         let view = NSHostingView(rootView: StatusBarView())
         view.frame = NSRect(x: 0.0, y: 0.0, width: WIDTH, height: HIGHT)
         firstMenuItem.view = view
