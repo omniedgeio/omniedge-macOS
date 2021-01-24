@@ -6,7 +6,7 @@
 //
 
 import Cocoa
-
+import OGSwitch
 import SwiftUI
 
 @NSApplicationMain
@@ -17,44 +17,55 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBOutlet weak var firstMenuItem: NSMenuItem!
     
     
+    @IBOutlet weak var customeView: OGSwitch!
     
     var statusItem: NSStatusItem?
 
+    @IBOutlet weak var switchLabel: NSTextField!
+    
+    
+    
+    var xpcStore: XPCStore?
+    
+    @IBAction func switchPressed(_ sender: Any) {
+        if let button = sender as? OGSwitch{
+            switchLabel.stringValue = button.isOn ? "On":"Off"
+            
+            if(button.isOn){
+                self.xpcStore?.helperTool?.install()
+            }else{
+                self.xpcStore?.helperTool?.uninstall()
+            }
+            
+        }
+        
+       
+        
+    }
+   
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
-        
-//        let xpcStore = XPCStore()
-
-        
-        
-      
-        
-        
-        
+        self.xpcStore = XPCStore()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
      
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem?.button?.title = "Omniedge"
+        statusItem?.button?.title = "📡"
         
         if let menu = menu {
             statusItem?.menu = menu
             menu.delegate = self
         }
         
-        //        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
+//        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
 //        let view = NSHostingView(rootView: StatusBarView(xpcStore: xpcStore))
-        
-        let view = NSSwitch()
-
-        
-        view.frame = NSRect(x: 0.0, y: 0.0, width: WIDTH, height: HIGHT)
+//
+//        view.frame = NSRect(x: 0.0, y: 0.0, width: WIDTH, height: HIGHT)
         
         
-        firstMenuItem.view = view
+        firstMenuItem.view = customeView
         
     }
     

@@ -7,15 +7,13 @@
 
 import Foundation
 import Cocoa
-import os
-let LOGGER = Logger()
-class XPCStore: ObservableObject{
+
+class XPCStore{
     let XPCConnection: NSXPCConnection
     var helperTool: HelperTool?
     
-    @Published var isConnected: Bool = false {
+    var isConnected: Bool = false {
         didSet {
-            LOGGER.log("Click")
             NSLog("click")
         }
     }

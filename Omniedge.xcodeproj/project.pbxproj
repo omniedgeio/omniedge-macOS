@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
+		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
+		0B734E1E25BD3E0F0048FC0D /* OGSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; };
+		0B734E1F25BD3E0F0048FC0D /* OGSwitch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
 		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
 		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0B9A2AD925B9B370000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AD825B9B370000B316D /* n2n */; };
-		0B9A2AFB25B9BAC5000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AFA25B9BAC5000B316D /* n2n */; };
 		0B9B787A25B4717000BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
 		0B9B787B25B4717000BB415D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787925B4717000BB415D /* Protocols.swift */; };
 		0B9B788025B4718200BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
@@ -36,6 +39,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0B734E1725BD3D9B0048FC0D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0B734E2025BD3E0F0048FC0D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0B734E1F25BD3E0F0048FC0D /* OGSwitch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0B7575B625B44FF900601DC7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,6 +82,9 @@
 
 /* Begin PBXFileReference section */
 		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
+		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
+		0B734E3825BD5D550048FC0D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = io.omniedge.mac.Omniedge.HelperTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7575BA25B44FF900601DC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0B7575C125B4507100601DC7 /* HelperTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelperTool-Info.plist"; sourceTree = "<group>"; };
@@ -93,7 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9A2AFB25B9BAC5000B316D /* n2n in Frameworks */,
+				0B734E1E25BD3E0F0048FC0D /* OGSwitch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +141,7 @@
 		0B9A2AD425B9B36B000B316D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */,
 				0B9A2AD525B9B36B000B316D /* n2n */,
 			);
 			name = Frameworks;
@@ -136,9 +163,11 @@
 				0B7575B925B44FF900601DC7 /* HelperTool */,
 				0B9B787725B4717000BB415D /* Common */,
 				0BBF0F8025AB52FC001E9B2C /* Products */,
+				0B9A2AD425B9B36B000B316D /* Frameworks */,
+				0B734E0E25BD3C1F0048FC0D /* Cartfile */,
 				0B9B781E25B4547A00BB415D /* uninstall.sh */,
 				0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */,
-				0B9A2AD425B9B36B000B316D /* Frameworks */,
+				0B734E3825BD5D550048FC0D /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +235,8 @@
 				0BBF0F7C25AB52FC001E9B2C /* Frameworks */,
 				0BBF0F7D25AB52FC001E9B2C /* Resources */,
 				0B7575C525B4517B00601DC7 /* CopyFiles */,
+				0B734E1725BD3D9B0048FC0D /* CopyFiles */,
+				0B734E2025BD3E0F0048FC0D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,7 +245,6 @@
 			);
 			name = Omniedge;
 			packageProductDependencies = (
-				0B9A2AFA25B9BAC5000B316D /* n2n */,
 			);
 			productName = Omniedge;
 			productReference = 0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */;
@@ -261,6 +291,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B734E3925BD5D550048FC0D /* .gitignore in Resources */,
+				0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */,
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
 				0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */,
 			);
@@ -425,7 +457,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -480,7 +512,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -499,9 +531,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -518,9 +551,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -565,10 +599,6 @@
 			productName = n2n;
 		};
 		0B9A2AD825B9B370000B316D /* n2n */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = n2n;
-		};
-		0B9A2AFA25B9BAC5000B316D /* n2n */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = n2n;
 		};
