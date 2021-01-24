@@ -3,17 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
 		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0B9A2AD925B9B370000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AD825B9B370000B316D /* n2n */; };
+		0B9A2AFB25B9BAC5000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AFA25B9BAC5000B316D /* n2n */; };
 		0B9B787A25B4717000BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
 		0B9B787B25B4717000BB415D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787925B4717000BB415D /* Protocols.swift */; };
 		0B9B788025B4718200BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
 		0B9B788125B4718200BB415D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787925B4717000BB415D /* Protocols.swift */; };
-		0B9B788925B4720400BB415D /* XPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B788825B4720400BB415D /* XPCClient.swift */; };
 		0B9B789325B4746F00BB415D /* XPCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789225B4746F00BB415D /* XPCServer.swift */; };
 		0B9B789725B4773A00BB415D /* HelperTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789625B4773A00BB415D /* HelperTool.swift */; };
 		0B9B789B25B4792900BB415D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
@@ -22,6 +24,16 @@
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
 		0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0B9A2B2225B9BCCE000B316D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BBF0F7725AB52FC001E9B2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B7575B725B44FF900601DC7;
+			remoteInfo = HelperTool;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0B7575B625B44FF900601DC7 /* CopyFiles */ = {
@@ -46,15 +58,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
 		0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = io.omniedge.mac.Omniedge.HelperTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7575BA25B44FF900601DC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0B7575C125B4507100601DC7 /* HelperTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelperTool-Info.plist"; sourceTree = "<group>"; };
 		0B7575C225B4508C00601DC7 /* Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Launchd.plist; sourceTree = "<group>"; };
+		0B9A2AD525B9B36B000B316D /* n2n */ = {isa = PBXFileReference; lastKnownFileType = folder; name = n2n; path = ../n2n; sourceTree = "<group>"; };
 		0B9B781E25B4547A00BB415D /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
 		0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SMJobBlessUtil.py; sourceTree = "<group>"; };
 		0B9B787825B4717000BB415D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B9B787925B4717000BB415D /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		0B9B788825B4720400BB415D /* XPCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCClient.swift; sourceTree = "<group>"; };
 		0B9B789225B4746F00BB415D /* XPCServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCServer.swift; sourceTree = "<group>"; };
 		0B9B789625B4773A00BB415D /* HelperTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperTool.swift; sourceTree = "<group>"; };
 		0B9B789A25B4792900BB415D /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -72,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B9A2AD925B9B370000B316D /* n2n in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B9A2AFB25B9BAC5000B316D /* n2n in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +110,14 @@
 				0B9B789625B4773A00BB415D /* HelperTool.swift */,
 			);
 			path = HelperTool;
+			sourceTree = "<group>";
+		};
+		0B9A2AD425B9B36B000B316D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B9A2AD525B9B36B000B316D /* n2n */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0B9B787725B4717000BB415D /* Common */ = {
@@ -115,6 +138,7 @@
 				0BBF0F8025AB52FC001E9B2C /* Products */,
 				0B9B781E25B4547A00BB415D /* uninstall.sh */,
 				0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */,
+				0B9A2AD425B9B36B000B316D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +156,9 @@
 			children = (
 				0BBF0F9825AB580D001E9B2C /* Support */,
 				0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */,
-				0B9B788825B4720400BB415D /* XPCClient.swift */,
 				0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */,
 				0B9B789A25B4792900BB415D /* Util.swift */,
+				0B734DD625BC23080048FC0D /* XPCStore.swift */,
 			);
 			path = Omniedge;
 			sourceTree = "<group>";
@@ -164,8 +188,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				0B734DE125BC5D020048FC0D /* PBXTargetDependency */,
 			);
 			name = HelperTool;
+			packageProductDependencies = (
+				0B9A2AD825B9B370000B316D /* n2n */,
+			);
 			productName = HelperTool;
 			productReference = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */;
 			productType = "com.apple.product-type.tool";
@@ -182,8 +210,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				0B9A2B2325B9BCCE000B316D /* PBXTargetDependency */,
 			);
 			name = Omniedge;
+			packageProductDependencies = (
+				0B9A2AFA25B9BAC5000B316D /* n2n */,
+			);
 			productName = Omniedge;
 			productReference = 0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */;
 			productType = "com.apple.product-type.application";
@@ -254,8 +286,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
+				0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */,
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
-				0B9B788925B4720400BB415D /* XPCClient.swift in Sources */,
 				0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
@@ -263,6 +295,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0B734DE125BC5D020048FC0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 0B734DE025BC5D020048FC0D /* n2n */;
+		};
+		0B9A2B2325B9BCCE000B316D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B7575B725B44FF900601DC7 /* HelperTool */;
+			targetProxy = 0B9A2B2225B9BCCE000B316D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0BBF0F8825AB52FD001E9B2C /* Main.storyboard */ = {
@@ -280,10 +324,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				LD_RUNPATH_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -304,10 +351,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				LD_RUNPATH_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -375,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -430,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -449,11 +499,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -470,11 +518,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -512,6 +558,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0B734DE025BC5D020048FC0D /* n2n */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = n2n;
+		};
+		0B9A2AD825B9B370000B316D /* n2n */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = n2n;
+		};
+		0B9A2AFA25B9BAC5000B316D /* n2n */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = n2n;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0BBF0F7725AB52FC001E9B2C /* Project object */;
 }

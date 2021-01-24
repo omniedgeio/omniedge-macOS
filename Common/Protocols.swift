@@ -8,11 +8,12 @@
 
 import Foundation
 
-@objc protocol HelperTool {
+@objc(HelperTool)
+protocol HelperTool {
+    
+    func version(completion: @escaping(String) -> Void) // change to check version instead of check alive after first release.
+    func isConnect(completion: @escaping(Bool) -> Void)
     func install()
     func uninstall()
 }
 
-@objc public protocol InstallationClient {
-    func installationDidReachProgress(_ progress: Double, description: String?)
-}

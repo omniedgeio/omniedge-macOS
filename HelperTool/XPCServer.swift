@@ -78,16 +78,12 @@ extension XPCServer: NSXPCListenerDelegate {
         
         newConnection.exportedInterface = NSXPCInterface(with: HelperTool.self)
         newConnection.exportedObject = helperTool
-        
-        newConnection.remoteObjectInterface = NSXPCInterface(with: InstallationClient.self)
-        
+                
         newConnection.interruptionHandler = connetionInterruptionHandler
         newConnection.invalidationHandler = connectionInvalidationHandler
         
         newConnection.resume()
-        
-        helperTool.client = newConnection.remoteObjectProxy as? InstallationClient
-        
+                
         return true
     }
 }

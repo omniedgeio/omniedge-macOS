@@ -8,81 +8,66 @@
 import SwiftUI
 
 
-let HIGHT: CGFloat = 300.0
+let HIGHT: CGFloat = 310.0
 let WIDTH: CGFloat = 250.0
 
 
 struct StatusBarView: View {
     
+    @ObservedObject var xpcStore: XPCStore
     
-    @State var connected = false
+    
     var body: some View {
         VStack {
-            Toggle(isOn: $connected){
-                
-                Text("Enable")
+            Toggle(isOn: $xpcStore.isConnected){
+                Text(xpcStore.isConnected ? "ON":"OFF")
                 Spacer()
-                
             }
-            .padding([.leading, .trailing])
+            .padding(.horizontal)
+            
             .toggleStyle(SwitchToggleStyle())
+                
+//            
+//            
+//            Divider()
+//                .padding(.horizontal)
+//            
+//            
+//            HStack {
+//                Text("Hostname:")
+//                Spacer()
+//                Text("Apple-iMac-2015")
+//            }
+//            .padding([ .leading, .trailing])
+//            
+//            HStack {
+//                Text("IP Address:")
+//                Spacer()
+//                Text("10.253.10.23")
+//            }
+//            .padding([.top, .leading, .trailing])
+//            
+//            
+//            Divider()
+//                .padding(.horizontal)
             
-            
-            Divider()
-                .padding(.horizontal)
-            
-            
-            HStack {
-                Text("Hostname:")
-                Spacer()
-                Text("Apple-iMac-2015")
-            }
-            .padding([ .leading, .trailing])
-            
-            HStack {
-                Text("IP Address:")
-                Spacer()
-                Text("10.253.10.23")
-            }
-            .padding([.top, .leading, .trailing])
-            
-            
-            Divider()
-                .padding(.horizontal)
-            
-            ScrollView {
-                VStack(spacing: 10) {
-                    ForEach(1..<10) {
-                        
-                        ExtractedView(name: "\($0)")
-                        
-                    }
-                }
-            }
-            .frame(height: 180.0)
-            
-            
-            Divider()
-            Button(action: testXPC) {
-                Text("Test XPC")
-            }
+//            ScrollView {
+//                VStack(spacing: 10) {
+//                    ForEach(1..<10) {
+//
+//                        ExtractedView(name: "\($0)")
+//
+//                    }
+//                }
+//            }
+//            .frame(height: 180.0)
+          
             
         }
         
         //        .frame(width: width, height: height)
         
         
-        
-    }
-}
-func testXPC(){
-    
-}
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            StatusBarView()
-        }
         
     }
 }
@@ -104,3 +89,16 @@ struct ExtractedView: View {
         
     }
 }
+
+
+
+struct SwiftUIView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            StatusBarView(xpcStore: XPCStore())
+        }
+        
+    }
+}
+
+

@@ -31,6 +31,7 @@ struct Util {
         
         if !blessStatus {
             NSLog("[SMJBS]: Helper bless failed with error \(error!.takeUnretainedValue())")
+            
         }
         
         return blessStatus

@@ -8,3 +8,6 @@
 struct Constant {
     static let helperMachLabel = "io.omniedge.mac.Omniedge.HelperTool"
 }
+
+
+let HelperToolVersion = "1.0"
