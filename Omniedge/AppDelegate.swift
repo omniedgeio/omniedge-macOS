@@ -8,6 +8,7 @@
 import Cocoa
 import OGSwitch
 import SwiftUI
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -20,9 +21,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBOutlet weak var customeView: OGSwitch!
     
     var statusItem: NSStatusItem?
-
+    
     @IBOutlet weak var switchLabel: NSTextField!
     
+    @IBAction func checkForUpdates(_ sender: Any) {
+        let updater = SUUpdater.shared()
+        updater?.checkForUpdates(self)
+    }
     
     
     var xpcStore: XPCStore?
@@ -39,10 +44,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
         }
         
-       
+        
         
     }
-   
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.xpcStore = XPCStore()
@@ -50,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-     
+        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusItem?.button?.title = "📡"
         
@@ -59,17 +64,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             menu.delegate = self
         }
         
-//        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
-//        let view = NSHostingView(rootView: StatusBarView(xpcStore: xpcStore))
-//
-//        view.frame = NSRect(x: 0.0, y: 0.0, width: WIDTH, height: HIGHT)
+        //        firstMenuItem.view = OmniPanel(frame: NSRect(x: 0.0, y: 0.0, width: 250.0, height: 170.0))
+        //        let view = NSHostingView(rootView: StatusBarView(xpcStore: xpcStore))
+        //
+        //        view.frame = NSRect(x: 0.0, y: 0.0, width: WIDTH, height: HIGHT)
         
         
         firstMenuItem.view = customeView
         
     }
     
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

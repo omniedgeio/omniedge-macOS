@@ -1,4 +1,4 @@
-PRIVILEGED_HELPER_LABEL=io.omniedge.mac.omniedge.HelperTool
+PRIVILEGED_HELPER_LABEL=io.omniedge.mac.Omniedge.HelperTool
 
 sudo rm /Library/PrivilegedHelperTools/$PRIVILEGED_HELPER_LABEL
 sudo rm /Library/LaunchDaemons/$PRIVILEGED_HELPER_LABEL.plist

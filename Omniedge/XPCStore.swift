@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 
 class XPCStore{
-    let XPCConnection: NSXPCConnection
+    var XPCConnection: NSXPCConnection?
     var helperTool: HelperTool?
     
     var isConnected: Bool = false {
@@ -21,19 +21,31 @@ class XPCStore{
     
     init(){
         
-        XPCConnection = NSXPCConnection(machServiceName: Constant.helperMachLabel,
+        self.connectToXPC()
+        
+        
+        
+    }
+    
+    private func disconnect(){
+        XPCConnection?.invalidationHandler = nil
+        XPCConnection?.interruptionHandler = nil
+        self.XPCConnection = nil
+    }
+    
+    private func connectToXPC(){
+        self.XPCConnection = NSXPCConnection(machServiceName: Constant.helperMachLabel,
                                         options: .privileged)
         
-        XPCConnection.remoteObjectInterface = NSXPCInterface(with: HelperTool.self)
+        XPCConnection?.remoteObjectInterface = NSXPCInterface(with: HelperTool.self)
         
-        XPCConnection.invalidationHandler = connectionInvalidationHandler
-        XPCConnection.interruptionHandler = connetionInterruptionHandler
+        XPCConnection?.invalidationHandler = connectionInvalidationHandler
+        XPCConnection?.interruptionHandler = connetionInterruptionHandler
         
-        XPCConnection.resume()
+        XPCConnection?.resume()
         
-        self.helperTool = XPCConnection.remoteObjectProxy as? HelperTool
+        self.helperTool = XPCConnection?.remoteObjectProxy as? HelperTool
         self.helperTool?.version(completion: checkHelperVersion)
-        
     }
     
     private func checkHelperVersion(ver: String){
@@ -49,11 +61,15 @@ class XPCStore{
     
     
     private func connetionInterruptionHandler() {
-        
+        NSLog("interrupted Connection")
+
     }
     
     private func connectionInvalidationHandler() {
-        
+        DispatchQueue.main.async {
+            self.alertInstall()
+            
+        }
         
     }
     
@@ -94,6 +110,7 @@ class XPCStore{
     
     func installHelperTool(){
         
+        disconnect()
         guard let auth = Util.askAuthorization() else {
             fatalError("Authorization not acquired.")
         }
@@ -101,6 +118,7 @@ class XPCStore{
         if(!Util.blessHelper(label: Constant.helperMachLabel, authorization: auth)){
             notAbleToStart("Install HelperTool failed.")
         }
+        connectToXPC()
         
     }
     

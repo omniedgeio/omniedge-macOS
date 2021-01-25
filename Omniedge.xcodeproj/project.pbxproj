@@ -9,9 +9,15 @@
 /* Begin PBXBuildFile section */
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
-		0B734E1E25BD3E0F0048FC0D /* OGSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; };
-		0B734E1F25BD3E0F0048FC0D /* OGSwitch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
+		0B734E5325BD6A3B0048FC0D /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */; };
+		0B734E5725BD6A6A0048FC0D /* OGSwitch.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */; };
+		0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; };
+		0B734E6325BD6D380048FC0D /* OGSwitch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E4F25BD69E60048FC0D /* Sparkle.framework */; };
+		0B734E6925BD6D8F0048FC0D /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E4F25BD69E60048FC0D /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B734E6E25BD75810048FC0D /* appdmg.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E6D25BD75810048FC0D /* appdmg.json */; };
+		0B734E7225BD75F90048FC0D /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0B734E7125BD75F90048FC0D /* Makefile */; };
 		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
 		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0B9A2AD925B9B370000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AD825B9B370000B316D /* n2n */; };
@@ -52,9 +58,22 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				0B734E5325BD6A3B0048FC0D /* Sparkle.framework.dSYM in Embed Frameworks */,
+				0B734E5725BD6A6A0048FC0D /* OGSwitch.framework.dSYM in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0B734E6425BD6D380048FC0D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0B734E1F25BD3E0F0048FC0D /* OGSwitch.framework in Embed Frameworks */,
+				0B734E6325BD6D380048FC0D /* OGSwitch.framework in Embed Frameworks */,
+				0B734E6925BD6D8F0048FC0D /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +104,11 @@
 		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
 		0B734E3825BD5D550048FC0D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0B734E4F25BD69E60048FC0D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
+		0B734E6D25BD75810048FC0D /* appdmg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = appdmg.json; sourceTree = "<group>"; };
+		0B734E7125BD75F90048FC0D /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = io.omniedge.mac.Omniedge.HelperTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7575BA25B44FF900601DC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0B7575C125B4507100601DC7 /* HelperTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelperTool-Info.plist"; sourceTree = "<group>"; };
@@ -119,7 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B734E1E25BD3E0F0048FC0D /* OGSwitch.framework in Frameworks */,
+				0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */,
+				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +166,9 @@
 		0B9A2AD425B9B36B000B316D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */,
+				0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */,
+				0B734E4F25BD69E60048FC0D /* Sparkle.framework */,
 				0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */,
 				0B9A2AD525B9B36B000B316D /* n2n */,
 			);
@@ -168,6 +196,8 @@
 				0B9B781E25B4547A00BB415D /* uninstall.sh */,
 				0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */,
 				0B734E3825BD5D550048FC0D /* .gitignore */,
+				0B734E6D25BD75810048FC0D /* appdmg.json */,
+				0B734E7125BD75F90048FC0D /* Makefile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,7 +247,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0B734DE125BC5D020048FC0D /* PBXTargetDependency */,
 			);
 			name = HelperTool;
 			packageProductDependencies = (
@@ -237,6 +266,7 @@
 				0B7575C525B4517B00601DC7 /* CopyFiles */,
 				0B734E1725BD3D9B0048FC0D /* CopyFiles */,
 				0B734E2025BD3E0F0048FC0D /* Embed Frameworks */,
+				0B734E6425BD6D380048FC0D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -295,6 +325,7 @@
 				0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */,
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
 				0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */,
+				0B734E6E25BD75810048FC0D /* appdmg.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +353,7 @@
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
+				0B734E7225BD75F90048FC0D /* Makefile in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,10 +361,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0B734DE125BC5D020048FC0D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 0B734DE025BC5D020048FC0D /* n2n */;
-		};
 		0B9A2B2325B9BCCE000B316D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0B7575B725B44FF900601DC7 /* HelperTool */;
@@ -355,6 +383,7 @@
 		0B7575BD25B44FF900601DC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
@@ -362,7 +391,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -382,6 +411,7 @@
 		0B7575BE25B44FF900601DC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
@@ -389,7 +419,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -457,7 +487,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -512,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -527,13 +557,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omniedge/Omniedge.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -547,13 +584,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omniedge/Omniedge.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Omniedge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -594,10 +638,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0B734DE025BC5D020048FC0D /* n2n */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = n2n;
-		};
 		0B9A2AD825B9B370000B316D /* n2n */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = n2n;
