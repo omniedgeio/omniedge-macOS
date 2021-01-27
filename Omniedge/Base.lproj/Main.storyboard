@@ -24,9 +24,20 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Auto update" state="on" id="BOF-NM-1cW">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="pressAutoUpdate:" target="Voe-Tx-rLC" id="HmJ-fx-85k"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Launch at Login" state="on" id="v1l-CF-SC9" userLabel="Auto Launch">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="pressAutoLaunch:" target="Voe-Tx-rLC" id="nfP-1f-tzr"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                                        <menuItem title="Check for Updates" id="4sb-4s-VLi" userLabel="Check for Updates">
+                                        <menuItem title="Check for updates" id="4sb-4s-VLi" userLabel="Check for Updates">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="jTS-Xj-efU"/>
@@ -48,10 +59,13 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Omniedge" customModuleProvider="target">
                     <connections>
+                        <outlet property="autoLaunch" destination="v1l-CF-SC9" id="3WW-cg-Yve"/>
+                        <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
                         <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
                         <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
+                        <outlet property="updater" destination="nNc-dx-0De" id="rj3-jW-U2Y"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -62,7 +76,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="18" y="12" width="29" height="16"/>
+                            <rect key="frame" x="18" y="12" width="36" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
                                 <font key="font" usesAppearanceFont="YES"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -70,7 +84,7 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="yAZ-Gy-8Cq" customClass="OGSwitch" customModule="OGSwitch">
-                            <rect key="frame" x="140" y="7" width="40" height="25"/>
+                            <rect key="frame" x="147" y="7" width="40" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="Cqn-Az-ooV"/>
                                 <constraint firstAttribute="height" constant="25" id="RZM-QY-Blt"/>
@@ -85,7 +99,7 @@
                         <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="11" id="Kyf-eQ-bGN"/>
                         <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="20" symbolic="YES" id="e1s-QT-Sw9"/>
                         <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="leading" secondItem="Slv-7L-Yrd" secondAttribute="trailing" constant="95" id="hyM-Xg-MnD"/>
-                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="20" symbolic="YES" id="wrJ-pG-e9d"/>
+                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="wrJ-pG-e9d"/>
                     </constraints>
                 </customView>
             </objects>

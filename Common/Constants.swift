@@ -11,3 +11,8 @@ struct Constant {
 
 
 let HelperToolVersion = "1.0"
+
+
+let AUTO_LAUNCH = "io.omniedge.mac.autolaunch"
+let AUTO_UPDATE = "io.omniedge.mac.autoupdate"
+let AUTO_LAUNCH_HELPER = "io.omniedge.mac.Omniedge.LaunchHelperTool"
