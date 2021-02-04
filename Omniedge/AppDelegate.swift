@@ -22,12 +22,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBAction func pressAutoLaunch(_ sender: NSMenuItem) {
         sender.state = sender.state == .on ? .off : .on
-        UserDefaults.standard.set(sender.state, forKey: AUTO_LAUNCH)
-        NSLog("Set login item switch to: \(sender.state == .on ? true : false)")
-
-        let result = SMLoginItemSetEnabled(AUTO_LAUNCH_HELPER as CFString, sender.state == .on ? true : false)
+        UserDefaults.standard.set(sender.state, forKey: AUTO_LAUNCH_DEFAULT_KEY)
+        NSLog("Set login item switch to: \(sender.state == .on)")
+        
+        let result = SMLoginItemSetEnabled(AUTO_LAUNCH_HELPER as CFString, sender.state == .on )
         NSLog("Set login item success: \(result)")
-
+        
         
     }
     
@@ -37,8 +37,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBAction func pressAutoUpdate(_ sender: NSMenuItem) {
         sender.state = sender.state == .on ? .off : .on
-        UserDefaults.standard.set(sender.state, forKey: AUTO_UPDATE)
-        updater.automaticallyChecksForUpdates = sender.state == .on ? true:false
+        UserDefaults.standard.set(sender.state, forKey: AUTO_UPDATE_DEFAULT_KEY)
+        updater.automaticallyChecksForUpdates = sender.state == .on
+        
+        
+        NSWorkspace.shared.runningApplications.forEach {
+            NSLog( "\($0.bundleIdentifier)")
+        }
+        let foundHelper = NSWorkspace.shared.runningApplications.contains {
+            
+            $0.bundleIdentifier == AUTO_LAUNCH_HELPER
+        }
+        NSLog("Auto Launch found: \(foundHelper)")
     }
     
     
@@ -68,24 +78,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.xpcStore = XPCStore()
         
         let userDefaults = UserDefaults.standard
-        if let autoLaunchFlag =  userDefaults.object(forKey: AUTO_LAUNCH) as? NSControl.StateValue{
+        if let autoLaunchFlag =  userDefaults.object(forKey: AUTO_LAUNCH_DEFAULT_KEY) as? NSControl.StateValue{
             autoLaunch.state = autoLaunchFlag
         }else{
             autoLaunch.state = .on //default
             let result = SMLoginItemSetEnabled(AUTO_LAUNCH_HELPER as CFString, true)
             NSLog("Set login item success: \(result)")
-
+            
         }
         
         
-        if let autoUpdateFlag =  userDefaults.object(forKey: AUTO_UPDATE) as? NSControl.StateValue{
+        if let autoUpdateFlag =  userDefaults.object(forKey: AUTO_UPDATE_DEFAULT_KEY) as? NSControl.StateValue{
             autoUpdate.state = autoUpdateFlag
         }else{
             autoUpdate.state = .on //default
             updater.automaticallyChecksForUpdates = true
-
+            
         }
-    
+        
+        let foundHelper = NSWorkspace.shared.runningApplications.contains {
+            $0.bundleIdentifier == AUTO_LAUNCH_HELPER
+        }
+        NSLog("Auto Launch found: \(foundHelper)")
         
         
     }

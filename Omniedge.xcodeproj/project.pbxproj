@@ -48,8 +48,8 @@
 		0B734E1725BD3D9B0048FC0D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,7 +391,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -419,7 +419,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/HelperTool/HelperTool-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
 					__TEXT,
@@ -560,6 +560,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -571,7 +572,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -587,6 +589,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -598,7 +601,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

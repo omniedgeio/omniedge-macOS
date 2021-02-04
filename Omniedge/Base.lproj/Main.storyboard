@@ -30,12 +30,6 @@
                                                 <action selector="pressAutoUpdate:" target="Voe-Tx-rLC" id="HmJ-fx-85k"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Launch at Login" state="on" id="v1l-CF-SC9" userLabel="Auto Launch">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="pressAutoLaunch:" target="Voe-Tx-rLC" id="nfP-1f-tzr"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Check for updates" id="4sb-4s-VLi" userLabel="Check for Updates">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -59,7 +53,6 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Omniedge" customModuleProvider="target">
                     <connections>
-                        <outlet property="autoLaunch" destination="v1l-CF-SC9" id="3WW-cg-Yve"/>
                         <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
                         <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
