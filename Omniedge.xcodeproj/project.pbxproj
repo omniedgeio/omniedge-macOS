@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B22165325CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
+		0B22165425CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
+		0B2480BD25D3F7780017C338 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2480BC25D3F7780017C338 /* StatusBarController.swift */; };
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
 		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
@@ -31,7 +34,6 @@
 		0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */; };
 		0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */; };
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
-		0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B22165225CC448B00387622 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0B2480BC25D3F7780017C338 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
 		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
@@ -127,7 +131,6 @@
 		0BBF0F8925AB52FD001E9B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
-		0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B2480BA25D3C7230017C338 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				0B2480BC25D3F7780017C338 /* StatusBarController.swift */,
+			);
+			path = StatusBar;
+			sourceTree = "<group>";
+		};
 		0B7575B925B44FF900601DC7 /* HelperTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +191,7 @@
 			children = (
 				0B9B787825B4717000BB415D /* Constants.swift */,
 				0B9B787925B4717000BB415D /* Protocols.swift */,
+				0B22165225CC448B00387622 /* Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -213,9 +225,9 @@
 		0BBF0F8125AB52FC001E9B2C /* Omniedge */ = {
 			isa = PBXGroup;
 			children = (
+				0B2480BA25D3C7230017C338 /* StatusBar */,
 				0BBF0F9825AB580D001E9B2C /* Support */,
 				0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */,
-				0BBF0FAB25AB5F26001E9B2C /* StatusBarView.swift */,
 				0B9B789A25B4792900BB415D /* Util.swift */,
 				0B734DD625BC23080048FC0D /* XPCStore.swift */,
 			);
@@ -337,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B9B789325B4746F00BB415D /* XPCServer.swift in Sources */,
+				0B22165425CC448B00387622 /* Extensions.swift in Sources */,
 				0B9B789725B4773A00BB415D /* HelperTool.swift in Sources */,
 				0B9B788025B4718200BB415D /* Constants.swift in Sources */,
 				0B9B788125B4718200BB415D /* Protocols.swift in Sources */,
@@ -349,9 +362,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
+				0B2480BD25D3F7780017C338 /* StatusBarController.swift in Sources */,
 				0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */,
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
-				0BBF0FAC25AB5F26001E9B2C /* StatusBarView.swift in Sources */,
+				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				0B734E7225BD75F90048FC0D /* Makefile in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,

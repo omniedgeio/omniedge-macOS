@@ -17,3 +17,7 @@ let AUTO_LAUNCH_DEFAULT_KEY = "io.omniedge.mac.autolaunch"
 let AUTO_UPDATE_DEFAULT_KEY = "io.omniedge.mac.autoupdate"
 let APP_IDENTIFIER = "io.omniedge.mac.Omniedge"
 let AUTO_LAUNCH_HELPER = "io.omniedge.mac.LaunchAtLoginHelperTool"
+
+
+
+let LOGIN_TOKEN_KEY = "io.omniedge.mac.login.token"

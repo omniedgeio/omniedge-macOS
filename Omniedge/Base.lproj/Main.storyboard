@@ -19,8 +19,11 @@
                                         <menuItem title="Item" id="BPC-xX-3vL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
+                                        <menuItem title="Login" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="KhA-eo-Irz"/>
-                                        <menuItem title="About Omniedge" id="5kV-Vb-QxS">
+                                        <menuItem title="About Omniedge" id="FLo-lu-sTi">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
