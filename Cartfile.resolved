@@ -1,1 +1,2 @@
 github "OskarGroth/OGSwitch" "2.9.2"
+github "p2/OAuth2" "4.2.0"

@@ -34,7 +34,7 @@ class XPCStore{
     }
     
     private func connectToXPC(){
-        self.XPCConnection = NSXPCConnection(machServiceName: Constant.helperMachLabel,
+        self.XPCConnection = NSXPCConnection(machServiceName: XPCConstant.HelperMachLabel,
                                         options: .privileged)
         
         XPCConnection?.remoteObjectInterface = NSXPCInterface(with: HelperTool.self)
@@ -51,7 +51,7 @@ class XPCStore{
     private func checkHelperVersion(ver: String){
         NSLog("Current Helper verions:\(ver)")
         
-        if ver != HelperToolVersion{
+        if ver != XPCConstant.HelperToolVersion{
             DispatchQueue.main.async {
                 self.alertInstall()
                 
@@ -115,7 +115,7 @@ class XPCStore{
             fatalError("Authorization not acquired.")
         }
         
-        if(!Util.blessHelper(label: Constant.helperMachLabel, authorization: auth)){
+        if(!Util.blessHelper(label: XPCConstant.HelperMachLabel, authorization: auth)){
             notAbleToStart("Install HelperTool failed.")
         }
         connectToXPC()

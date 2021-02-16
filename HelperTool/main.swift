@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import n2n
+import n2nMacOS
 
 NSLog("Hello,Log!")
 print("Hello, World!")

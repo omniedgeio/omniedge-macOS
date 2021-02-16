@@ -4,10 +4,31 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FileKit (Playground) 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>FileKit (Playground) 2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>FileKit (Playground).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>HelperTool.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Omniedge.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,6 +43,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0B7575B725B44FF900601DC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0BB4142825C6A814005F3C98</key>
 		<dict>
 			<key>primary</key>

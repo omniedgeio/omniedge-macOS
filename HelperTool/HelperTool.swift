@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import n2n
+import n2nMacOS
 
 var keepRunning: Int32 = 1
 

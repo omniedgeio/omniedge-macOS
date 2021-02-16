@@ -7,7 +7,6 @@
 
 import SecurityFoundation
 import ServiceManagement
-
 struct Util {
     
     static func askAuthorization() -> AuthorizationRef? {

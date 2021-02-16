@@ -19,8 +19,11 @@
                                         <menuItem title="Item" id="BPC-xX-3vL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="Login" id="5kV-Vb-QxS">
+                                        <menuItem title="LoginItem" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="logInOutItem:" target="Voe-Tx-rLC" id="DRq-Dg-5Az"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="KhA-eo-Irz"/>
                                         <menuItem title="About Omniedge" id="FLo-lu-sTi">
@@ -59,6 +62,7 @@
                         <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
                         <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
+                        <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
                         <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
                         <outlet property="updater" destination="nNc-dx-0De" id="rj3-jW-U2Y"/>
@@ -72,7 +76,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="18" y="12" width="36" height="16"/>
+                            <rect key="frame" x="12" y="12" width="42" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
                                 <font key="font" usesAppearanceFont="YES"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -93,7 +97,7 @@
                     <constraints>
                         <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="7" id="0UT-vj-3bQ"/>
                         <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="11" id="Kyf-eQ-bGN"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="20" symbolic="YES" id="e1s-QT-Sw9"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="14" id="e1s-QT-Sw9"/>
                         <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="leading" secondItem="Slv-7L-Yrd" secondAttribute="trailing" constant="95" id="hyM-Xg-MnD"/>
                         <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="wrJ-pG-e9d"/>
                     </constraints>

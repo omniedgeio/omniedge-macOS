@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		0B22165325CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
 		0B22165425CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
-		0B2480BD25D3F7780017C338 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2480BC25D3F7780017C338 /* StatusBarController.swift */; };
+		0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DB25DA953400344C07 /* n2nMacOS */; };
+		0B3D99DF25DA953B00344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DE25DA953B00344C07 /* n2nMacOS */; };
+		0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */; };
+		0B5A05AD25DB67A5000BFD54 /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */; };
+		0B5A05AE25DB67A5000BFD54 /* OAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B5A05BC25DB6A5B000BFD54 /* OGSwitch.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */; };
+		0B5A05BD25DB6A5B000BFD54 /* OAuth2.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */; };
+		0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */; };
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
 		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
-		0B734E5325BD6A3B0048FC0D /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */; };
-		0B734E5725BD6A6A0048FC0D /* OGSwitch.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */; };
 		0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; };
 		0B734E6325BD6D380048FC0D /* OGSwitch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E4F25BD69E60048FC0D /* Sparkle.framework */; };
@@ -23,7 +28,6 @@
 		0B734E7225BD75F90048FC0D /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0B734E7125BD75F90048FC0D /* Makefile */; };
 		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
 		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		0B9A2AD925B9B370000B316D /* n2n in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9A2AD825B9B370000B316D /* n2n */; };
 		0B9B787A25B4717000BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
 		0B9B787B25B4717000BB415D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787925B4717000BB415D /* Protocols.swift */; };
 		0B9B788025B4718200BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
@@ -62,8 +66,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				0B734E5325BD6A3B0048FC0D /* Sparkle.framework.dSYM in Embed Frameworks */,
-				0B734E5725BD6A6A0048FC0D /* OGSwitch.framework.dSYM in Embed Frameworks */,
+				0B5A05BC25DB6A5B000BFD54 /* OGSwitch.framework.dSYM in Embed Frameworks */,
+				0B5A05BD25DB6A5B000BFD54 /* OAuth2.framework.dSYM in Embed Frameworks */,
+				0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +80,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0B734E6325BD6D380048FC0D /* OGSwitch.framework in Embed Frameworks */,
+				0B5A05AE25DB67A5000BFD54 /* OAuth2.framework in Embed Frameworks */,
 				0B734E6925BD6D8F0048FC0D /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -103,7 +109,11 @@
 
 /* Begin PBXFileReference section */
 		0B22165225CC448B00387622 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		0B2480BC25D3F7780017C338 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniEdgeDataLoader.swift; sourceTree = "<group>"; };
+		0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/Mac/OAuth2.framework; sourceTree = "<group>"; };
+		0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
+		0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OAuth2.framework.dSYM; sourceTree = "<group>"; };
+		0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
 		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
@@ -138,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9A2AD925B9B370000B316D /* n2n in Frameworks */,
+				0B3D99DF25DA953B00344C07 /* n2nMacOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,21 +157,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */,
+				0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */,
 				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
+				0B5A05AD25DB67A5000BFD54 /* OAuth2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B2480BA25D3C7230017C338 /* StatusBar */ = {
-			isa = PBXGroup;
-			children = (
-				0B2480BC25D3F7780017C338 /* StatusBarController.swift */,
-			);
-			path = StatusBar;
-			sourceTree = "<group>";
-		};
 		0B7575B925B44FF900601DC7 /* HelperTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +181,7 @@
 		0B9A2AD425B9B36B000B316D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */,
 				0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */,
 				0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */,
 				0B734E4F25BD69E60048FC0D /* Sparkle.framework */,
@@ -225,11 +230,11 @@
 		0BBF0F8125AB52FC001E9B2C /* Omniedge */ = {
 			isa = PBXGroup;
 			children = (
-				0B2480BA25D3C7230017C338 /* StatusBar */,
 				0BBF0F9825AB580D001E9B2C /* Support */,
 				0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */,
 				0B9B789A25B4792900BB415D /* Util.swift */,
 				0B734DD625BC23080048FC0D /* XPCStore.swift */,
+				0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */,
 			);
 			path = Omniedge;
 			sourceTree = "<group>";
@@ -237,6 +242,9 @@
 		0BBF0F9825AB580D001E9B2C /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */,
+				0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */,
+				0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */,
 				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
 				0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */,
 				0BBF0F8B25AB52FD001E9B2C /* Info.plist */,
@@ -262,7 +270,7 @@
 			);
 			name = HelperTool;
 			packageProductDependencies = (
-				0B9A2AD825B9B370000B316D /* n2n */,
+				0B3D99DE25DA953B00344C07 /* n2nMacOS */,
 			);
 			productName = HelperTool;
 			productReference = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */;
@@ -287,6 +295,7 @@
 			);
 			name = Omniedge;
 			packageProductDependencies = (
+				0B3D99DB25DA953400344C07 /* n2nMacOS */,
 			);
 			productName = Omniedge;
 			productReference = 0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */;
@@ -318,6 +327,9 @@
 				Base,
 			);
 			mainGroup = 0BBF0F7625AB52FC001E9B2C;
+			packageReferences = (
+				0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */,
+			);
 			productRefGroup = 0BBF0F8025AB52FC001E9B2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,10 +374,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
-				0B2480BD25D3F7780017C338 /* StatusBarController.swift in Sources */,
 				0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */,
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
+				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				0B734E7225BD75F90048FC0D /* Makefile in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
@@ -655,10 +667,27 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@gitlab.com:omniedge/n2nmacos.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		0B9A2AD825B9B370000B316D /* n2n */ = {
+		0B3D99DB25DA953400344C07 /* n2nMacOS */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = n2n;
+			package = 0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */;
+			productName = n2nMacOS;
+		};
+		0B3D99DE25DA953B00344C07 /* n2nMacOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */;
+			productName = n2nMacOS;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

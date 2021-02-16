@@ -14,7 +14,7 @@ class XPCServer: NSObject {
     private var listener: NSXPCListener?
     
     internal func start() {
-        listener = NSXPCListener(machServiceName: Constant.helperMachLabel)
+        listener = NSXPCListener(machServiceName: XPCConstant.HelperMachLabel)
         listener?.delegate = self
         listener?.resume()
     }
