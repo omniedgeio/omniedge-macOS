@@ -73,12 +73,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
            
             
         }else{
-            
             var url = try! oauth2.authorizeURL(params: nil)
             url = URL(string: url.description.removingPercentEncoding!)!
-            try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
+            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
             oauth2.afterAuthorizeOrFail = { authParameters, error in
                 self.updateUI()
+                
             }
         }
         
@@ -94,6 +94,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(event:replyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
     }
     
@@ -202,5 +203,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     
+    
+
 }
 

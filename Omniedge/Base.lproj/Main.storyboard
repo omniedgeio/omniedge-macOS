@@ -71,7 +71,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="nNc-dx-0De" customClass="SUUpdater"/>
-                <customView id="jnN-yL-9YP">
+                <customView id="jnN-yL-9YP" userLabel="Switcher">
                     <rect key="frame" x="0.0" y="0.0" width="200" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>

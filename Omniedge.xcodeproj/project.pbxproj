@@ -235,6 +235,7 @@
 				0B9B789A25B4792900BB415D /* Util.swift */,
 				0B734DD625BC23080048FC0D /* XPCStore.swift */,
 				0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */,
+				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
 			);
 			path = Omniedge;
 			sourceTree = "<group>";
@@ -245,7 +246,6 @@
 				0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */,
 				0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */,
 				0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */,
-				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
 				0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */,
 				0BBF0F8B25AB52FD001E9B2C /* Info.plist */,
 				0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */,
