@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBOutlet weak var loginItem: NSMenuItem!
     
+    @IBOutlet weak var deviceList: NSMenuItem!
     
     
     @IBOutlet weak var updater: SUUpdater!
@@ -101,18 +102,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc private func handleEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         
         if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
-                    if let url = URL(string: urlString), "omniedge" == url.scheme && "signin" == url.host {
-                        self.oauth2.handleRedirectURL(url)
-                    }
-                }
-                else {
-                    NSLog("No valid URL to handle")
-                }
+            if let url = URL(string: urlString), "omniedge" == url.scheme && "signin" == url.host {
+                self.oauth2.handleRedirectURL(url)
+            }
+        }
+        else {
+            NSLog("No valid URL to handle")
+        }
         
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let deviceListMenu = NSMenu()
+        deviceListMenu.addItem(withTitle: "Decvice 1", action: nil, keyEquivalent: "")
         
+        self.deviceList.submenu = deviceListMenu
         dataLoader = OmniEdgeDataLoader(oauth2: self.oauth2)
         self.xpcStore = XPCStore()
         updateUI()
@@ -120,29 +124,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func updateUI(){
+
+        isLoggedIn(oauth2.accessToken != nil)
+        
         let userDefaults = UserDefaults.standard
-        
-        
-        if let _ = oauth2.accessToken{
-            
-            isN2NControlHide(false)
-            loginItem.title = "Log Out"
-            
-        }else{
-            
-            isN2NControlHide(true)
-            loginItem.title = "Log In"
-            
-        }
-        
-        
+
         if let autoUpdateFlag =  userDefaults.object(forKey: UserDefaultKeys.AutoUpdate) as? NSControl.StateValue{
             
             autoUpdate.state = autoUpdateFlag
             updater.automaticallyChecksForUpdates =  autoUpdate.state.toBool()
             
         }else{
-            //defaults
             autoUpdate.state = .on
             updater.automaticallyChecksForUpdates = true
             userDefaults.set(autoUpdate.state, forKey: UserDefaultKeys.AutoUpdate)
@@ -151,14 +143,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    private func isN2NControlHide(_ isHidden: Bool){
+    private func isLoggedIn(_ isLoggedIn: Bool){
         
-        if(isHidden){
-            firstMenuItem.view = nil
-            firstMenuItem.isHidden = true
-        }else{
+        if(isLoggedIn){
             firstMenuItem.view = customeView
             firstMenuItem.isHidden = false
+            
+            loginItem.title = "Log Out"
+
+        }else{
+            firstMenuItem.view = nil
+            firstMenuItem.isHidden = true
+            
+            loginItem.title = "Log In"
+
             
         }
     }
@@ -197,12 +195,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
             
         }
-        
-        
-        
+
     }
-    
-    
     
 
 }

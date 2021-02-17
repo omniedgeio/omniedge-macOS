@@ -19,6 +19,9 @@
                                         <menuItem title="Item" id="BPC-xX-3vL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
+                                        <menuItem title="Device List" id="JJ6-LO-niX">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                         <menuItem title="LoginItem" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -61,6 +64,7 @@
                     <connections>
                         <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
                         <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
+                        <outlet property="deviceList" destination="JJ6-LO-niX" id="pTF-Mx-ixf"/>
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
                         <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
@@ -72,11 +76,11 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="nNc-dx-0De" customClass="SUUpdater"/>
                 <customView id="jnN-yL-9YP" userLabel="Switcher">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="39"/>
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="12" y="12" width="42" height="16"/>
+                            <rect key="frame" x="12" y="8" width="47" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
                                 <font key="font" usesAppearanceFont="YES"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -84,10 +88,10 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="yAZ-Gy-8Cq" customClass="OGSwitch" customModule="OGSwitch">
-                            <rect key="frame" x="147" y="7" width="40" height="25"/>
+                            <rect key="frame" x="152" y="6" width="35" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="Cqn-Az-ooV"/>
-                                <constraint firstAttribute="height" constant="25" id="RZM-QY-Blt"/>
+                                <constraint firstAttribute="width" constant="35" id="Cqn-Az-ooV"/>
+                                <constraint firstAttribute="height" constant="20" id="RZM-QY-Blt"/>
                             </constraints>
                             <connections>
                                 <action selector="switchPressed:" target="Voe-Tx-rLC" id="ugw-6D-bHt"/>
@@ -95,11 +99,11 @@
                         </customView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="7" id="0UT-vj-3bQ"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="11" id="Kyf-eQ-bGN"/>
+                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="1sq-Vc-5yW"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="centerY" secondItem="yAZ-Gy-8Cq" secondAttribute="centerY" id="Fhb-Ev-XKi"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="8" id="Kyf-eQ-bGN"/>
                         <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="14" id="e1s-QT-Sw9"/>
                         <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="leading" secondItem="Slv-7L-Yrd" secondAttribute="trailing" constant="95" id="hyM-Xg-MnD"/>
-                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="wrJ-pG-e9d"/>
                     </constraints>
                 </customView>
             </objects>
