@@ -17,6 +17,8 @@
 		0B5A05BC25DB6A5B000BFD54 /* OGSwitch.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */; };
 		0B5A05BD25DB6A5B000BFD54 /* OAuth2.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */; };
 		0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */; };
+		0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */; };
+		0B5A05FE25DFF0FC000BFD54 /* DeviceInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */; };
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
 		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
@@ -114,6 +116,8 @@
 		0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
 		0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OAuth2.framework.dSYM; sourceTree = "<group>"; };
 		0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
+		0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoView.xib; sourceTree = "<group>"; };
 		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
 		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 				0B734DD625BC23080048FC0D /* XPCStore.swift */,
 				0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */,
 				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
+				0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */,
+				0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */,
 			);
 			path = Omniedge;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5A05FE25DFF0FC000BFD54 /* DeviceInfoView.xib in Resources */,
 				0B734E3925BD5D550048FC0D /* .gitignore in Resources */,
 				0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */,
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
@@ -380,6 +387,7 @@
 				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				0B734E7225BD75F90048FC0D /* Makefile in Sources */,
+				0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

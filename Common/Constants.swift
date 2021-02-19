@@ -20,6 +20,7 @@ struct UserDefaultKeys{
     static let AutoLaunch = "io.omniedge.mac.autolaunch"
     static let AutoUpdate = "io.omniedge.mac.autoupdate"
     static let IDToken = "io.omniedge.mac.id.token"
+    static let NetworkStatus = "io.omniedge.mac.network.status"
 }
 
 

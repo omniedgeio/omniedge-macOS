@@ -42,12 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBAction func pressAutoUpdate(_ sender: NSMenuItem) {
         UserDefaults.standard.set(sender.state.toggle(), forKey: UserDefaultKeys.AutoUpdate)
         updateUI()
-        
-        dataLoader?.request(callback: { json, error in
-            print(json)
-            print(error)
-
-        })
     }
     
     var oauth2 = createOAuth2()
@@ -71,6 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let _ = oauth2.idToken{
             
             oauth2.forgetTokens()
+            UserDefaults.standard.setValue(nil, forKey: UserDefaultKeys.NetworkStatus)
+
            
             
         }else{
@@ -78,7 +74,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             url = URL(string: url.description.removingPercentEncoding!)!
             try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
             oauth2.afterAuthorizeOrFail = { authParameters, error in
-                self.updateUI()
+                
+                self.dataLoader?.queryNetwork(callback: { network, error in
+                    UserDefaults.standard.setValue(network, forKey: UserDefaultKeys.NetworkStatus)
+                    
+                    DispatchQueue.main.async {
+                        self.updateUI()
+                    }
+                })
+                
+               
                 
             }
         }
@@ -112,16 +117,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let deviceListMenu = NSMenu()
-        deviceListMenu.addItem(withTitle: "Decvice 1", action: nil, keyEquivalent: "")
-        
-        self.deviceList.submenu = deviceListMenu
+                
         dataLoader = OmniEdgeDataLoader(oauth2: self.oauth2)
         self.xpcStore = XPCStore()
         updateUI()
         
     }
+    
+    let decoder = JSONDecoder()
     
     func updateUI(){
 
@@ -138,6 +143,39 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             autoUpdate.state = .on
             updater.automaticallyChecksForUpdates = true
             userDefaults.set(autoUpdate.state, forKey: UserDefaultKeys.AutoUpdate)
+        }
+        
+        if let networkStatus = userDefaults.object(forKey: UserDefaultKeys.NetworkStatus) as? Data{
+            
+            let network: NetworkResponse = try! decoder.decode(NetworkResponse.self, from: networkStatus)
+            let submenu = NSMenu()
+
+            if let devices = network.vNetwork?.devices{
+                for (index, device) in devices.enumerated() {
+                    
+                    let deviceInfoView = DeviceInfoView()
+    //                deviceInfoView.loadViewFromNib()
+
+                    deviceInfoView.deviceName.wantsLayer = true
+                    deviceInfoView.deviceName.stringValue =  device.name ?? ""
+                    deviceInfoView.ip.stringValue = device.virtualIP ?? ""
+                    deviceInfoView.ping.stringValue = "- ms"
+                    let menuItem = NSMenuItem()
+                    menuItem.view = deviceInfoView
+                    submenu.addItem(menuItem)
+                    
+                    if index != devices.count - 1{
+                        submenu.addItem(NSMenuItem.separator())
+                    }
+                    
+                }
+            }
+            
+            
+            self.deviceList.submenu = submenu
+            
+            
+            
         }
         
         
@@ -173,9 +211,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             menu.delegate = self
         }
         
-        
-        firstMenuItem.view = customeView
-        firstMenuItem.isHidden = true
         
         
     }

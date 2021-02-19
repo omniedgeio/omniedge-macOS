@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +17,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Omniedge" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="Item" id="BPC-xX-3vL">
+                                        <menuItem title="Switcher" id="BPC-xX-3vL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem title="Device List" id="JJ6-LO-niX">
@@ -77,10 +78,10 @@
                 <customObject id="nNc-dx-0De" customClass="SUUpdater"/>
                 <customView id="jnN-yL-9YP" userLabel="Switcher">
                     <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="12" y="8" width="47" height="16"/>
+                            <rect key="frame" x="12" y="-44" width="47" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
                                 <font key="font" usesAppearanceFont="YES"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -88,7 +89,7 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="yAZ-Gy-8Cq" customClass="OGSwitch" customModule="OGSwitch">
-                            <rect key="frame" x="152" y="6" width="35" height="20"/>
+                            <rect key="frame" x="152" y="-46" width="35" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="Cqn-Az-ooV"/>
                                 <constraint firstAttribute="height" constant="20" id="RZM-QY-Blt"/>
@@ -99,12 +100,14 @@
                         </customView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="1sq-Vc-5yW"/>
+                        <constraint firstItem="qRL-sk-2CO" firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="1sq-Vc-5yW"/>
                         <constraint firstItem="Slv-7L-Yrd" firstAttribute="centerY" secondItem="yAZ-Gy-8Cq" secondAttribute="centerY" id="Fhb-Ev-XKi"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="jnN-yL-9YP" secondAttribute="top" constant="8" id="Kyf-eQ-bGN"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="14" id="e1s-QT-Sw9"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="qRL-sk-2CO" secondAttribute="top" constant="8" id="Kyf-eQ-bGN"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="qRL-sk-2CO" secondAttribute="leading" constant="14" id="e1s-QT-Sw9"/>
                         <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="leading" secondItem="Slv-7L-Yrd" secondAttribute="trailing" constant="95" id="hyM-Xg-MnD"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="qRL-sk-2CO"/>
+                    <viewLayoutGuide key="layoutMargins" id="yDD-Qu-JZA"/>
                 </customView>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
