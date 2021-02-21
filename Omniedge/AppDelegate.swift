@@ -333,9 +333,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
             
             if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus){
-                
-                let hostId = UserDefaults.standard.string(forKey: UserDefaultKeys.DeviceUUID)!
-                
+                                
                 
                 let network: NetworkResponse = try! decoder.decode(NetworkResponse.self, from: networkStatus)
                 
@@ -394,7 +392,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         super.awakeFromNib()
         
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem?.button?.title = "📡"
+        statusItem?.button?.image = NSImage(named: "StatusBarIcon")
         
         if let menu = menu {
             statusItem?.menu = menu
