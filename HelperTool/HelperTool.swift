@@ -9,13 +9,15 @@ import Foundation
 import n2nMacOS
 
 var keepRunning: Int32 = 1
+var isConnected = false
 
 class HelperToolImpl: HelperTool{
+   
     
-    var isConnected = false
+
     
     func isConnect(completion: @escaping (Bool) -> Void) {
-        completion(isConnected)
+        completion(keepRunning == 1 && isConnected)
     }
     
     func version(completion: @escaping (String) -> Void) {
@@ -27,22 +29,39 @@ class HelperToolImpl: HelperTool{
     private var searchingWorkItem: DispatchWorkItem?
     
     
-    func install(){
+    let decoder = JSONDecoder()
+    
+    func connect(_ networkConfig: Data, completion: @escaping (Error?)->Void){
         NSLog("[SMJBS]: \(#function)")
         
-        let deviceName = "n2n01111"
-        let communityName = "omniedge"
-        let encryptKey = "66YRd88kyYdhzk"
-        let deviceMac = "DE:AD:BE:EF:F1:10"
-        let localIP = "10.254.1.23"
-        let superNode = "52.80.139.238:7787"
+        
+        let config = try! decoder.decode(NetworkConfig.self, from: networkConfig)
+        
+        let deviceName = ProcessInfo.processInfo.hostName
+        let communityName = config.communityName
+        let encryptKey = config.secretKey
+        var deviceMac = "DE:AD:BE:EF:F1:10"
+        let localIP = config.virtualIP
+        let superNode = config.addr
+        
+        
+        
+        if let intfIterator = FindEthernetInterfaces() {
+            if let macAddress = GetMACAddress(intfIterator) {
+                let macAddressAsString = macAddress.map( { String(format:"%02x", $0) } )
+                    .joined(separator: ":")
+                deviceMac = macAddressAsString
+            }
+
+            IOObjectRelease(intfIterator)
+        }
         
         NSLog("[SMJBS]: \(#function)")
 
         if(!isConnected){
             searchingWorkItem = DispatchWorkItem {
                 NSLog("[SMJBS]: edge start")
-                self.isConnected = true
+                isConnected = true
                 keepRunning = 1
                 quick_edge_init(deviceName, communityName, encryptKey, deviceMac, localIP, superNode, &keepRunning)
                 NSLog("[SMJBS]: edge end")
@@ -51,15 +70,15 @@ class HelperToolImpl: HelperTool{
             DispatchQueue.global().async(execute: self.searchingWorkItem!)
         }
         
-       
+        completion(nil)
         
         NSLog("[SMJBS]: \(#function)")
     }
-    func uninstall(){
+    func disconnect(){
         NSLog("[SMJBS]: \(#function)")
         keepRunning = 0
         searchingWorkItem?.cancel()
-        self.isConnected = false
+        isConnected = false
         
     }
 }

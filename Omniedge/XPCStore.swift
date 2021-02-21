@@ -11,12 +11,7 @@ import Cocoa
 class XPCStore{
     var XPCConnection: NSXPCConnection?
     var helperTool: HelperTool?
-    
-    var isConnected: Bool = false {
-        didSet {
-            NSLog("click")
-        }
-    }
+
 
     
     init(){

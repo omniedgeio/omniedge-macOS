@@ -13,7 +13,8 @@ protocol HelperTool {
     
     func version(completion: @escaping(String) -> Void) // change to check version instead of check alive after first release.
     func isConnect(completion: @escaping(Bool) -> Void)
-    func install()
-    func uninstall()
+    
+    func connect(_ networkConfig: Data, completion: @escaping (Error?)->Void)
+    func disconnect()
 }
 

@@ -28,4 +28,5 @@ extension NSControl.StateValue{
     public func toggle() -> NSControl.StateValue{
         return  self == .on ? .off: .on
     }
+    
 }

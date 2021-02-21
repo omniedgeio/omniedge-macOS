@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
-        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,10 +29,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="KhA-eo-Irz"/>
-                                        <menuItem title="About Omniedge" id="FLo-lu-sTi">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Auto update" state="on" id="BOF-NM-1cW">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -45,6 +40,12 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="jTS-Xj-efU"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="About Omniedge" id="FLo-lu-sTi">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="gSg-m2-JL8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Quit" keyEquivalent="q" id="fRw-bA-hJf">
@@ -69,7 +70,9 @@
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
                         <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
+                        <outlet property="networkSwitcher" destination="yAZ-Gy-8Cq" id="Cea-yt-kw0"/>
                         <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
+                        <outlet property="switcherAlign" destination="ndD-vV-hvV" id="WOh-IM-9XE"/>
                         <outlet property="updater" destination="nNc-dx-0De" id="rj3-jW-U2Y"/>
                     </connections>
                 </customObject>
@@ -80,16 +83,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="12" y="-44" width="47" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
-                                <font key="font" usesAppearanceFont="YES"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="yAZ-Gy-8Cq" customClass="OGSwitch" customModule="OGSwitch">
-                            <rect key="frame" x="152" y="-46" width="35" height="20"/>
+                            <rect key="frame" x="153" y="6" width="35" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="Cqn-Az-ooV"/>
                                 <constraint firstAttribute="height" constant="20" id="RZM-QY-Blt"/>
@@ -98,16 +93,21 @@
                                 <action selector="switchPressed:" target="Voe-Tx-rLC" id="ugw-6D-bHt"/>
                             </connections>
                         </customView>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
+                            <rect key="frame" x="12" y="8" width="24" height="16"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
+                                <font key="font" usesAppearanceFont="YES"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="qRL-sk-2CO" firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="13" id="1sq-Vc-5yW"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="centerY" secondItem="yAZ-Gy-8Cq" secondAttribute="centerY" id="Fhb-Ev-XKi"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="top" secondItem="qRL-sk-2CO" secondAttribute="top" constant="8" id="Kyf-eQ-bGN"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="qRL-sk-2CO" secondAttribute="leading" constant="14" id="e1s-QT-Sw9"/>
-                        <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="leading" secondItem="Slv-7L-Yrd" secondAttribute="trailing" constant="95" id="hyM-Xg-MnD"/>
+                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="12" id="AcJ-n0-OMQ"/>
+                        <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="centerY" secondItem="jnN-yL-9YP" secondAttribute="centerY" id="HXZ-ty-AIn"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="centerY" secondItem="yAZ-Gy-8Cq" secondAttribute="centerY" id="Qmn-y9-r5y"/>
+                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="14" id="ndD-vV-hvV"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="qRL-sk-2CO"/>
-                    <viewLayoutGuide key="layoutMargins" id="yDD-Qu-JZA"/>
                 </customView>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>

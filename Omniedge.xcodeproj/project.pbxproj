@@ -27,7 +27,6 @@
 		0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E4F25BD69E60048FC0D /* Sparkle.framework */; };
 		0B734E6925BD6D8F0048FC0D /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B734E4F25BD69E60048FC0D /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0B734E6E25BD75810048FC0D /* appdmg.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E6D25BD75810048FC0D /* appdmg.json */; };
-		0B734E7225BD75F90048FC0D /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0B734E7125BD75F90048FC0D /* Makefile */; };
 		0B7575BB25B44FF900601DC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7575BA25B44FF900601DC7 /* main.swift */; };
 		0B7575C625B4518000601DC7 /* io.omniedge.mac.Omniedge.HelperTool in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0B9B787A25B4717000BB415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B787825B4717000BB415D /* Constants.swift */; };
@@ -40,6 +39,10 @@
 		0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */; };
 		0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */; };
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
+		0BD772F025E25AFC0001282C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD772EF25E25AFC0001282C /* Models.swift */; };
+		0BD772F125E25AFC0001282C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD772EF25E25AFC0001282C /* Models.swift */; };
+		0BD772F425E261500001282C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
+		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +129,6 @@
 		0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
 		0B734E6D25BD75810048FC0D /* appdmg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = appdmg.json; sourceTree = "<group>"; };
-		0B734E7125BD75F90048FC0D /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0B7575B825B44FF900601DC7 /* io.omniedge.mac.Omniedge.HelperTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = io.omniedge.mac.Omniedge.HelperTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7575BA25B44FF900601DC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0B7575C125B4507100601DC7 /* HelperTool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelperTool-Info.plist"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		0BBF0F8925AB52FD001E9B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
+		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +166,7 @@
 				0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */,
 				0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */,
 				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
+				0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */,
 				0B5A05AD25DB67A5000BFD54 /* OAuth2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +205,7 @@
 				0B9B787825B4717000BB415D /* Constants.swift */,
 				0B9B787925B4717000BB415D /* Protocols.swift */,
 				0B22165225CC448B00387622 /* Extensions.swift */,
+				0BD772EF25E25AFC0001282C /* Models.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -218,7 +223,6 @@
 				0B9B784525B4609C00BB415D /* SMJobBlessUtil.py */,
 				0B734E3825BD5D550048FC0D /* .gitignore */,
 				0B734E6D25BD75810048FC0D /* appdmg.json */,
-				0B734E7125BD75F90048FC0D /* Makefile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,6 +306,7 @@
 			name = Omniedge;
 			packageProductDependencies = (
 				0B3D99DB25DA953400344C07 /* n2nMacOS */,
+				0BD772F725E26F7A0001282C /* SwiftyPing */,
 			);
 			productName = Omniedge;
 			productReference = 0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */;
@@ -335,6 +340,7 @@
 			mainGroup = 0BBF0F7625AB52FC001E9B2C;
 			packageReferences = (
 				0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */,
+				0BD772F625E26F7A0001282C /* XCRemoteSwiftPackageReference "SwiftyPing" */,
 			);
 			productRefGroup = 0BBF0F8025AB52FC001E9B2C /* Products */;
 			projectDirPath = "";
@@ -371,8 +377,10 @@
 				0B22165425CC448B00387622 /* Extensions.swift in Sources */,
 				0B9B789725B4773A00BB415D /* HelperTool.swift in Sources */,
 				0B9B788025B4718200BB415D /* Constants.swift in Sources */,
+				0BD772F425E261500001282C /* Util.swift in Sources */,
 				0B9B788125B4718200BB415D /* Protocols.swift in Sources */,
 				0B7575BB25B44FF900601DC7 /* main.swift in Sources */,
+				0BD772F125E25AFC0001282C /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,8 +393,8 @@
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
+				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
-				0B734E7225BD75F90048FC0D /* Makefile in Sources */,
 				0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 			);
@@ -684,6 +692,14 @@
 				kind = branch;
 			};
 		};
+		0BD772F625E26F7A0001282C /* XCRemoteSwiftPackageReference "SwiftyPing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/samiyr/SwiftyPing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -696,6 +712,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */;
 			productName = n2nMacOS;
+		};
+		0BD772F725E26F7A0001282C /* SwiftyPing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BD772F625E26F7A0001282C /* XCRemoteSwiftPackageReference "SwiftyPing" */;
+			productName = SwiftyPing;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

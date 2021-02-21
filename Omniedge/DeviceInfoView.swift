@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftyPing
 
 class DeviceInfoView: NSView,NibLoadable {
     
@@ -33,6 +34,45 @@ class DeviceInfoView: NSView,NibLoadable {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         loadViewFromNib()
+    }
+    
+    func updateUI(){
+        if let hostPing = UserDefaults.standard.string(forKey: UserDefaultKeys.Ping + ip.stringValue){
+            self.ping.stringValue = hostPing
+        }else{
+            self.ping.stringValue = "- ms"
+        }
+    }
+    private var isPing = false
+    fileprivate func pingHosts() {
+        if self.ping.stringValue != "ping"{
+            let once = try? SwiftyPing(host: self.ip.stringValue, configuration: PingConfiguration(interval: 0.5, with: 3), queue: DispatchQueue.global())
+            once?.observer = { (response) in
+                if let duration = response.duration{
+                    if duration > 2{
+                        UserDefaults.standard.setValue("timeout", forKey: UserDefaultKeys.Ping + self.ip.stringValue)
+                    }else{
+                        UserDefaults.standard.setValue(String(format: "%.0f ms", duration * 1000), forKey: UserDefaultKeys.Ping + self.ip.stringValue)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.updateUI()
+                    }
+                }
+            }
+            once?.targetCount = 1
+            try? once?.startPinging()
+        }
+        self.ping.stringValue = "ping"
+    }
+    
+    override func mouseDown(with theEvent: NSEvent) {
+        pingHosts()
+        
+    }
+    
+    override func rightMouseDown(with theEvent: NSEvent) {
+        pingHosts()
     }
 }
 

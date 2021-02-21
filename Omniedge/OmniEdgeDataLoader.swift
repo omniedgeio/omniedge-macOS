@@ -13,8 +13,8 @@ class OmniEdgeDataLoader: OAuth2DataLoader{
     
     let graphql = URL(string: BackEndConstants.GraphqlEndpoint)!
     
-    func queryNetwork( callback: @escaping ((Data?, Error?) -> Void)) {
-        oauth2.logger = OAuth2DebugLogger(.trace)
+    
+    func queryNetwork( callback: @escaping (Result<Data, Error>) -> Void) {
         var req = self.oauth2.request(forURL: graphql)
         req.setValue(oauth2.idToken, forHTTPHeaderField: "Authorization")
         req.httpMethod = "POST"
@@ -24,12 +24,38 @@ class OmniEdgeDataLoader: OAuth2DataLoader{
             do {
                 let dict = try response.responseData()
                 
-                callback(dict, nil)
+                callback(.success(dict))
                 
             }
             catch let error {
                
-                callback(nil, error)
+                callback(.failure(error))
+                
+            }
+        }
+    }
+    
+    let encoder = JSONEncoder()
+    
+    func join(joinNetwork: JoinNetworkRequest, networkId:String, callback: @escaping (Result<Data, Error>) -> Void){
+        
+        let url = URL(string: BackEndConstants.RestJoin + "/virtual-network/\(networkId)/join")!
+        
+        var req = self.oauth2.request(forURL: url)
+        req.setValue(oauth2.idToken, forHTTPHeaderField: "Authorization")
+        req.httpMethod = "POST"
+        req.httpBody = try! encoder.encode(joinNetwork)
+        
+        perform(request: req){ response in
+            do {
+                let dict = try response.responseData()
+                
+                callback(.success(dict))
+                
+            }
+            catch let error {
+               
+                callback(.failure(error))
                 
             }
         }
@@ -93,3 +119,15 @@ struct Device: Decodable{
     var virtualIP: String?
     var description:String?
 }
+
+
+struct JoinNetworkRequest: Codable{
+    let instanceID: String
+    let virtualNetworkID: String
+    let name: String
+    var userAgent = "macOS"
+    let description: String
+    let publicKey: String
+}
+
+
