@@ -19,8 +19,15 @@
                                         <menuItem title="Switcher" id="BPC-xX-3vL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="Device List" id="JJ6-LO-niX">
+                                        <menuItem title="Device List" id="Lo5-bz-trT">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Device List" id="O5T-yq-XyO">
+                                                <items>
+                                                    <menuItem title="Item" id="Lhw-70-p4H">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                         </menuItem>
                                         <menuItem title="LoginItem" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -66,7 +73,7 @@
                     <connections>
                         <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
                         <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
-                        <outlet property="deviceList" destination="JJ6-LO-niX" id="pTF-Mx-ixf"/>
+                        <outlet property="deviceList" destination="Lo5-bz-trT" id="pCg-ZU-IwZ"/>
                         <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
                         <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>

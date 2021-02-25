@@ -11,15 +11,16 @@ import Cocoa
 class XPCStore{
     var XPCConnection: NSXPCConnection?
     var helperTool: HelperTool?
-
-
+    
+    
     
     init(){
-        
+        if  !FileManager.default.fileExists(atPath: "/Library/PrivilegedHelperTools/\(XPCConstant.HelperMachLabel)"){
+            
+            self.alertInstall("Omniedge needs to install Helper Tool to complete installation.")
+            
+        }
         self.connectToXPC()
-        
-        
-        
     }
     
     private func disconnect(){
@@ -29,8 +30,9 @@ class XPCStore{
     }
     
     private func connectToXPC(){
+        
         self.XPCConnection = NSXPCConnection(machServiceName: XPCConstant.HelperMachLabel,
-                                        options: .privileged)
+                                             options: .privileged)
         
         XPCConnection?.remoteObjectInterface = NSXPCInterface(with: HelperTool.self)
         
@@ -48,7 +50,7 @@ class XPCStore{
         
         if ver != XPCConstant.HelperToolVersion{
             DispatchQueue.main.async {
-                self.alertInstall()
+                self.alertInstall("Omniedge needs to upgrade Helper Tool.")
                 
             }
         }
@@ -57,21 +59,19 @@ class XPCStore{
     
     private func connetionInterruptionHandler() {
         NSLog("interrupted Connection")
-
-    }
-    
-    private func connectionInvalidationHandler() {
-        DispatchQueue.main.async {
-            self.alertInstall()
-            
-        }
         
     }
     
-    func alertInstall(){
+    private func connectionInvalidationHandler() {
+        NSLog("Invalid Connection")
+        
+        
+    }
+    
+    func alertInstall(_ message: String){
         let alert = NSAlert()
         alert.alertStyle = .informational
-        alert.messageText = "Omniedge needs to install Helper Tool to complete installation."
+        alert.messageText = message
         let okButton = alert.addButton(withTitle: "OK")
         
         //        okButton.target = self

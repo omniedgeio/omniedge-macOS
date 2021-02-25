@@ -9,7 +9,7 @@ import Foundation
 
 struct XPCConstant {
     static let HelperMachLabel = "io.omniedge.mac.Omniedge.HelperTool"
-    static let HelperToolVersion = "1.0"
+    static let HelperToolVersion = "1.2"
 
 }
 

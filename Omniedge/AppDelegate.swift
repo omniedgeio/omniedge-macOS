@@ -75,13 +75,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
             UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
             
+            xpcStore?.helperTool?.disconnect()
+            
         }else{
             
             var url = try! oauth2.authorizeURL(params: nil)
             url = URL(string: url.description.removingPercentEncoding!)!
-            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
+            //            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
+            try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
+            
+            
             oauth2.afterAuthorizeOrFail = { authParameters, error in
                 self.pullDevliceList(fromTimer: false,callback: self.join)
+                
                 
             }
         }
@@ -191,6 +197,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         NSLog("\(ProcessInfo.processInfo.hostName)")
         
+        
+        
         initDeviceInformation()
         oauth2.logger = OAuth2DebugLogger(.trace)
         
@@ -202,6 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         })
         
         self.xpcStore = XPCStore()
+        
         self.updateUI()
         
         
@@ -333,7 +342,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
             
             if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus){
-                                
+                
                 
                 let network: NetworkResponse = try! decoder.decode(NetworkResponse.self, from: networkStatus)
                 
@@ -407,10 +416,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
     }
     
+    func isTuntapInstalled() -> Bool {
+        return !FileManager.default.fileExists(atPath: "/dev/tap0")
+    }
+    
     @IBAction func switchPressed(_ sender: OGSwitch) {
         
+        
+        
+        
+        if !isTuntapInstalled() {
+            sender.setOn(isOn: false, animated: true)
+            alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
+            return
+        }
         switchLabel.stringValue = sender.isOn ? "On":"Off"
-
+        
+        
+        
+        
         
         if(sender.isOn){
             if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){

@@ -22,7 +22,7 @@ class HelperToolImpl: HelperTool{
     
     func version(completion: @escaping (String) -> Void) {
         
-        completion(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String)
+        completion(XPCConstant.HelperToolVersion)
     }
     
     
