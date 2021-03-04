@@ -86,6 +86,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
             
             oauth2.afterAuthorizeOrFail = { authParameters, error in
+                
+                
+                if let error = error {
+                    alert(title: "Login failed.", description: error.localizedDescription, .critical)
+                }else{
+                    if let path = Bundle.main.path(forResource: "success.html", ofType: nil){
+                        NSWorkspace.shared.open(URL(string: "file:///\(path)")!)
+                    }
+                }
+                
                 self.pullDevliceList(fromTimer: false,callback: self.join)
                 
                 
@@ -181,9 +191,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @objc private func handleEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         
+        DispatchQueue.main.async {
+            self.statusItem?.menu?.cancelTrackingWithoutAnimation()
+
+        }
+        
+        
         if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
             if let url = URL(string: urlString), "omniedge" == url.scheme && "signin" == url.host {
                 self.oauth2.handleRedirectURL(url)
+                
             }
         }
         else {
@@ -195,7 +212,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        NSLog("\(ProcessInfo.processInfo.hostName)")
+       
         
         
         
@@ -417,7 +434,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func isTuntapInstalled() -> Bool {
-        return !FileManager.default.fileExists(atPath: "/dev/tap0")
+        return FileManager.default.fileExists(atPath: "/dev/tap0")
+        
     }
     
     @IBAction func switchPressed(_ sender: OGSwitch) {
