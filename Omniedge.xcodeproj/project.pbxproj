@@ -36,6 +36,7 @@
 		0B9B789325B4746F00BB415D /* XPCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789225B4746F00BB415D /* XPCServer.swift */; };
 		0B9B789725B4773A00BB415D /* HelperTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789625B4773A00BB415D /* HelperTool.swift */; };
 		0B9B789B25B4792900BB415D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
+		0BA4E57C25F14062005AF9BF /* success.html in Resources */ = {isa = PBXBuildFile; fileRef = 0BA4E57B25F14062005AF9BF /* success.html */; };
 		0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */; };
 		0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */; };
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
@@ -141,6 +142,7 @@
 		0B9B789225B4746F00BB415D /* XPCServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCServer.swift; sourceTree = "<group>"; };
 		0B9B789625B4773A00BB415D /* HelperTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperTool.swift; sourceTree = "<group>"; };
 		0B9B789A25B4792900BB415D /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		0BA4E57B25F14062005AF9BF /* success.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = success.html; sourceTree = "<group>"; };
 		0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omniedge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		0BBF0F9825AB580D001E9B2C /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0BA4E57B25F14062005AF9BF /* success.html */,
 				0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */,
 				0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */,
 				0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */,
@@ -363,6 +366,7 @@
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
 				0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */,
 				0B734E6E25BD75810048FC0D /* appdmg.json in Resources */,
+				0BA4E57C25F14062005AF9BF /* success.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,7 +606,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -615,7 +619,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -631,7 +635,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.1.0;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -644,7 +648,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
