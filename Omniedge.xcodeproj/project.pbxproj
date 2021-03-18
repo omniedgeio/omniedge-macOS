@@ -19,6 +19,9 @@
 		0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */; };
 		0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */; };
 		0B5A05FE25DFF0FC000BFD54 /* DeviceInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */; };
+		0B6EF52F26039E3500545C83 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6EF52E26039E3500545C83 /* GCDWebServers.framework */; };
+		0B6EF53026039E3500545C83 /* GCDWebServers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6EF52E26039E3500545C83 /* GCDWebServers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0B6EF53326039E6B00545C83 /* GCDWebServers.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6EF53226039E6B00545C83 /* GCDWebServers.framework.dSYM */; };
 		0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B734DD625BC23080048FC0D /* XPCStore.swift */; };
 		0B734E0F25BD3C1F0048FC0D /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E0E25BD3C1F0048FC0D /* Cartfile */; };
 		0B734E3925BD5D550048FC0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B734E3825BD5D550048FC0D /* .gitignore */; };
@@ -72,6 +75,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				0B6EF53326039E6B00545C83 /* GCDWebServers.framework.dSYM in Embed Frameworks */,
 				0B5A05BC25DB6A5B000BFD54 /* OGSwitch.framework.dSYM in Embed Frameworks */,
 				0B5A05BD25DB6A5B000BFD54 /* OAuth2.framework.dSYM in Embed Frameworks */,
 				0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */,
@@ -86,6 +90,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0B734E6325BD6D380048FC0D /* OGSwitch.framework in Embed Frameworks */,
+				0B6EF53026039E3500545C83 /* GCDWebServers.framework in Embed Frameworks */,
 				0B5A05AE25DB67A5000BFD54 /* OAuth2.framework in Embed Frameworks */,
 				0B734E6925BD6D8F0048FC0D /* Sparkle.framework in Embed Frameworks */,
 			);
@@ -122,6 +127,8 @@
 		0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
 		0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoView.xib; sourceTree = "<group>"; };
+		0B6EF52E26039E3500545C83 /* GCDWebServers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDWebServers.framework; path = Carthage/Build/Mac/GCDWebServers.framework; sourceTree = "<group>"; };
+		0B6EF53226039E6B00545C83 /* GCDWebServers.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = GCDWebServers.framework.dSYM; sourceTree = "<group>"; };
 		0B734DD625BC23080048FC0D /* XPCStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCStore.swift; sourceTree = "<group>"; };
 		0B734E0E25BD3C1F0048FC0D /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0B734E1525BD3D5E0048FC0D /* OGSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OGSwitch.framework; path = Carthage/Build/Mac/OGSwitch.framework; sourceTree = "<group>"; };
@@ -168,6 +175,7 @@
 				0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */,
 				0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */,
 				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
+				0B6EF52F26039E3500545C83 /* GCDWebServers.framework in Frameworks */,
 				0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */,
 				0B5A05AD25DB67A5000BFD54 /* OAuth2.framework in Frameworks */,
 			);
@@ -191,6 +199,7 @@
 		0B9A2AD425B9B36B000B316D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B6EF52E26039E3500545C83 /* GCDWebServers.framework */,
 				0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */,
 				0B734E5625BD6A6A0048FC0D /* OGSwitch.framework.dSYM */,
 				0B734E5225BD6A3B0048FC0D /* Sparkle.framework.dSYM */,
@@ -256,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				0BA4E57B25F14062005AF9BF /* success.html */,
+				0B6EF53226039E6B00545C83 /* GCDWebServers.framework.dSYM */,
 				0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */,
 				0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */,
 				0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */,
@@ -606,7 +616,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0.1.0;
+				CURRENT_PROJECT_VERSION = 0.1.1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -619,7 +629,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -635,7 +645,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0.1.0;
+				CURRENT_PROJECT_VERSION = 0.1.1;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -648,7 +658,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

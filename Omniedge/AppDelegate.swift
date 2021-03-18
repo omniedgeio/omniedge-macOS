@@ -11,6 +11,7 @@ import SwiftUI
 import Sparkle
 import ServiceManagement
 import OAuth2
+import GCDWebServers
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -33,6 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     var xpcStore: XPCStore?
     
+    let webServer = GCDWebServer()
+    
     @IBOutlet weak var customeView: NSView!
     
     var statusItem: NSStatusItem?
@@ -47,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    
+    let semaphore = DispatchSemaphore(value: 0)
     
     var oauth2 = createOAuth2()
     
@@ -73,8 +76,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             let storage = HTTPCookieStorage.shared
             storage.cookies?.forEach() { storage.deleteCookie($0) }
             UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
-            UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
-            
             xpcStore?.helperTool?.disconnect()
             
         }else{
@@ -88,15 +89,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             oauth2.afterAuthorizeOrFail = { authParameters, error in
                 
                 
+                self.semaphore.signal()
+                
                 if let error = error {
                     alert(title: "Login failed.", description: error.localizedDescription, .critical)
-                }else{
-                    if let path = Bundle.main.path(forResource: "success.html", ofType: nil){
-                        NSWorkspace.shared.open(URL(string: "file:///\(path)")!)
-                    }
                 }
                 
-                self.pullDevliceList(fromTimer: false,callback: self.join)
+                self.pullDevliceList(callback: self.join)
                 
                 
             }
@@ -107,7 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    var timer : Timer?
+
     
     func join(){
         if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus),
@@ -155,24 +154,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
     
-    func pullDevliceList(fromTimer:Bool, callback: @escaping (()->Void)){
-        self.dataLoader?.queryNetwork(callback: { result in
-            
-            switch result{
-            case .success(let network):
-                UserDefaults.standard.setValue(network, forKey: UserDefaultKeys.NetworkStatus)
-            case .failure(let error):
-                NSLog("Get Device List Error: \(error.localizedDescription)")
-                if !fromTimer {
-                    alert(title:"Get Device List Error", description: error.localizedDescription, .critical)
-                }
+    func pullDevliceList(callback: (()->Void)? = nil){
+        if let _ = oauth2.accessToken {
+            self.dataLoader?.queryNetwork(callback: { result in
                 
-            }
-            callback()
-            DispatchQueue.main.async {
-                self.updateUI()
-            }
-        })
+                switch result{
+                case .success(let network):
+                    UserDefaults.standard.setValue(network, forKey: UserDefaultKeys.NetworkStatus)
+                case .failure(let error):
+                    NSLog("Get Device List Error: \(error.localizedDescription)")
+                }
+                callback?()
+                
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
+            })
+        }
+       
     }
     
     
@@ -209,22 +208,43 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
+    func callbackListening(turnOn: Bool){
+        webServer.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: {request in
+            
+            self.oauth2.handleRedirectURL(request.url)
+            self.semaphore.wait()
+            
+            if let _ = self.oauth2.idToken {
+                let path = Bundle.main.path(forResource: "success.html", ofType: nil)!
+                
+                return GCDWebServerDataResponse(data: try! Data(contentsOf: URL(string: "file:///\(path)")!), contentType: "text")
+               
+            }else{
+                
+                return GCDWebServerErrorResponse(statusCode: 404)
+
+            }
+           
+            
+        })
+        
+        if turnOn && !webServer.isRunning {
+            webServer.start(withPort: 8080, bonjourName: "GCD Web Server")
+        }
+       
+        if !turnOn && webServer.isRunning{
+            webServer.stop()
+        }
+        
+    }
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-       
-        
-        
-        
         initDeviceInformation()
-        oauth2.logger = OAuth2DebugLogger(.trace)
+        oauth2.logger = OAuth2DebugLogger(.off)
         
         dataLoader = OmniEdgeDataLoader(oauth2: self.oauth2)
-        
-        self.timer  = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
-            print("pulling")
-            self.pullDevliceList(fromTimer: true){}
-        })
         
         self.xpcStore = XPCStore()
         
@@ -334,6 +354,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func isLoggedIn(_ isLoggedIn: Bool){
         
         if(isLoggedIn){
+            
+            callbackListening(turnOn: false)
+            
             firstMenuItem.view = customeView
             firstMenuItem.isHidden = false
             
@@ -402,6 +425,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
             
         }else{
+            callbackListening(turnOn: true)
+
             firstMenuItem.view = nil
             firstMenuItem.isHidden = true
             
@@ -475,9 +500,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu){
-        DispatchQueue.main.async {
-            self.updateUI()
-        }
+        self.pullDevliceList()
         
     }
     

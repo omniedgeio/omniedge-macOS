@@ -43,9 +43,9 @@ struct BackEndConstants{
     static let ClientID = "274vpj278u5j7njhb9up99ibi8"
     static let ClientSecret = "t98n31jmusc3ucci7rql4ojodg7daehjv1nln586p60eu2k4pql"
 
-    static let TokenURL = "https://omniedge-dev.auth.us-east-2.amazoncognito.com/oauth2/token"
-    static let LoginURL = "https://omniedge-dev.auth.us-east-2.amazoncognito.com/login"
-    static let CallBackURL = "omniedge://signin/"
+    static let TokenURL = "https://auth-dev.edgecomputing.network/oauth2/token"
+    static let LoginURL = "https://auth-dev.edgecomputing.network/login"
+    static let CallBackURL = "http://localhost:8080/"
     static let Scope = "email+openid+phone+profile"
     
     static let GraphqlEndpoint = "https://nhgt5ptb5fhjzgu6qmwf76hhka.appsync-api.us-east-2.amazonaws.com/graphql"

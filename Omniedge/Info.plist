@@ -43,7 +43,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>io.omniedge.mac.Omniedge.HelperTool</key>
-		<string>identifier &quot;io.omniedge.mac.Omniedge.HelperTool&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: Youyang Zhang (TRQDV45QZV)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "io.omniedge.mac.Omniedge.HelperTool" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Youyang Zhang (TRQDV45QZV)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/omniedgeio/omniedge-mac/master/appcast-name.xml</string>
