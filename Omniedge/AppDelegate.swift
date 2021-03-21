@@ -188,6 +188,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(event:replyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
     }
     
+    func applicationWillTerminate(_ notification: Notification) {
+        self.xpcStore?.helperTool?.disconnect()
+    }
+    
+    
+
+    
     @objc private func handleEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         
         DispatchQueue.main.async {
@@ -455,8 +462,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     
-    func applicationWillTerminate(_ aNotification: Notification) {
-    }
+   
     
     func isTuntapInstalled() -> Bool {
         return FileManager.default.fileExists(atPath: "/dev/tap0")
