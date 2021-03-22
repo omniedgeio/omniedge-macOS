@@ -76,6 +76,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             let storage = HTTPCookieStorage.shared
             storage.cookies?.forEach() { storage.deleteCookie($0) }
             UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
+            UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
+
             xpcStore?.helperTool?.disconnect()
             
         }else{
@@ -391,33 +393,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus){
                 
                 
-                let network: NetworkResponse = try! decoder.decode(NetworkResponse.self, from: networkStatus)
-                
-                if let devices = network.vNetwork?.devices{
-                    for  device in devices {
-                        
-                        if let ip = ip, device.virtualIP == ip{
-                            continue
+                if let network: NetworkResponse = try? decoder.decode(NetworkResponse.self, from: networkStatus){
+                    if let devices = network.vNetwork?.devices{
+                        for  device in devices {
+                            
+                            if let ip = ip, device.virtualIP == ip{
+                                continue
+                            }
+                            
+                            let deviceInfoView = DeviceInfoView()
+                            deviceInfoView.deviceName.wantsLayer = true
+                            deviceInfoView.deviceName.stringValue =  device.name ?? ""
+                            deviceInfoView.ip.stringValue = device.virtualIP ?? ""
+                            deviceInfoView.updateUI()
+                            let menuItem = NSMenuItem()
+                            menuItem.view = deviceInfoView
+                            submenu.addItem(menuItem)
+                            
+                            submenu.addItem(NSMenuItem.separator())
+                            
+                            
                         }
-                        
-                        let deviceInfoView = DeviceInfoView()
-                        deviceInfoView.deviceName.wantsLayer = true
-                        deviceInfoView.deviceName.stringValue =  device.name ?? ""
-                        deviceInfoView.ip.stringValue = device.virtualIP ?? ""
-                        deviceInfoView.updateUI()
-                        let menuItem = NSMenuItem()
-                        menuItem.view = deviceInfoView
-                        submenu.addItem(menuItem)
-                        
-                        submenu.addItem(NSMenuItem.separator())
-                        
-                        
                     }
+                    
+                    
+                    self.deviceList.submenu = submenu
+                    self.deviceList.isHidden = false
                 }
                 
-                
-                self.deviceList.submenu = submenu
-                self.deviceList.isHidden = false
+               
                 
                 
             }
