@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    let semaphore = DispatchSemaphore(value: 0)
+    var semaphore: DispatchSemaphore?
     
     var oauth2 = createOAuth2()
     
@@ -88,13 +88,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
             oauth2.afterAuthorizeOrFail = { authParameters, error in
                 
-                
-                self.semaphore.signal()
-                
+
                 if let error = error {
                     alert(title: "Login failed.", description: error.localizedDescription, .critical)
                 }
                 
+                self.semaphore?.signal()
                 self.pullDevliceList(callback: self.join)
                 
                 
@@ -219,7 +218,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         webServer.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: {request in
             
             self.oauth2.handleRedirectURL(request.url)
-            self.semaphore.wait()
+            self.semaphore = DispatchSemaphore(value: 0)
+            self.semaphore?.wait()
             
             if let _ = self.oauth2.idToken {
                 let path = Bundle.main.path(forResource: "success.html", ofType: nil)!
