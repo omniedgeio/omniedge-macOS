@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0B22165325CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
 		0B22165425CC448B00387622 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B22165225CC448B00387622 /* Extensions.swift */; };
+		0B361061260E2F1B00CFDEEB /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = 0B361060260E2F1B00CFDEEB /* Bugsnag */; };
+		0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */; };
 		0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DB25DA953400344C07 /* n2nMacOS */; };
 		0B3D99DF25DA953B00344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DE25DA953B00344C07 /* n2nMacOS */; };
 		0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */; };
@@ -120,6 +122,7 @@
 
 /* Begin PBXFileReference section */
 		0B22165225CC448B00387622 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugsnagReportApplication.swift; sourceTree = "<group>"; };
 		0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniEdgeDataLoader.swift; sourceTree = "<group>"; };
 		0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/Mac/OAuth2.framework; sourceTree = "<group>"; };
 		0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 			files = (
 				0B734E6225BD6D380048FC0D /* OGSwitch.framework in Frameworks */,
 				0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */,
+				0B361061260E2F1B00CFDEEB /* Bugsnag in Frameworks */,
 				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
 				0B6EF52F26039E3500545C83 /* GCDWebServers.framework in Frameworks */,
 				0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */,
@@ -257,6 +261,7 @@
 				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
 				0B5A05F925DD0F11000BFD54 /* DeviceInfoView.swift */,
 				0B5A05FD25DFF0FC000BFD54 /* DeviceInfoView.xib */,
+				0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */,
 			);
 			path = Omniedge;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			packageProductDependencies = (
 				0B3D99DB25DA953400344C07 /* n2nMacOS */,
 				0BD772F725E26F7A0001282C /* SwiftyPing */,
+				0B361060260E2F1B00CFDEEB /* Bugsnag */,
 			);
 			productName = Omniedge;
 			productReference = 0BBF0F7F25AB52FC001E9B2C /* Omniedge.app */;
@@ -354,6 +360,7 @@
 			packageReferences = (
 				0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */,
 				0BD772F625E26F7A0001282C /* XCRemoteSwiftPackageReference "SwiftyPing" */,
+				0B36105F260E2F1B00CFDEEB /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
 			);
 			productRefGroup = 0BBF0F8025AB52FC001E9B2C /* Products */;
 			projectDirPath = "";
@@ -408,6 +415,7 @@
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
+				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
@@ -616,7 +624,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0.1.5;
+				CURRENT_PROJECT_VERSION = 0.1.7;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -629,7 +637,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -645,7 +653,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 0.1.5;
+				CURRENT_PROJECT_VERSION = 0.1.7;
 				DEVELOPMENT_TEAM = 3EC9QNH85N;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -658,7 +666,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -698,6 +706,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0B36105F260E2F1B00CFDEEB /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bugsnag/bugsnag-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.1;
+			};
+		};
 		0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@gitlab.com:omniedge/n2nmacos.git";
@@ -717,6 +733,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0B361060260E2F1B00CFDEEB /* Bugsnag */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B36105F260E2F1B00CFDEEB /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
+			productName = Bugsnag;
+		};
 		0B3D99DB25DA953400344C07 /* n2nMacOS */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0B3D99DA25DA953400344C07 /* XCRemoteSwiftPackageReference "n2nmacos" */;

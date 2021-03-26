@@ -32,6 +32,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
@@ -39,7 +41,7 @@
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>BugsnagReportApplication</string>
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>io.omniedge.mac.Omniedge.HelperTool</key>
@@ -49,5 +51,10 @@
 	<string>https://raw.githubusercontent.com/omniedgeio/omniedge-mac/master/appcast-name.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>1/3VxusR1uM21XtLgHvYlHBHikjw1oKdYNL54r3bkMk=</string>
+	<key>bugsnag</key>
+	<dict>
+		<key>apiKey</key>
+		<string>b7dbbb871e775ea83835f6560965cdd2</string>
+	</dict>
 </dict>
 </plist>

@@ -12,6 +12,7 @@ import Sparkle
 import ServiceManagement
 import OAuth2
 import GCDWebServers
+import Bugsnag
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -45,6 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBOutlet weak var switchLabel: NSTextField!
     
     @IBAction func pressAutoUpdate(_ sender: NSMenuItem) {
+
         UserDefaults.standard.set(sender.state.toggle(), forKey: UserDefaultKeys.AutoUpdate)
         self.updateUI()
         
@@ -113,43 +115,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus),
            UserDefaults.standard.value(forKey: UserDefaultKeys.NetworkConfig) == nil {
             
-            let network: NetworkResponse = try! decoder.decode(NetworkResponse.self, from: networkStatus)
-            guard let instanceID = UserDefaults.standard.string(forKey: UserDefaultKeys.DeviceUUID) else { return }
-            
-            guard let virtualNetworkID = network.vNetwork?.communityName else { return }
-            
-            let name = ProcessInfo.processInfo.hostName
-            
-            let description = ProcessInfo.processInfo.operatingSystemVersionString
-            guard let networkID = network.vNetwork?.id else{ return }
-            
-            let storePubTag = CryptoConstants.PublicStoreKey.data(using: .utf8)!
-            let getPubQuery: [String: Any] = [kSecClass as String: kSecClassKey,
-                                              kSecAttrApplicationTag as String: storePubTag,
-                                              kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-                                              kSecReturnRef as String: false]
-            
-            var item: CFTypeRef?
-            var error: Unmanaged<CFError>?
-            
-            SecItemCopyMatching(getPubQuery as CFDictionary, &item)
-            let publicKey = SecKeyCopyExternalRepresentation(item as! SecKey, &error)! as Data
-            
-            
-            let joinNetwork = JoinNetworkRequest(instanceID: instanceID, virtualNetworkID: virtualNetworkID, name: name, userAgent: "macOS", description: description, publicKey: publicKey.base64EncodedString())
-            self.dataLoader?.join(joinNetwork: joinNetwork, networkId: networkID){ result in
+            if let network: NetworkResponse = try? decoder.decode(NetworkResponse.self, from: networkStatus){
+                guard let instanceID = UserDefaults.standard.string(forKey: UserDefaultKeys.DeviceUUID) else { return }
                 
-                switch result {
-                case .success(let data):
-                    UserDefaults.standard.setValue(data, forKey: UserDefaultKeys.NetworkConfig)
-                case .failure(let error):
-                    NSLog("Join network failed: \(error.localizedDescription)")
-                    alert(title: "Join network failed", description: error.localizedDescription, .critical)
+                guard let virtualNetworkID = network.vNetwork?.communityName else { return }
+                
+                let name = ProcessInfo.processInfo.hostName
+                
+                let description = ProcessInfo.processInfo.operatingSystemVersionString
+                guard let networkID = network.vNetwork?.id else{ return }
+                let storePubTag = CryptoConstants.PublicStoreKey.data(using: .utf8)!
+                let getPubQuery: [String: Any] = [kSecClass as String: kSecClassKey,
+                                                  kSecAttrApplicationTag as String: storePubTag,
+                                                  kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                                                  kSecReturnRef as String: false]
+                
+                var item: CFTypeRef?
+                var error: Unmanaged<CFError>?
+                
+                SecItemCopyMatching(getPubQuery as CFDictionary, &item)
+                let publicKey = SecKeyCopyExternalRepresentation(item as! SecKey, &error)! as Data
+                
+                
+                let joinNetwork = JoinNetworkRequest(instanceID: instanceID, virtualNetworkID: virtualNetworkID, name: name, userAgent: "macOS", description: description, publicKey: publicKey.base64EncodedString())
+                self.dataLoader?.join(joinNetwork: joinNetwork, networkId: networkID){ result in
+                    
+                    switch result {
+                    case .success(let data):
+                        UserDefaults.standard.setValue(data, forKey: UserDefaultKeys.NetworkConfig)
+                    case .failure(let error):
+                        NSLog("Join network failed: \(error.localizedDescription)")
+                        alert(title: "Join network failed", description: error.localizedDescription, .critical)
+                    }
+                    
+                    
+                    
                 }
-                
-                
-                
             }
+           
+            
+            
             
             
         }
@@ -249,7 +254,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+        Bugsnag.start()
         initDeviceInformation()
         oauth2.logger = OAuth2DebugLogger(.off)
         
