@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,19 +16,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Omniedge" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="Switcher" id="BPC-xX-3vL">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Device List" id="Lo5-bz-trT">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Device List" id="O5T-yq-XyO">
-                                                <items>
-                                                    <menuItem title="Item" id="Lhw-70-p4H">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </menuItem>
                                         <menuItem title="LoginItem" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -36,6 +23,40 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="KhA-eo-Irz"/>
+                                        <menuItem title="MyOmniNetwork" id="8zW-xY-iGF">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Virtual Network List" id="71M-kJ-VyZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Virtual Network List" id="hP7-C2-QoT">
+                                                <items>
+                                                    <menuItem title="Device List" id="Lo5-bz-trT">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <menu key="submenu" title="Device List" id="O5T-yq-XyO">
+                                                            <items>
+                                                                <menuItem title="Switcher" id="BPC-xX-3vL">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                </menuItem>
+                                                                <menuItem title="Item" id="Lhw-70-p4H">
+                                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                                </menuItem>
+                                                            </items>
+                                                        </menu>
+                                                    </menuItem>
+                                                    <menuItem title="Item" id="WhD-9Y-TD6">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Sw8-fF-lxy"/>
+                                        <menuItem title="Dashboard ... " id="fQW-U9-T6K">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="dashboard:" target="Voe-Tx-rLC" id="r8f-sJ-Fk1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Yuy-tw-tPK"/>
                                         <menuItem title="Auto update" state="on" id="BOF-NM-1cW">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -49,7 +70,13 @@
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="jTS-Xj-efU"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="About Omniedge" id="FLo-lu-sTi">
+                                        <menuItem title="Talk to us" id="lG8-F8-J6P">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="talktous:" target="Voe-Tx-rLC" id="S93-rr-IQU"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="About" id="FLo-lu-sTi">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="gSg-m2-JL8"/>
@@ -81,6 +108,7 @@
                         <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
                         <outlet property="switcherAlign" destination="ndD-vV-hvV" id="WOh-IM-9XE"/>
                         <outlet property="updater" destination="nNc-dx-0De" id="rj3-jW-U2Y"/>
+                        <outlet property="virtualnetworkList" destination="71M-kJ-VyZ" id="tST-yu-qMG"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>

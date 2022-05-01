@@ -25,13 +25,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBOutlet weak var loginItem: NSMenuItem!
     
+    @IBOutlet weak var virtualnetworkList: NSMenuItem!
+    
     @IBOutlet weak var deviceList: NSMenuItem!
     
     
     @IBOutlet weak var updater: SUUpdater!
     
     @IBOutlet weak var autoUpdate: NSMenuItem!
-    
     
     var xpcStore: XPCStore?
     
@@ -44,6 +45,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBOutlet weak var networkSwitcher: OGSwitch!
     
     @IBOutlet weak var switchLabel: NSTextField!
+    
+    @IBAction func dashboard(_ sender: NSMenuItem) {
+        NSWorkspace.shared.open(URL(string: "https://omniedge.io/dashboard")!)
+    }
+    @IBAction func talktous(_ sender: NSMenuItem) {
+        let service=NSSharingService(named: NSSharingService.Name.composeEmail)!
+        service.recipients=["support@omniedge.io"]
+        service.subject="OmniEdge macOS Support"
+        service.perform(withItems: [""])
+    }
     
     @IBAction func pressAutoUpdate(_ sender: NSMenuItem) {
 
@@ -375,6 +386,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             firstMenuItem.isHidden = false
             
             loginItem.title = "Log Out"
+        
             
             let submenu = NSMenu()
             var ip: String?
