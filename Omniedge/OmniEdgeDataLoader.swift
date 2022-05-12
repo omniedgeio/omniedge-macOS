@@ -39,7 +39,7 @@ class OmniEdgeDataLoader: OAuth2DataLoader{
     
     func join(joinNetwork: JoinNetworkRequest, networkId:String, callback: @escaping (Result<Data, Error>) -> Void){
         
-        let url = URL(string: BackEndConstants.RestJoin + "/virtual-network/\(networkId)/join")!
+        let url = URL(string: BackEndConstants.baseApiEndPoint + "/virtual-network/\(networkId)/join")!
         
         var req = self.oauth2.request(forURL: url)
         req.setValue(oauth2.idToken, forHTTPHeaderField: "Authorization")

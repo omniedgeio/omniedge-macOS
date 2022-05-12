@@ -43,6 +43,8 @@
 		0BD772F125E25AFC0001282C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD772EF25E25AFC0001282C /* Models.swift */; };
 		0BD772F425E261500001282C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
+		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
+		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		EE4EC14827D394A30085210F /* GCDWebServers.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; };
 		EE4EC14927D394A30085210F /* GCDWebServers.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE4EC14B27D394A70085210F /* OAuth2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14A27D394A70085210F /* OAuth2.xcframework */; };
@@ -160,6 +162,8 @@
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
 		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
+		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
 		EE4EC14627D394860085210F /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Build; path = Carthage/Build; sourceTree = "<group>"; };
 		EE4EC14727D394A30085210F /* GCDWebServers.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GCDWebServers.xcframework; path = Carthage/Build/GCDWebServers.xcframework; sourceTree = "<group>"; };
 		EE4EC14A27D394A70085210F /* OAuth2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OAuth2.xcframework; path = Carthage/Build/OAuth2.xcframework; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 		0BBF0F7625AB52FC001E9B2C = {
 			isa = PBXGroup;
 			children = (
+				4C5664F6282CEF8B00C14EEB /* Models */,
 				0BBF0F8125AB52FC001E9B2C /* Omniedge */,
 				0B7575B925B44FF900601DC7 /* HelperTool */,
 				0B9B787725B4717000BB415D /* Common */,
@@ -287,6 +292,15 @@
 				0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		4C5664F6282CEF8B00C14EEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C5664F7282CEFBF00C14EEB /* AuthSession.swift */,
+				4C5664F9282D011D00C14EEB /* RestResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +436,8 @@
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
+				4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */,
+				4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */,
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
 				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,

@@ -14,6 +14,7 @@ import OAuth2
 import GCDWebServers
 import Bugsnag
 
+@available(macOS 10.15, *)
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
@@ -65,13 +66,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     var semaphore: DispatchSemaphore?
     
-    var oauth2 = createOAuth2()
+    //var oauth2 = createOAuth2()
     
-    private static func createOAuth2() -> OAuth2CodeGrant{
+    private var oauth2: OAuth2CodeGrant?
+    private var webSocketSessionTask: URLSessionWebSocketTask?
+    
+    private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
             "client_id": BackEndConstants.ClientID,
             "client_secret": BackEndConstants.ClientSecret,
-            "authorize_uri":BackEndConstants.LoginURL ,
+            "authorize_uri":authUrl, // BackEndConstants.LoginURL ,
             "token_uri": BackEndConstants.TokenURL,
             "redirect_uris": [BackEndConstants.CallBackURL],
             "scope": BackEndConstants.Scope,
@@ -83,44 +87,49 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBAction func logInOutItem(_ sender: NSMenuItem) {
         
-        if let _ = oauth2.idToken{
-            
-            oauth2.forgetTokens()
-            let storage = HTTPCookieStorage.shared
-            storage.cookies?.forEach() { storage.deleteCookie($0) }
-            UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
-            UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
-
-            xpcStore?.helperTool?.disconnect()
-            
-        }else{
-            
-            var url = try! oauth2.authorizeURL(params: nil)
-            url = URL(string: url.description.removingPercentEncoding!)!
-            //            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
-            try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
-            
-            
-            oauth2.afterAuthorizeOrFail = { authParameters, error in
-                
-
-                if let error = error {
-                    alert(title: "Login failed.", description: error.localizedDescription, .critical)
-                }
-                
-                self.semaphore?.signal()
-                self.pullDevliceList(callback: self.join)
-                
-                
+        self.getAuthSessionCode { authUrl in
+            self.oauth2 = AppDelegate.createOAuth2(authUrl: authUrl)
+            guard let oauth2 = self.oauth2 else {
+                return
             }
-        }
-        
-        self.updateUI()
-        
-        
-    }
-    
+            
+            oauth2.logger = OAuth2DebugLogger(.off)
+            self.dataLoader = OmniEdgeDataLoader(oauth2: oauth2)
+            if let _ = oauth2.idToken{
+                
+                oauth2.forgetTokens()
+                let storage = HTTPCookieStorage.shared
+                storage.cookies?.forEach() { storage.deleteCookie($0) }
+                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
+                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
 
+                self.xpcStore?.helperTool?.disconnect()
+                
+            }else{
+                
+                var url = try! oauth2.authorizeURL(params: nil)
+                url = URL(string: url.description.removingPercentEncoding!)!
+                //            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
+                try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
+                
+                
+                oauth2.afterAuthorizeOrFail = { authParameters, error in
+                    
+
+                    if let error = error {
+                        alert(title: "Login failed.", description: error.localizedDescription, .critical)
+                    }
+                    
+                    self.semaphore?.signal()
+                    self.pullDevliceList(callback: self.join)
+                    
+                    
+                }
+            }
+            
+            self.updateUI()
+        }
+    }
     
     func join(){
         if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus),
@@ -172,7 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func pullDevliceList(callback: (()->Void)? = nil){
-        if let _ = oauth2.accessToken {
+        if let _ = oauth2?.accessToken {
             self.dataLoader?.queryNetwork(callback: { result in
                 
                 switch result{
@@ -198,8 +207,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.updateUI()
     }
     
-    
-    
     func applicationWillFinishLaunching(_ notification: Notification) {
         
         NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(event:replyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
@@ -209,8 +216,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.xpcStore?.helperTool?.disconnect()
     }
     
-    
-
     
     @objc private func handleEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
         
@@ -222,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         if let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue {
             if let url = URL(string: urlString), "omniedge" == url.scheme && "signin" == url.host {
-                self.oauth2.handleRedirectURL(url)
+                self.oauth2?.handleRedirectURL(url)
                 
             }
         }
@@ -235,11 +240,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func callbackListening(turnOn: Bool){
         webServer.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: {request in
             
-            self.oauth2.handleRedirectURL(request.url)
+            self.oauth2?.handleRedirectURL(request.url)
             self.semaphore = DispatchSemaphore(value: 0)
             self.semaphore?.wait()
             
-            if let _ = self.oauth2.idToken {
+            if let _ = self.oauth2?.idToken {
                 let path = Bundle.main.path(forResource: "success.html", ofType: nil)!
                 
                 return GCDWebServerDataResponse(data: try! Data(contentsOf: URL(string: "file:///\(path)")!), contentType: "text")
@@ -267,15 +272,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Bugsnag.start()
         initDeviceInformation()
-        oauth2.logger = OAuth2DebugLogger(.off)
-        
-        dataLoader = OmniEdgeDataLoader(oauth2: self.oauth2)
-        
+    
         self.xpcStore = XPCStore()
         
         self.updateUI()
-        
-        
     }
     
     func initDeviceInformation(){
@@ -351,7 +351,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func updateUI(){
         
-        isLoggedIn(oauth2.accessToken != nil)
+        isLoggedIn(self.oauth2?.accessToken != nil)
         
         self.xpcStore?.helperTool?.isConnect{
             if $0 {
@@ -461,8 +461,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             self.deviceList.isHidden = true
             
             loginItem.title = "Log In"
-            
-            
         }
     }
     
@@ -482,29 +480,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    
-   
-    
     func isTuntapInstalled() -> Bool {
         return FileManager.default.fileExists(atPath: "/dev/tap0")
-        
     }
     
     @IBAction func switchPressed(_ sender: OGSwitch) {
-        
-        
-        
-        
+
         if !isTuntapInstalled() {
             sender.setOn(isOn: false, animated: true)
             alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
             return
         }
         switchLabel.stringValue = sender.isOn ? "On":"Off"
-        
-        
-        
-        
         
         if(sender.isOn){
             if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){
@@ -531,6 +518,69 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
     }
     
-    
+    private func getAuthSessionCode(completed: @escaping (String) -> Void ) {
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+        guard let url = URL(string: ApiEndPoint.baseApi + ApiEndPoint.authSession) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard let jsonData = data else {
+                return
+            }
+            
+            do {
+                let decoder1 = JSONDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                decoder1.dateDecodingStrategy = .formatted(dateFormatter)
+                
+                let restReponse = try decoder1.decode(RestResponse<AuthSession>.self, from: jsonData)
+                self.monitorSessionCodeWSEvent(sessionCode: restReponse.data.sessionId)
+                completed(restReponse.data.authUrl)
+            } catch let error {
+                print("error:\(error)")
+            }
+            
+            return
+        }
+        
+        task.resume()
+    }
+
+    private func monitorSessionCodeWSEvent(sessionCode: String) {
+        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+        self.webSocketSessionTask = urlSession.webSocketTask(with: URL(string: "ws://18.191.169.4:8081/login/session/\(sessionCode)")!)
+        self.webSocketSessionTask?.resume()
+        
+        let request: [String:String] = ["type":"auth:session"]
+        guard let jsonData = try? JSONEncoder().encode(request),
+              let jsonText = String(data: jsonData, encoding: .utf8)
+              else {
+            return
+        }
+        
+        self.webSocketSessionTask?.send(.string(jsonText)) { error in
+            return
+        }
+        
+        self.webSocketSessionTask?.receive { result in
+            switch result {
+            case .success(let message):
+                switch message {
+                                case .string(let text):
+                                    print("Received string: \(text)")
+                                case .data(let data):
+                                    print("Received data: \(data)")
+                                @unknown default:
+                                    fatalError()
+                                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 

@@ -50,11 +50,18 @@ struct BackEndConstants{
     
     static let GraphqlEndpoint = "https://nhgt5ptb5fhjzgu6qmwf76hhka.appsync-api.us-east-2.amazonaws.com/graphql"
     
+    // static let RestJoin = "https://3b0loh21sb.execute-api.us-east-2.amazonaws.com/dev"
+    static let baseApiEndPoint = "https://dev-api.omniedge.io/api/v1/"
     static let RestJoin = "https://3b0loh21sb.execute-api.us-east-2.amazonaws.com/dev"
 
     static let DeviceQuery = """
     {"query":"query {  listVirtualNetworks {    items {      id      ipPrefix      communityName      devices {        items {          id          name          virtualIP           description        }      }    }  }}","variables":{}}
     """
+}
+
+struct ApiEndPoint {
+    static let baseApi = "https://dev-api.omniedge.io/api/v1/"
+    static let authSession = "auth/login/session"
 }
 
 let OAuth2AppDidReceiveCallbackNotification = NSNotification.Name(rawValue: "OAuth2AppDidReceiveCallback")
