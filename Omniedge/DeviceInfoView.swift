@@ -48,16 +48,15 @@ class DeviceInfoView: NSView,NibLoadable {
         if self.ping.stringValue != "ping"{
             let once = try? SwiftyPing(host: self.ip.stringValue, configuration: PingConfiguration(interval: 0.5, with: 3), queue: DispatchQueue.global())
             once?.observer = { (response) in
-                if let duration = response.duration{
-                    if duration > 2{
-                        UserDefaults.standard.setValue("timeout", forKey: UserDefaultKeys.Ping + self.ip.stringValue)
-                    }else{
-                        UserDefaults.standard.setValue(String(format: "%.0f ms", duration * 1000), forKey: UserDefaultKeys.Ping + self.ip.stringValue)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.updateUI()
-                    }
+                let duration = response.duration
+                if duration > 2{
+                    UserDefaults.standard.setValue("timeout", forKey: UserDefaultKeys.Ping + self.ip.stringValue)
+                }else{
+                    UserDefaults.standard.setValue(String(format: "%.0f ms", duration * 1000), forKey: UserDefaultKeys.Ping + self.ip.stringValue)
+                }
+                
+                DispatchQueue.main.async {
+                    self.updateUI()
                 }
             }
             once?.targetCount = 1
