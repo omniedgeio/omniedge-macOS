@@ -11,8 +11,8 @@ struct VirtualNetworkModel: Decodable {
     let vnId:String
     let vnName: String
     let ipRange: String
-    let ddbUuid:String
-    let servers: [ServerModel]
+    let ddbUuid:String?
+    let server: ServerModel
     let devices: [String]
     let users: [UserModel]
     let role: Int
@@ -24,7 +24,7 @@ struct VirtualNetworkModel: Decodable {
         case vnName = "name"
         case ipRange = "ip_range"
         case ddbUuid = "ddb_uuid"
-        case servers = "server"
+        case server
         case devices
         case users
         case role

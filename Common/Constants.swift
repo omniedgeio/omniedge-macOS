@@ -66,3 +66,8 @@ struct ApiEndPoint {
 }
 
 let OAuth2AppDidReceiveCallbackNotification = NSNotification.Name(rawValue: "OAuth2AppDidReceiveCallback")
+
+struct OmniError: Error {
+    let errorCode: Int
+    let message: String?
+}

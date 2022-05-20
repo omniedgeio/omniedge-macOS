@@ -71,6 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var oauth2: OAuth2CodeGrant?
     private var webSocketSessionTask: URLSessionWebSocketTask?
     private var jwtToken: String?
+    private var virtalNetworkList: [VirtualNetworkModel]?
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -188,12 +189,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func pullDevliceList(callback: (()->Void)? = nil) {
+        
+        if self.virtalNetworkList != nil {
+            return
+        }
+        
         guard let jwtToken = jwtToken else {
             return
         }
         
         self.dataLoader1.queryNetwork(token: jwtToken, callback: { result in
-            
+            switch result {
+            case .success(let networkers):
+                self.virtalNetworkList = networkers
+            case .failure(let error):
+                print(error)
+            }
         })
 
 //        if let _ = oauth2?.accessToken {

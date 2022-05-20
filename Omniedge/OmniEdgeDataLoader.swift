@@ -9,7 +9,7 @@ import Foundation
 import OAuth2
 
 class OmniEdgeDataLoader1 {
-    func queryNetwork(token: String, callback: @escaping (Result<Data, Error>) -> Void) {
+    func queryNetwork(token: String, callback: @escaping (Result<[VirtualNetworkModel], Error>) -> Void) {
         
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
         
@@ -30,9 +30,26 @@ class OmniEdgeDataLoader1 {
                 return
             }
             
-            let jsonText = String(data: data, encoding: .utf8)
-            print(jsonText)
+            do {
+                let decoder = JSONDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                
+                let restReponse = try decoder.decode(RestResponse<[VirtualNetworkModel]>.self, from: data)
+                if(restReponse.code == 200) {
+                    let virtualNetworkList = restReponse.data
+                    callback(.success(virtualNetworkList))
+                } else {
+                    callback(.failure(OmniError(errorCode: restReponse.code, message: nil)))
+                }
+                
+            } catch let error {
+                print(error)
+                callback(.failure(error))
+            }
         }
+        
         task.resume()
     }
 }
