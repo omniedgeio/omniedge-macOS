@@ -8,29 +8,58 @@
 import Foundation
 import OAuth2
 
+class OmniEdgeDataLoader1 {
+    func queryNetwork(token: String, callback: @escaping (Result<Data, Error>) -> Void) {
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+        
+        guard let url = URL(string: ApiEndPoint.baseApi + ApiEndPoint.virtualNetworkList) else {
+            return;
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                callback(.failure(error!))
+                return
+            }
+            guard let data = data else {
+                return
+            }
+            
+            let jsonText = String(data: data, encoding: .utf8)
+            print(jsonText)
+        }
+        task.resume()
+    }
+}
+
 
 class OmniEdgeDataLoader: OAuth2DataLoader{
     
     let graphql = URL(string: BackEndConstants.GraphqlEndpoint)!
     
-    
-    func queryNetwork( callback: @escaping (Result<Data, Error>) -> Void) {
+    func queryNetwork(callback: @escaping (Result<Data, Error>) -> Void) {
+        
         var req = self.oauth2.request(forURL: graphql)
         req.setValue(oauth2.idToken, forHTTPHeaderField: "Authorization")
         req.httpMethod = "POST"
         req.httpBody = BackEndConstants.DeviceQuery.data(using: .utf8)
-        
+
         perform(request: req) { response in
             do {
                 let dict = try response.responseData()
-                
+
                 callback(.success(dict))
-                
+
             }
             catch let error {
-               
+
                 callback(.failure(error))
-                
+
             }
         }
     }

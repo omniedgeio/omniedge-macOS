@@ -70,6 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     private var oauth2: OAuth2CodeGrant?
     private var webSocketSessionTask: URLSessionWebSocketTask?
+    private var jwtToken: String?
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -84,48 +85,54 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     var dataLoader: OmniEdgeDataLoader?
+    var dataLoader1: OmniEdgeDataLoader1 = OmniEdgeDataLoader1()
     
     @IBAction func logInOutItem(_ sender: NSMenuItem) {
         
         self.getAuthSessionCode { authUrl in
-            self.oauth2 = AppDelegate.createOAuth2(authUrl: authUrl)
-            guard let oauth2 = self.oauth2 else {
+            
+            guard let url = URL(string: authUrl) else {
                 return
             }
             
-            oauth2.logger = OAuth2DebugLogger(.off)
-            self.dataLoader = OmniEdgeDataLoader(oauth2: oauth2)
-            if let _ = oauth2.idToken{
-                
-                oauth2.forgetTokens()
-                let storage = HTTPCookieStorage.shared
-                storage.cookies?.forEach() { storage.deleteCookie($0) }
-                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
-                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
-
-                self.xpcStore?.helperTool?.disconnect()
-                
-            }else{
-                
-                var url = try! oauth2.authorizeURL(params: nil)
-                url = URL(string: url.description.removingPercentEncoding!)!
-                //            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
-                try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
-                
-                
-                oauth2.afterAuthorizeOrFail = { authParameters, error in
-                    
-
-                    if let error = error {
-                        alert(title: "Login failed.", description: error.localizedDescription, .critical)
-                    }
-                    
-                    self.semaphore?.signal()
-                    self.pullDevliceList(callback: self.join)
-                    
-                    
-                }
-            }
+            NSWorkspace.shared.open(url)
+            
+//            self.oauth2 = AppDelegate.createOAuth2(authUrl: authUrl)
+//            guard let oauth2 = self.oauth2 else {
+//                return
+//            }
+//
+//            oauth2.logger = OAuth2DebugLogger(.off)
+//            self.dataLoader = OmniEdgeDataLoader(oauth2: oauth2)
+//            if let _ = oauth2.idToken{
+//
+//                oauth2.forgetTokens()
+//                let storage = HTTPCookieStorage.shared
+//                storage.cookies?.forEach() { storage.deleteCookie($0) }
+//                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkStatus)
+//                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.NetworkConfig)
+//
+//                self.xpcStore?.helperTool?.disconnect()
+//
+//            }else{
+//
+//                var url = try! oauth2.authorizeURL(params: nil)
+//                url = URL(string: url.description.removingPercentEncoding!)!
+//                //            try! oauth2.authorizer.authorizeEmbedded(with: oauth2.authConfig, at: url)
+//                try! oauth2.authorizer.openAuthorizeURLInBrowser(url)
+//
+//
+//                oauth2.afterAuthorizeOrFail = { authParameters, error in
+//
+//
+//                    if let error = error {
+//                        alert(title: "Login failed.", description: error.localizedDescription, .critical)
+//                    }
+//
+//                    self.semaphore?.signal()
+//                    self.pullDevliceList(callback: self.join)
+//                }
+//            }
             
             self.updateUI()
         }
@@ -180,23 +187,31 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
     
-    func pullDevliceList(callback: (()->Void)? = nil){
-        if let _ = oauth2?.accessToken {
-            self.dataLoader?.queryNetwork(callback: { result in
-                
-                switch result{
-                case .success(let network):
-                    UserDefaults.standard.setValue(network, forKey: UserDefaultKeys.NetworkStatus)
-                case .failure(let error):
-                    NSLog("Get Device List Error: \(error.localizedDescription)")
-                }
-                callback?()
-                
-                DispatchQueue.main.async {
-                    self.updateUI()
-                }
-            })
+    func pullDevliceList(callback: (()->Void)? = nil) {
+        guard let jwtToken = jwtToken else {
+            return
         }
+        
+        self.dataLoader1.queryNetwork(token: jwtToken, callback: { result in
+            
+        })
+
+//        if let _ = oauth2?.accessToken {
+//            self.dataLoader?.queryNetwork(callback: { result in
+//
+//                switch result{
+//                case .success(let network):
+//                    UserDefaults.standard.setValue(network, forKey: UserDefaultKeys.NetworkStatus)
+//                case .failure(let error):
+//                    NSLog("Get Device List Error: \(error.localizedDescription)")
+//                }
+//                callback?()
+//
+//                DispatchQueue.main.async {
+//                    self.updateUI()
+//                }
+//            })
+//        }
        
     }
     
@@ -526,7 +541,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        let task = session.dataTask(with: request) { (data, response, error) in
+        let task = session.dataTask(with: request) {[weak self] (data, response, error) in
             guard let jsonData = data else {
                 return
             }
@@ -538,7 +553,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 decoder1.dateDecodingStrategy = .formatted(dateFormatter)
                 
                 let restReponse = try decoder1.decode(RestResponse<AuthSession>.self, from: jsonData)
-                self.monitorSessionCodeWSEvent(sessionCode: restReponse.data.sessionId)
+                self?.monitorSessionCodeWSEvent(sessionCode: restReponse.data.sessionId) { msgData in
+                    
+                    guard let data = msgData,
+                          let obj = try? JSONDecoder().decode(Dictionary<String, String>.self, from: data) else {
+                        return
+                    }
+                    
+                    self?.jwtToken = obj["token"]
+                    self?.pullDevliceList()
+                }
+                
                 completed(restReponse.data.authUrl)
             } catch let error {
                 print("error:\(error)")
@@ -550,10 +575,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         task.resume()
     }
 
-    private func monitorSessionCodeWSEvent(sessionCode: String) {
+    private func monitorSessionCodeWSEvent(sessionCode: String, receiverHandler: @escaping (Data?) -> Void) {
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         self.webSocketSessionTask = urlSession.webSocketTask(with: URL(string: "ws://18.191.169.4:8081/login/session/\(sessionCode)")!)
         self.webSocketSessionTask?.resume()
+                
+        self.webSocketSessionTask?.receive { result in
+            switch result {
+            case .success(let message):
+                switch message {
+                    case .string(let text):
+                        print("Received string: \(text)")
+                    receiverHandler(text.data(using: .utf8))
+                    case .data(let data):
+                        print("Received data: \(data)")
+                        receiverHandler(data)
+                    @unknown default:
+                        fatalError()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         let request: [String:String] = ["type":"auth:session"]
         guard let jsonData = try? JSONEncoder().encode(request),
@@ -563,23 +606,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         self.webSocketSessionTask?.send(.string(jsonText)) { error in
-            return
-        }
-        
-        self.webSocketSessionTask?.receive { result in
-            switch result {
-            case .success(let message):
-                switch message {
-                                case .string(let text):
-                                    print("Received string: \(text)")
-                                case .data(let data):
-                                    print("Received data: \(data)")
-                                @unknown default:
-                                    fatalError()
-                                }
-            case .failure(let error):
-                print(error)
+            if error != nil {
+                print(error!)
+                return
             }
+            
+            print("successfully sent: \(jsonText)")
         }
     }
 }
