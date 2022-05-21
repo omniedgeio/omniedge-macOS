@@ -72,6 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var webSocketSessionTask: URLSessionWebSocketTask?
     private var jwtToken: String?
     private var virtalNetworkList: [VirtualNetworkModel]?
+    private var virtualNetworkContainerMenu: NSMenu?
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -202,6 +203,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             switch result {
             case .success(let networkers):
                 self.virtalNetworkList = networkers
+                self.populateVirtalNetworkMenuItems()
             case .failure(let error):
                 print(error)
             }
@@ -225,8 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 //        }
        
     }
-    
-    
+
     @IBAction func checkForUpdates(_ sender: Any) {
         let updater = SUUpdater.shared()
         updater?.checkForUpdates(self)
@@ -367,10 +368,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 
             }
         }
-        
-        
-        
-        
     }
     
     let decoder = JSONDecoder()
@@ -573,6 +570,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     
                     self?.jwtToken = obj["token"]
                     self?.pullDevliceList()
+                    self?.isLoggedIn(true)
                 }
                 
                 completed(restReponse.data.authUrl)
@@ -625,5 +623,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             print("successfully sent: \(jsonText)")
         }
     }
+    
+    private func populateVirtalNetworkMenuItems() {
+        guard let vnList = self.virtalNetworkList else {
+            return
+        }
+        
+        if self.virtualNetworkContainerMenu != nil {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.virtualNetworkContainerMenu = NSMenu()
+            var index = 0
+            vnList.forEach { item in
+                let subVnMenItem = NSMenuItem(title: item.vnName, action: #selector(self.didTappedVnItemMenu(sender:)), keyEquivalent: "")
+                subVnMenItem.tag = index
+                index += 1
+                subVnMenItem.view = VirtualNetworkItemView(model: item)
+                self.virtualNetworkContainerMenu?.addItem(subVnMenItem)
+            }
+            
+            self.virtualnetworkList.submenu = self.virtualNetworkContainerMenu
+        }
+    }
+    
+    @objc private func didTappedVnItemMenu(sender: NSMenuItem) {
+        let tag = sender.tag
+        return
+    }
+    
 }
 

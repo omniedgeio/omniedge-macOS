@@ -48,6 +48,8 @@
 		4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E128375CFC0045D5C4 /* UserModel.swift */; };
 		4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E328375E4C0045D5C4 /* ServerModel.swift */; };
 		4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */; };
+		4CE405E92838FD0F0045D5C4 /* VirtualNetworkContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */; };
+		4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */; };
 		EE4EC14827D394A30085210F /* GCDWebServers.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; };
 		EE4EC14927D394A30085210F /* GCDWebServers.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE4EC14B27D394A70085210F /* OAuth2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14A27D394A70085210F /* OAuth2.xcframework */; };
@@ -170,6 +172,8 @@
 		4CE405E128375CFC0045D5C4 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4CE405E328375E4C0045D5C4 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkModel.swift; sourceTree = "<group>"; };
+		4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkContainerView.swift; sourceTree = "<group>"; };
+		4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkItemView.swift; sourceTree = "<group>"; };
 		EE4EC14627D394860085210F /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Build; path = Carthage/Build; sourceTree = "<group>"; };
 		EE4EC14727D394A30085210F /* GCDWebServers.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GCDWebServers.xcframework; path = Carthage/Build/GCDWebServers.xcframework; sourceTree = "<group>"; };
 		EE4EC14A27D394A70085210F /* OAuth2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OAuth2.xcframework; path = Carthage/Build/OAuth2.xcframework; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 		0BBF0F8125AB52FC001E9B2C /* Omniedge */ = {
 			isa = PBXGroup;
 			children = (
+				4CE405E72838FCE30045D5C4 /* Views */,
 				0BBF0F9825AB580D001E9B2C /* Support */,
 				0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */,
 				0B9B789A25B4792900BB415D /* Util.swift */,
@@ -310,6 +315,15 @@
 				4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4CE405E72838FCE30045D5C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */,
+				4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
+				4CE405E92838FD0F0045D5C4 /* VirtualNetworkContainerView.swift in Sources */,
 				0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */,
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
@@ -449,6 +464,7 @@
 				4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */,
 				4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */,
 				4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */,
+				4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */,
 				4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */,
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
 				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
