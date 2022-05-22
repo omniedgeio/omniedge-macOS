@@ -7,6 +7,7 @@
 
 import Foundation
 import OAuth2
+import Alamofire
 
 class OmniEdgeDataLoader1 {
     func queryNetwork(token: String, callback: @escaping (Result<[VirtualNetworkModel], Error>) -> Void) {
@@ -51,6 +52,10 @@ class OmniEdgeDataLoader1 {
         }
         
         task.resume()
+        
+//        AF.request("https://httpbin.org/get").response { response in
+//            debugPrint(response)
+//        }
     }
     
     func registerDevice(token: String, deviceInfo: DeviceModel) {
@@ -65,6 +70,7 @@ class OmniEdgeDataLoader1 {
         let jsonData = try? JSONEncoder().encode(deviceInfo)
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {
