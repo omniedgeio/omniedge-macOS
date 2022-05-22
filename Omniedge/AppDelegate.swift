@@ -475,6 +475,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 self.switcherAlign.constant = 14
             }
             
+            self.registerDevice()
+            
         }else{
             callbackListening(turnOn: true)
 
@@ -485,6 +487,39 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
             loginItem.title = "Log In"
         }
+    }
+    
+    private func registerDevice() {
+        guard let model = self.getDeviceInfo(),
+        let token = self.jwtToken else {
+            return
+        }
+        
+        self.dataLoader1.registerDevice(token: token, deviceInfo: model)
+    }
+    
+    private func getDeviceInfo() -> DeviceModel? {
+        let deviceName = ProcessInfo.processInfo.hostName
+        // let osVersion = ProcessInfo.processInfo.operatingSystemVersionString
+        guard let hardwareUUID = self.getHardwareUUID() else {
+            return nil
+        }
+        
+        return DeviceModel(deviceName: deviceName, deviceUuid: hardwareUUID, deviceOS: "macOS")
+    }
+    
+    private func getHardwareUUID() -> String? {
+        let dev = IOServiceMatching("IOPlatformExpertDevice")
+        let platformExpert: io_service_t = IOServiceGetMatchingService(kIOMasterPortDefault, dev)
+        let serialNumberAsCFString = IORegistryEntryCreateCFProperty(platformExpert, kIOPlatformUUIDKey as CFString, kCFAllocatorDefault, 0)
+        IOObjectRelease(platformExpert)
+        let ser: CFTypeRef? = serialNumberAsCFString?.takeUnretainedValue()
+        
+        guard let result = ser as? String else {
+            return nil
+        }
+        
+        return result
     }
     
     

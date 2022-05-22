@@ -52,6 +52,42 @@ class OmniEdgeDataLoader1 {
         
         task.resume()
     }
+    
+    func registerDevice(token: String, deviceInfo: DeviceModel) {
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+        guard let url = URL(string: ApiEndPoint.baseApi + ApiEndPoint.registerDevice) else {
+            return;
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        let jsonData = try? JSONEncoder().encode(deviceInfo)
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                // callback(.failure(error!))
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                let json = String(data: data, encoding: .utf8)
+                print(json)
+            } catch let error {
+                print(error)
+                // callback(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
 }
 
 
