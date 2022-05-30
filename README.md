@@ -9,6 +9,7 @@ The OmniEdge GUI version for macOS, API implementation is still understand devel
 
 [🤝 Website](https://omniedge.io)
 [💬 Twitter](https://twitter.com/omniedgeio)
+[😇 Discord](https://discord.gg/d4faRPYj)
 
 A cross-platform private network tool for developers.
 
