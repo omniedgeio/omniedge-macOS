@@ -6,9 +6,16 @@
 //
 
 import Cocoa
+import OGSwitch
+
+protocol VirtualNetworItemViewDelegate: AnyObject {
+    func didToggled(on: Bool, model: VirtualNetworkModel);
+}
 
 class VirtualNetworkItemView: NSView {
 
+    weak public var delegate: VirtualNetworItemViewDelegate?
+    
     private var model: VirtualNetworkModel
     
     init(model: VirtualNetworkModel) {
@@ -26,6 +33,7 @@ class VirtualNetworkItemView: NSView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.titleLabel)
         self.addSubview(self.ipRangeLable)
+        self.addSubview(self.toggleSwitch)
     }
     
     private func initLayout() {
@@ -35,12 +43,21 @@ class VirtualNetworkItemView: NSView {
             self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
             self.ipRangeLable.leadingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor, constant: 20),
-            self.ipRangeLable.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.ipRangeLable.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
             self.ipRangeLable.widthAnchor.constraint(equalToConstant: 150),
             
+            self.toggleSwitch.leadingAnchor.constraint(equalTo: self.ipRangeLable.trailingAnchor),
+            self.toggleSwitch.centerYAnchor.constraint(equalTo: self.ipRangeLable.centerYAnchor),
+            self.toggleSwitch.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            self.toggleSwitch.widthAnchor.constraint(equalToConstant: 60.0),
+            self.toggleSwitch.heightAnchor.constraint(equalToConstant: 30.0),
+            
             self.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    @objc private func didToggled() {
+        self.delegate?.didToggled(on: self.toggleSwitch.isOn, model: self.model)
     }
     
     // Lazy loading
@@ -63,6 +80,14 @@ class VirtualNetworkItemView: NSView {
         view.alignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        return view
+    }()
+    
+    private lazy var toggleSwitch: OGSwitch = {
+        let view = OGSwitch()
+        view.target = self
+        view.action = #selector(didToggled)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     

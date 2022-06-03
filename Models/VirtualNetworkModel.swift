@@ -13,7 +13,7 @@ struct VirtualNetworkModel: Decodable {
     let ipRange: String
     let ddbUuid:String?
     let server: ServerModel
-    let devices: [String]
+    let devices: [DeviceRegisterModel]?
     let users: [UserModel]
     let role: Int
     let usersCount: Int

@@ -43,10 +43,10 @@
 		0BD772F125E25AFC0001282C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD772EF25E25AFC0001282C /* Models.swift */; };
 		0BD772F425E261500001282C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
+		4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */; };
 		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
 		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
-		4CE15D39283A6EBC0000E529 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE15D38283A6EBC0000E529 /* Alamofire.xcframework */; };
 		4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E128375CFC0045D5C4 /* UserModel.swift */; };
 		4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E328375E4C0045D5C4 /* ServerModel.swift */; };
 		4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */; };
@@ -169,6 +169,7 @@
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
 		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
 		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
 		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -201,7 +202,6 @@
 				EE4EC14827D394A30085210F /* GCDWebServers.xcframework in Frameworks */,
 				0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */,
 				0B361061260E2F1B00CFDEEB /* Bugsnag in Frameworks */,
-				4CE15D39283A6EBC0000E529 /* Alamofire.xcframework in Frameworks */,
 				0B734E6825BD6D8F0048FC0D /* Sparkle.framework in Frameworks */,
 				EE4EC14B27D394A70085210F /* OAuth2.xcframework in Frameworks */,
 				0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */,
@@ -320,6 +320,7 @@
 				4CE405E328375E4C0045D5C4 /* ServerModel.swift */,
 				4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */,
 				4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */,
+				4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -477,6 +478,7 @@
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
 				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
+				4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */,
 				0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 			);
@@ -696,7 +698,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -725,7 +727,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";

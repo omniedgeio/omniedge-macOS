@@ -7,7 +7,6 @@
 
 import Foundation
 import OAuth2
-import Alamofire
 
 class OmniEdgeDataLoader1 {
     func queryNetwork(token: String, callback: @escaping (Result<[VirtualNetworkModel], Error>) -> Void) {
@@ -30,6 +29,8 @@ class OmniEdgeDataLoader1 {
             guard let data = data else {
                 return
             }
+            
+            let json = String(data: data, encoding: .utf8)
             
             do {
                 let decoder = JSONDecoder()
@@ -58,7 +59,7 @@ class OmniEdgeDataLoader1 {
 //        }
     }
     
-    func registerDevice(token: String, deviceInfo: DeviceModel) {
+    func registerDevice(token: String, deviceInfo: DeviceModel, callback: @escaping (Result<DeviceRegisterModel, Error>) -> Void) {
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
         guard let url = URL(string: ApiEndPoint.baseApi + ApiEndPoint.registerDevice) else {
             return;
@@ -71,6 +72,53 @@ class OmniEdgeDataLoader1 {
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                callback(.failure(error!))
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                decoder.dateDecodingStrategy = .formatted(dateFormatter)
+                
+                let restReponse = try decoder.decode(RestResponse<DeviceRegisterModel>.self, from: data)
+                if(restReponse.code == 200) {
+                    let deviceRegister = restReponse.data
+                    callback(.success(deviceRegister))
+                } else {
+                    callback(.failure(OmniError(errorCode: restReponse.code, message: nil)))
+                }
+            } catch let error {
+                print(error)
+                callback(.failure(error))
+            }
+        
+        }
+        
+        task.resume()
+    }
+    
+    func joinDevice(token: String, deviceId: String, networkUuid: String) {
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+        
+        let joinUrl = "\(networkUuid)/devices/\(deviceId)/join";
+        
+        guard let url = URL(string: ApiEndPoint.baseApi + ApiEndPoint.virtualNetworkList + joinUrl) else {
+            return;
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {

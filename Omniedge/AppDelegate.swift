@@ -73,6 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var jwtToken: String?
     private var virtalNetworkList: [VirtualNetworkModel]?
     private var virtualNetworkContainerMenu: NSMenu?
+    private var deviceRegisterModel: DeviceRegisterModel?
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -495,7 +496,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return
         }
         
-        self.dataLoader1.registerDevice(token: token, deviceInfo: model)
+        self.dataLoader1.registerDevice(token: token, deviceInfo: model) { result in
+            switch result {
+            case .success(let deviceRegisterModel):
+                self.deviceRegisterModel = deviceRegisterModel
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func getDeviceInfo() -> DeviceModel? {
@@ -672,10 +680,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             self.virtualNetworkContainerMenu = NSMenu()
             var index = 0
             vnList.forEach { item in
-                let subVnMenItem = NSMenuItem(title: item.vnName, action: #selector(self.didTappedVnItemMenu(sender:)), keyEquivalent: "")
+                let subVnMenItem = NSMenuItem(title: item.vnName, action: nil, keyEquivalent: "")
                 subVnMenItem.tag = index
                 index += 1
-                subVnMenItem.view = VirtualNetworkItemView(model: item)
+                let contentView = VirtualNetworkItemView(model: item)
+                contentView.delegate = self
+                subVnMenItem.view = contentView
                 self.virtualNetworkContainerMenu?.addItem(subVnMenItem)
             }
             
@@ -683,10 +693,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
     
-    @objc private func didTappedVnItemMenu(sender: NSMenuItem) {
-        let tag = sender.tag
-        return
-    }
+}
+
+@available(macOS 10.15, *)
+extension AppDelegate: VirtualNetworItemViewDelegate {
     
+    internal func didToggled(on: Bool, model: VirtualNetworkModel) {
+        if(!on){
+            return
+        }
+        guard let token = self.jwtToken,
+              let deviceId = self.deviceRegisterModel?.deviceId else {
+            return
+        }
+        
+        self.dataLoader1.joinDevice(token: token, deviceId: deviceId, networkUuid: model.vnId)
+    }
 }
 

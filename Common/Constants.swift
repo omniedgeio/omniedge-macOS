@@ -62,7 +62,7 @@ struct BackEndConstants{
 struct ApiEndPoint {
     static let baseApi = "https://dev-api.omniedge.io/api/v1/"
     static let authSession = "auth/login/session"
-    static let virtualNetworkList = "virtual-networks"
+    static let virtualNetworkList = "virtual-networks/"
     static let registerDevice = "devices/register"
 }
 

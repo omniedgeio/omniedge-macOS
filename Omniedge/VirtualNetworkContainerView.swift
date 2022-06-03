@@ -8,6 +8,8 @@
 import Cocoa
 
 class VirtualNetworkContainerView: NSView {
+    weak public var delegate: VirtualNetworItemViewDelegate?
+    
     private var virtualNetworks: [VirtualNetworkModel]
     private var viewItems: [NSView] = []
     
@@ -29,6 +31,7 @@ class VirtualNetworkContainerView: NSView {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
             self.viewItems.append(view)
+            view.delegate = delegate
         }
     }
     
