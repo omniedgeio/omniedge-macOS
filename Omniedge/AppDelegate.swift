@@ -19,22 +19,15 @@ import Bugsnag
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @IBOutlet weak var menu: NSMenu!
-    
-    @IBOutlet weak var firstMenuItem: NSMenuItem!
-    
     @IBOutlet weak var switcherAlign: NSLayoutConstraint!
     
     @IBOutlet weak var loginItem: NSMenuItem!
-    
-    @IBOutlet weak var virtualnetworkList: NSMenuItem!
-    
-    @IBOutlet weak var deviceList: NSMenuItem!
-    
     
     @IBOutlet weak var updater: SUUpdater!
     
     @IBOutlet weak var autoUpdate: NSMenuItem!
     
+    @IBOutlet weak var menuItemVirtualNetwork: NSMenuItem!
     var xpcStore: XPCStore?
     
     let webServer = GCDWebServer()
@@ -50,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBAction func dashboard(_ sender: NSMenuItem) {
         NSWorkspace.shared.open(URL(string: "https://omniedge.io/dashboard")!)
     }
+    
     @IBAction func talktous(_ sender: NSMenuItem) {
         let service=NSSharingService(named: NSSharingService.Name.composeEmail)!
         service.recipients=["support@omniedge.io"]
@@ -405,10 +399,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if(isLoggedIn){
             
             callbackListening(turnOn: false)
-            
-            firstMenuItem.view = customeView
-            firstMenuItem.isHidden = false
-            
             loginItem.title = "Log Out"
         
             
@@ -456,15 +446,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                             
                         }
                     }
-                    
-                    
-                    self.deviceList.submenu = submenu
-                    self.deviceList.isHidden = false
                 }
-                
-               
-                
-                
             }
             
             //dirty fix align
@@ -480,12 +462,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             
         }else{
             callbackListening(turnOn: true)
-
-            firstMenuItem.view = nil
-            firstMenuItem.isHidden = true
-            
-            self.deviceList.isHidden = true
-            
             loginItem.title = "Log In"
         }
     }
@@ -666,7 +642,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             print("successfully sent: \(jsonText)")
         }
     }
-    
+        
     private func populateVirtalNetworkMenuItems() {
         guard let vnList = self.virtalNetworkList else {
             return
@@ -677,19 +653,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         DispatchQueue.main.async {
-            self.virtualNetworkContainerMenu = NSMenu()
-            var index = 0
-            vnList.forEach { item in
-                let subVnMenItem = NSMenuItem(title: item.vnName, action: nil, keyEquivalent: "")
-                subVnMenItem.tag = index
+            let vnMenuItemIndex = self.menu.index(of: self.menuItemVirtualNetwork)
+            var index = 1
+            vnList.forEach { vnItem in
+                let menuItem = NSMenuItem(title: vnItem.vnName, action: nil, keyEquivalent: "")
+                self.menu.insertItem(menuItem, at: vnMenuItemIndex + index)
                 index += 1
-                let contentView = VirtualNetworkItemView(model: item)
+                
+                let detailMenu = NSMenu()
+                let detailMenuItem = NSMenuItem(title: vnItem.vnName, action: nil, keyEquivalent: "")
+                let contentView = VirtualNetworkItemView(model: vnItem)
                 contentView.delegate = self
-                subVnMenItem.view = contentView
-                self.virtualNetworkContainerMenu?.addItem(subVnMenItem)
+                detailMenuItem.view = contentView
+                detailMenu.addItem(detailMenuItem)
+                
+                menuItem.submenu = detailMenu
             }
-            
-            self.virtualnetworkList.submenu = self.virtualNetworkContainerMenu
         }
     }
     

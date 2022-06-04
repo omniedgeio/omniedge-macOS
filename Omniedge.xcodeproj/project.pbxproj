@@ -44,6 +44,7 @@
 		0BD772F425E261500001282C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
 		4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */; };
+		4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */; };
 		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
 		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
@@ -170,6 +171,7 @@
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
 		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
+		4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
 		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
 		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */,
 				4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */,
+				4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
+				4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */,
 				4CE405E92838FD0F0045D5C4 /* VirtualNetworkContainerView.swift in Sources */,
 				0B734DD725BC23080048FC0D /* XPCStore.swift in Sources */,
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
