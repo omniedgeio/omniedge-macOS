@@ -31,7 +31,7 @@ class OmniEdgeDataLoader1 {
             }
             
             let json = String(data: data, encoding: .utf8)
-            
+            print(json)
             do {
                 let decoder = JSONDecoder()
                 let dateFormatter = DateFormatter()
@@ -107,7 +107,7 @@ class OmniEdgeDataLoader1 {
         task.resume()
     }
     
-    func joinDevice(token: String, deviceId: String, networkUuid: String) {
+    func joinDevice(token: String, deviceId: String, networkUuid: String, callback: @escaping (Result<JoinDeviceMode, Error>) -> Void) {
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
         
         let joinUrl = "\(networkUuid)/devices/\(deviceId)/join";
@@ -134,9 +134,16 @@ class OmniEdgeDataLoader1 {
             do {
                 let json = String(data: data, encoding: .utf8)
                 print(json)
+                let restReponse = try JSONDecoder().decode(RestResponse<JoinDeviceMode>.self, from: data)
+                if(restReponse.code == 200) {
+                    callback(.success(restReponse.data))
+                } else {
+                    callback(.failure(OmniError(errorCode: restReponse.code, message: nil)))
+                }
+                
             } catch let error {
                 print(error)
-                // callback(.failure(error))
+                callback(.failure(error))
             }
         }
         

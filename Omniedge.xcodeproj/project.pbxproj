@@ -45,6 +45,7 @@
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
 		4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */; };
 		4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */; };
+		4C2DF5BD284B8D4E00456AB3 /* JoinDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */; };
 		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
 		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
@@ -172,6 +173,7 @@
 		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
 		4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
+		4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDeviceModel.swift; sourceTree = "<group>"; };
 		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
 		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */,
 				4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */,
 				4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */,
+				4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */,
 				4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */,
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
+				4C2DF5BD284B8D4E00456AB3 /* JoinDeviceModel.swift in Sources */,
 				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */,

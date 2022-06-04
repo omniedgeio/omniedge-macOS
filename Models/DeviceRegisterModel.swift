@@ -14,6 +14,7 @@ struct DeviceRegisterModel: Decodable {
     let deviceName: String
     let createdOn: Date
     let ddbUuid: String?
+    let virtualIp: String
     
     enum CodingKeys: String, CodingKey {
         case deviceId = "id"
@@ -22,5 +23,6 @@ struct DeviceRegisterModel: Decodable {
         case deviceName = "name"
         case createdOn = "created_at"
         case ddbUuid = "ddb_uuid"
+        case virtualIp = "virtual_ip"
     }
 }

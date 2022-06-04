@@ -64,7 +64,7 @@ class DeviceItemView: NSView {
     
     private lazy var ipRange: NSTextField = {
         let view = NSTextField()
-        view.stringValue = "100.100.100.113"
+        view.stringValue = self.model.virtualIp
         view.isEditable = false
         view.isBezeled = false
         view.alignment = .left

@@ -65,9 +65,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var oauth2: OAuth2CodeGrant?
     private var webSocketSessionTask: URLSessionWebSocketTask?
     private var jwtToken: String?
-    private var virtalNetworkList: [VirtualNetworkModel]?
+    private var virtalNetworkList: [VirtualNetworkModel] = []
     private var virtualNetworkContainerMenu: NSMenu?
     private var deviceRegisterModel: DeviceRegisterModel?
+    private var virtualNetworkMenuItems: [NSMenuItem] = []
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -85,6 +86,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var dataLoader1: OmniEdgeDataLoader1 = OmniEdgeDataLoader1()
     
     @IBAction func logInOutItem(_ sender: NSMenuItem) {
+        
+        if self.loginItem.title == "Log Out" {
+            self.isLoggedIn(false)
+            return
+        }
         
         self.getAuthSessionCode { authUrl in
             
@@ -186,23 +192,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func pullDevliceList(callback: (()->Void)? = nil) {
         
-        if self.virtalNetworkList != nil {
-            return
-        }
-        
         guard let jwtToken = jwtToken else {
             return
         }
         
-        self.dataLoader1.queryNetwork(token: jwtToken, callback: { result in
-            switch result {
-            case .success(let networkers):
-                self.virtalNetworkList = networkers
-                self.populateVirtalNetworkMenuItems()
-            case .failure(let error):
-                print(error)
-            }
-        })
+        self.queryNetworkList {
+            self.populateVirtalNetworkMenuItems()
+        }
 
 //        if let _ = oauth2?.accessToken {
 //            self.dataLoader?.queryNetwork(callback: { result in
@@ -463,6 +459,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }else{
             callbackListening(turnOn: true)
             loginItem.title = "Log In"
+            self.virtalNetworkList.removeAll()
+            self.virtualNetworkMenuItems.forEach { menuItem in
+                self.menu.removeItem(menuItem)
+            }
+            self.virtualNetworkMenuItems.removeAll()
         }
     }
     
@@ -644,10 +645,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
         
     private func populateVirtalNetworkMenuItems() {
-        guard let vnList = self.virtalNetworkList else {
-            return
-        }
-        
         if self.virtualNetworkContainerMenu != nil {
             return
         }
@@ -655,7 +652,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         DispatchQueue.main.async {
             let vnMenuItemIndex = self.menu.index(of: self.menuItemVirtualNetwork)
             var index = 1
-            vnList.forEach { vnItem in
+            self.virtalNetworkList.forEach { vnItem in
                 let menuItem = NSMenuItem(title: vnItem.vnName, action: nil, keyEquivalent: "")
                 self.menu.insertItem(menuItem, at: vnMenuItemIndex + index)
                 index += 1
@@ -672,12 +669,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
     
+    private func queryNetworkList(callback: (() -> Void)?) {
+        
+        self.virtalNetworkList.removeAll()
+        
+        guard let jwtToken = jwtToken else {
+            return
+        }
+        
+        self.dataLoader1.queryNetwork(token: jwtToken, callback: { result in
+            switch result {
+            case .success(let networkers):
+                self.virtalNetworkList = networkers
+                if callback != nil {
+                    callback!()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
 }
 
 @available(macOS 10.15, *)
 extension AppDelegate: VirtualNetworItemViewDelegate {
     
-    internal func didToggled(on: Bool, model: VirtualNetworkModel) {
+    internal func didToggled(on: Bool, model: VirtualNetworkModel, contentView: VirtualNetworkItemView) {
         if(!on){
             return
         }
@@ -686,7 +703,24 @@ extension AppDelegate: VirtualNetworItemViewDelegate {
             return
         }
         
-        self.dataLoader1.joinDevice(token: token, deviceId: deviceId, networkUuid: model.vnId)
+        let virtualNetworkId = model.vnId
+        self.dataLoader1.joinDevice(token: token, deviceId: deviceId, networkUuid: model.vnId) { result in
+            
+            switch result {
+            case .success(_):
+                self.queryNetworkList{
+                    guard let virtualNetworkModel = self.virtalNetworkList.first(where: {$0.vnId == virtualNetworkId}) else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        contentView.updateModel(model: virtualNetworkModel)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

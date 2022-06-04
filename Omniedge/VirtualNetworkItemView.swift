@@ -9,7 +9,7 @@ import Cocoa
 import OGSwitch
 
 protocol VirtualNetworItemViewDelegate: AnyObject {
-    func didToggled(on: Bool, model: VirtualNetworkModel);
+    func didToggled(on: Bool, model: VirtualNetworkModel, contentView: VirtualNetworkItemView);
 }
 
 class VirtualNetworkItemView: NSView {
@@ -28,6 +28,18 @@ class VirtualNetworkItemView: NSView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateModel(model: VirtualNetworkModel) {
+        self.deviceItemViews.forEach { item in
+            item.removeFromSuperview()
+        }
+        
+        self.deviceItemViews.removeAll()
+        
+        self.createDeviceItemView()
+        self.layoutDeviceItemViews()
+        
     }
     
     private func initView() {
@@ -89,7 +101,7 @@ class VirtualNetworkItemView: NSView {
     }
     
     @objc private func didToggled() {
-        self.delegate?.didToggled(on: self.toggleSwitch.isOn, model: self.model)
+        self.delegate?.didToggled(on: self.toggleSwitch.isOn, model: self.model, contentView: self)
     }
     
     // Lazy loading
