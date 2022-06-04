@@ -664,6 +664,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 detailMenu.addItem(detailMenuItem)
                 
                 menuItem.submenu = detailMenu
+                
+                self.virtualNetworkMenuItems.append(menuItem)
             }
         }
     }
