@@ -557,8 +557,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu){
-        self.pullDevliceList()
-        
+        // self.pullDevliceList()
     }
     
     private func getAuthSessionCode(completed: @escaping (String) -> Void ) {

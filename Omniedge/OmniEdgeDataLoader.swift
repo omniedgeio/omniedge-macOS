@@ -84,6 +84,9 @@ class OmniEdgeDataLoader1 {
                 return
             }
             
+            let json = String(data: data, encoding: .utf8)
+            print(json)
+            
             do {
                 let decoder = JSONDecoder()
                 let dateFormatter = DateFormatter()
