@@ -16,6 +16,7 @@ class VirtualNetworkItemView: NSView {
 
     weak public var delegate: VirtualNetworItemViewDelegate?
     
+    private var seperatorBottomCopnstraint: NSLayoutConstraint?
     private var model: VirtualNetworkModel
     private var deviceItemViews: [DeviceItemView] = []
     
@@ -36,6 +37,15 @@ class VirtualNetworkItemView: NSView {
         }
         
         self.deviceItemViews.removeAll()
+        
+        if self.model.devices?.isEmpty ?? true {
+            self.seperatorBottomCopnstraint?.isActive = false
+            if self.seperatorBottomCopnstraint != nil {
+                self.seperator.removeConstraint(self.seperatorBottomCopnstraint!)
+            }
+        }
+        
+        self.model = model
         
         self.createDeviceItemView()
         self.layoutDeviceItemViews()
@@ -81,7 +91,8 @@ class VirtualNetworkItemView: NSView {
     
     private func layoutDeviceItemViews() {
         if self.deviceItemViews.count == 0 {
-            self.seperator.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+            self.seperatorBottomCopnstraint = self.seperator.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+            self.seperatorBottomCopnstraint?.isActive = true
             self.widthAnchor.constraint(equalToConstant: 325).isActive = true
             return
         }
