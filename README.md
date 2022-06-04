@@ -99,12 +99,17 @@ You can prepare your own supernode and build the client to reach your own target
 
 ## Compiler and debugger
 
-Latest version of Android Studio
+Latest version of Xcode, run,
+
+```bash
+carthage update
+carthage update --use-xcframeworks
+```
 
 
 ## Contributors
 
-@chenyi_ @dddrandy
+@kidylee @EbenDang
 
 ## About US
 [OmniEdge](https://omniedge.io) is primiary developed by the people at [https://github.com/orgs/omniedgeio/people](https://github.com/orgs/omniedgeio/people). 
