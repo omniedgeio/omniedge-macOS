@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JoinDeviceMode: Decodable {
+struct JoinDeviceMode: Codable {
     
     let communityName: String
     let secretKey: String

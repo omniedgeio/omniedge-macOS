@@ -288,6 +288,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
         Bugsnag.start()
         initDeviceInformation()
     
@@ -402,23 +403,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             var ip: String?
             if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){
                 
-                let localHost: NetworkConfig  = try! decoder.decode(NetworkConfig.self, from: networkConfig)
-                let deviceInfoView = DeviceInfoView()
-                deviceInfoView.deviceName.wantsLayer = true
-                deviceInfoView.deviceName.stringValue =  ProcessInfo.processInfo.hostName
-                deviceInfoView.ip.stringValue = localHost.virtualIP
+                guard let localHost  = try? JSONDecoder().decode(JoinDeviceMode.self, from: networkConfig) else {
+                    return
+                }
                 
-                ip = localHost.virtualIP
-                deviceInfoView.updateUI()
-                let menuItem = NSMenuItem()
-                menuItem.view = deviceInfoView
-                submenu.addItem(menuItem)
-                submenu.addItem(NSMenuItem.separator())
+                DispatchQueue.main.async {
+                    let deviceInfoView = DeviceInfoView()
+                    deviceInfoView.deviceName.wantsLayer = true
+                    deviceInfoView.deviceName.stringValue =  ProcessInfo.processInfo.hostName
+                    deviceInfoView.ip.stringValue = localHost.virtualIp
+                    
+                    ip = localHost.virtualIp
+                    deviceInfoView.updateUI()
+                    let menuItem = NSMenuItem()
+                    menuItem.view = deviceInfoView
+                    submenu.addItem(menuItem)
+                    submenu.addItem(NSMenuItem.separator())
+                }
             }
             
-            
             if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus){
-                
                 
                 if let network: NetworkResponse = try? decoder.decode(NetworkResponse.self, from: networkStatus){
                     if let devices = network.vNetwork?.devices{
@@ -524,36 +528,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func isTuntapInstalled() -> Bool {
+        let existed = FileManager.default.fileExists(atPath: "/dev/tap0")
         return FileManager.default.fileExists(atPath: "/dev/tap0")
-    }
-    
-    @IBAction func switchPressed(_ sender: OGSwitch) {
-
-        if !isTuntapInstalled() {
-            sender.setOn(isOn: false, animated: true)
-            alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
-            return
-        }
-        switchLabel.stringValue = sender.isOn ? "On":"Off"
-        
-        if(sender.isOn){
-            if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){
-                
-                
-                self.xpcStore?.helperTool?.connect(networkConfig){ err in
-                    
-                    if err != nil{
-                        
-                    }
-                    
-                }
-            }
-        }else{
-            self.xpcStore?.helperTool?.disconnect()
-        }
-        
-        
-        
     }
     
     func menuWillOpen(_ menu: NSMenu){
@@ -690,6 +666,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
         })
     }
+    
+    private func connectVirtualNetwork(on: Bool, switchCtrl: OGSwitch) -> Bool {
+
+        if(on && !self.isTuntapInstalled()){
+            switchCtrl.setOn(isOn: false, animated: true)
+            alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
+            return false
+        }
+        
+        if(on){
+            
+            guard let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig) else {
+                return false
+            }
+            self.xpcStore?.helperTool?.connect(networkConfig){ err in
+                if err != nil {
+                    print(err!)
+                }
+            }
+        } else {
+            self.xpcStore?.helperTool?.disconnect()
+        }
+        
+        return true
+    }
+    
 }
 
 @available(macOS 10.15, *)
@@ -697,8 +699,10 @@ extension AppDelegate: VirtualNetworItemViewDelegate {
     
     internal func didToggled(on: Bool, model: VirtualNetworkModel, contentView: VirtualNetworkItemView) {
         if(!on){
+            _ = self.connectVirtualNetwork(on: on, switchCtrl: contentView.switcher)
             return
         }
+        
         guard let token = self.jwtToken,
               let deviceId = self.deviceRegisterModel?.deviceId else {
             return
@@ -708,7 +712,11 @@ extension AppDelegate: VirtualNetworItemViewDelegate {
         self.dataLoader1.joinDevice(token: token, deviceId: deviceId, networkUuid: model.vnId) { result in
             
             switch result {
-            case .success(_):
+            case .success(let joinDeviceRsp):
+                let networkconfigData = try? JSONEncoder().encode(joinDeviceRsp)
+                UserDefaults.standard.setValue(networkconfigData, forKey: UserDefaultKeys.NetworkConfig)
+                UserDefaults.standard.synchronize()
+                _ = self.connectVirtualNetwork(on: true, switchCtrl: contentView.switcher)
                 self.queryNetworkList{
                     guard let virtualNetworkModel = self.virtalNetworkList.first(where: {$0.vnId == virtualNetworkId}) else {
                         return

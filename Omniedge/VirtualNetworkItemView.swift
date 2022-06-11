@@ -16,6 +16,12 @@ class VirtualNetworkItemView: NSView {
 
     weak public var delegate: VirtualNetworItemViewDelegate?
     
+    public var switcher: OGSwitch {
+        get {
+            return self.toggleSwitch
+        }
+    }
+    
     private var seperatorBottomCopnstraint: NSLayoutConstraint?
     private var model: VirtualNetworkModel
     private var deviceItemViews: [DeviceItemView] = []
