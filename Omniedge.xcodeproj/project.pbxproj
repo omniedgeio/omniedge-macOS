@@ -43,6 +43,7 @@
 		0BD772F125E25AFC0001282C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD772EF25E25AFC0001282C /* Models.swift */; };
 		0BD772F425E261500001282C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9B789A25B4792900BB415D /* Util.swift */; };
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
+		24D360C92855FC9500284253 /* SMJobBlessReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */; };
 		4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */; };
 		4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */; };
 		4C2DF5BD284B8D4E00456AB3 /* JoinDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */; };
@@ -171,6 +172,7 @@
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
 		0BD772EF25E25AFC0001282C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SMJobBlessReadMe.txt; sourceTree = "<group>"; };
 		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
 		4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
 		4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDeviceModel.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 		0BBF0F7625AB52FC001E9B2C = {
 			isa = PBXGroup;
 			children = (
+				24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */,
 				4C5664F6282CEF8B00C14EEB /* Models */,
 				0BBF0F8125AB52FC001E9B2C /* Omniedge */,
 				0B7575B925B44FF900601DC7 /* HelperTool */,
@@ -442,6 +445,7 @@
 				0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */,
 				0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */,
 				0B734E6E25BD75810048FC0D /* appdmg.json in Resources */,
+				24D360C92855FC9500284253 /* SMJobBlessReadMe.txt in Resources */,
 				0BA4E57C25F14062005AF9BF /* success.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
