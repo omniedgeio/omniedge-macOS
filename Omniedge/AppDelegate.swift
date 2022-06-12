@@ -288,6 +288,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
         Bugsnag.start()
         initDeviceInformation()
     
@@ -402,8 +403,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             var ip: String?
             if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){
                 
+                guard let localHost  = try? JSONDecoder().decode(JoinDeviceMode.self, from: networkConfig) else {
+                    return
+                }
+                
                 DispatchQueue.main.async {
-                    let localHost: JoinDeviceMode  = try! decoder.decode(JoinDeviceMode.self, from: networkConfig)
                     let deviceInfoView = DeviceInfoView()
                     deviceInfoView.deviceName.wantsLayer = true
                     deviceInfoView.deviceName.stringValue =  ProcessInfo.processInfo.hostName
@@ -418,10 +422,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 }
             }
             
-            
             if let networkStatus = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkStatus){
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     
                     if let network: NetworkResponse = try? decoder.decode(NetworkResponse.self, from: networkStatus){
                         if let devices = network.vNetwork?.devices{
@@ -528,6 +531,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func isTuntapInstalled() -> Bool {
+        let existed = FileManager.default.fileExists(atPath: "/dev/tap0")
         return FileManager.default.fileExists(atPath: "/dev/tap0")
     }
     
@@ -674,14 +678,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         if(on){
-            if let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig){
-                self.xpcStore?.helperTool?.connect(networkConfig){ err in
-                    if err != nil {
-                        print(err!)
-                    }
+            
+            guard let networkConfig = UserDefaults.standard.data(forKey: UserDefaultKeys.NetworkConfig) else {
+                return false
+            }
+            self.xpcStore?.helperTool?.connect(networkConfig){ err in
+                if err != nil {
+                    print(err!)
                 }
             }
-        }else{
+        } else {
             self.xpcStore?.helperTool?.disconnect()
         }
         
@@ -707,17 +713,13 @@ extension AppDelegate: VirtualNetworItemViewDelegate {
         self.dataLoader1.joinDevice(token: token, deviceId: deviceId, networkUuid: model.vnId) { result in
             
             switch result {
-            case .success(let joinDeviceModel):
-                guard let data = try? JSONEncoder().encode(joinDeviceModel) else {
-                    return
-                }
-                
-                UserDefaults.standard.setValue(data, forKey: UserDefaultKeys.NetworkConfig)
+            case .success(let joinDeviceRsp):
+                let networkconfigData = try? JSONEncoder().encode(joinDeviceRsp)
+                UserDefaults.standard.setValue(networkconfigData, forKey: UserDefaultKeys.NetworkConfig)
                 UserDefaults.standard.synchronize()
-                if !self.connectVirtualNetwork(on: on) {
-                    contentView.swicher.setOn(isOn: false, animated: true)
+                if !self.connectVirtualNetwork(on: true) {
+                    contentView.swicher.setOn(isOn: false, animated: false)
                 }
-                
                 self.queryNetworkList{
                     guard let virtualNetworkModel = self.virtalNetworkList.first(where: {$0.vnId == virtualNetworkId}) else {
                         return
