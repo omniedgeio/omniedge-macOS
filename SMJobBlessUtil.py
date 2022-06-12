@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 #
 #   File:       SMJobBlessUtil.py
 #
@@ -57,7 +57,6 @@ import getopt
 import subprocess
 import plistlib
 import operator
-import pdb
 
 class UsageException (Exception):
     """
@@ -94,7 +93,7 @@ def checkCodeSignature(programPath, programType):
     ]
     try:
         subprocess.check_call(args, stderr=open("/dev/null"))
-    except subprocess.CalledProcessError, e:
+    except subprocess.CalledProcessError as e:
         raise CheckException("%s code signature invalid" % programType, programPath)
     
 def readDesignatedRequirement(programPath, programType):
@@ -108,8 +107,8 @@ def readDesignatedRequirement(programPath, programType):
         programPath
     ]
     try:
-        req = subprocess.check_output(args, stderr=open("/dev/null"))
-    except subprocess.CalledProcessError, e:
+        req = subprocess.check_output(args, stderr=open("/dev/null"), encoding="utf-8")
+    except subprocess.CalledProcessError as e:
         raise CheckException("%s designated requirement unreadable" % programType, programPath)
 
     reqLines = req.splitlines()
@@ -120,7 +119,8 @@ def readDesignatedRequirement(programPath, programType):
 def readInfoPlistFromPath(infoPath):
     """Reads an "Info.plist" file from the specified path."""
     try:
-        info = plistlib.readPlist(infoPath)
+        with open(infoPath, 'rb') as fp:
+            info = plistlib.load(fp)
     except:
         raise CheckException("'Info.plist' not readable", infoPath)
     if not isinstance(info, dict):
@@ -141,19 +141,20 @@ def readPlistFromToolSection(toolPath, segmentName, sectionName):
         toolPath
     ]
     try:
-        plistDump = subprocess.check_output(args)
-    except subprocess.CalledProcessError, e:
+        plistDump = subprocess.check_output(args, encoding="utf-8")
+    except subprocess.CalledProcessError as e:
         raise CheckException("tool %s / %s section unreadable" % (segmentName, sectionName), toolPath)
 
     # Convert that hex dump to an property list.
     
     plistLines = plistDump.splitlines()
+
     if len(plistLines) < 3 or plistLines[1] != ("Contents of (%s,%s) section" % (segmentName, sectionName)):
         raise CheckException("tool %s / %s section dump malformed (1)" % (segmentName, sectionName), toolPath)
     del plistLines[0:2]
 
     try:
-        bytes = []
+        data = []
         for line in plistLines:
             # line looks like this:
             #
@@ -161,8 +162,9 @@ def readPlistFromToolSection(toolPath, segmentName, sectionName):
             columns = line.split("\t")
             assert len(columns) == 2
             for hexStr in columns[1].split():
-                bytes.append(int(hexStr, 16))
-        plist = plistlib.readPlistFromString(bytearray(bytes))
+                data.append(int(hexStr, 16))
+
+        plist = plistlib.loads(bytes(data))
     except:
         raise CheckException("tool %s / %s section dump malformed (2)" % (segmentName, sectionName), toolPath)
 
@@ -221,7 +223,7 @@ def checkStep2(appPath, toolPathList):
     
     infoPath = os.path.join(appPath, "Contents", "Info.plist")
     info = readInfoPlistFromPath(infoPath)
-    if not info.has_key("SMPrivilegedExecutables"):
+    if "SMPrivilegedExecutables" not in info:
         raise CheckException("'SMPrivilegedExecutables' not found", infoPath)
     infoToolDict = info["SMPrivilegedExecutables"]
     if not isinstance(infoToolDict, dict):
@@ -261,13 +263,13 @@ def checkStep3(appPath, toolPathList):
     for toolPath in toolPathList:
         info = readPlistFromToolSection(toolPath, "__TEXT", "__info_plist")
 
-        if not info.has_key("CFBundleInfoDictionaryVersion") or info["CFBundleInfoDictionaryVersion"] != "6.0":
+        if "CFBundleInfoDictionaryVersion" not in info or info["CFBundleInfoDictionaryVersion"] != "6.0":
             raise CheckException("'CFBundleInfoDictionaryVersion' in tool __TEXT / __info_plist section must be '6.0'", toolPath)
 
-        if not info.has_key("CFBundleIdentifier") or info["CFBundleIdentifier"] != os.path.basename(toolPath):
+        if "CFBundleIdentifier" not in info or info["CFBundleIdentifier"] != os.path.basename(toolPath):
             raise CheckException("'CFBundleIdentifier' in tool __TEXT / __info_plist section must match tool name", toolPath)
 
-        if not info.has_key("SMAuthorizedClients"):
+        if "SMAuthorizedClients" not in info:
             raise CheckException("'SMAuthorizedClients' in tool __TEXT / __info_plist section not found", toolPath)
         infoClientList = info["SMAuthorizedClients"]
         if not isinstance(infoClientList, list):
@@ -287,7 +289,7 @@ def checkStep4(appPath, toolPathList):
     for toolPath in toolPathList:
         launchd = readPlistFromToolSection(toolPath, "__TEXT", "__launchd_plist")
 
-        if not launchd.has_key("Label") or launchd["Label"] != os.path.basename(toolPath):
+        if "Label" not in launchd or launchd["Label"] != os.path.basename(toolPath):
             raise CheckException("'Label' in tool __TEXT / __launchd_plist section must match tool name", toolPath)
 
         # We don't need to check that the label matches the bundle identifier because
@@ -318,7 +320,7 @@ def setreq(appPath, appInfoPlistPath, toolInfoPlistPaths):
     Reads information from the built app and uses it to set the SMJobBless setup
     in the specified app and tool Info.plist source files.
     """
-    #pdb.set_trace()
+
     if not os.path.isdir(appPath):
         raise CheckException("app not found", appPath)
 
@@ -353,29 +355,30 @@ def setreq(appPath, appInfoPlistPath, toolInfoPlistPaths):
     for toolInfoPlistPath in toolInfoPlistPaths:
         toolInfo = readInfoPlistFromPath(toolInfoPlistPath)
         toolInfoPlistPathToToolInfoMap[toolInfoPlistPath] = toolInfo
-        if not toolInfo.has_key("CFBundleIdentifier"):
+        if "CFBundleIdentifier" not in toolInfo:
             raise CheckException("'CFBundleIdentifier' not found", toolInfoPlistPath)
         bundleID = toolInfo["CFBundleIdentifier"]
-        if not isinstance(bundleID, basestring):
+        if not isinstance(bundleID, str):
             raise CheckException("'CFBundleIdentifier' must be a string", toolInfoPlistPath)
         appToolDict[bundleID] = toolNameToReqMap[bundleID]
 
     # Set the SMPrivilegedExecutables value in the app "Info.plist".
 
     appInfo = readInfoPlistFromPath(appInfoPlistPath)
-    needsUpdate = not appInfo.has_key("SMPrivilegedExecutables")
+    needsUpdate = "SMPrivilegedExecutables" not in appInfo
     if not needsUpdate:
         oldAppToolDict = appInfo["SMPrivilegedExecutables"]
         if not isinstance(oldAppToolDict, dict):
             raise CheckException("'SMPrivilegedExecutables' must be a dictionary", appInfoPlistPath)
-        appToolDictSorted = sorted(appToolDict.iteritems(), key=operator.itemgetter(0))
-        oldAppToolDictSorted = sorted(oldAppToolDict.iteritems(), key=operator.itemgetter(0))
+        appToolDictSorted = sorted(appToolDict.items(), key=operator.itemgetter(0))
+        oldAppToolDictSorted = sorted(oldAppToolDict.items(), key=operator.itemgetter(0))
         needsUpdate = (appToolDictSorted != oldAppToolDictSorted)
     
     if needsUpdate:
         appInfo["SMPrivilegedExecutables"] = appToolDict
-        plistlib.writePlist(appInfo, appInfoPlistPath)
-        print >> sys.stdout, "%s: updated" % appInfoPlistPath
+        with open(appInfoPlistPath, 'wb') as fp:
+            plistlib.dump(appInfo, fp)
+        print ("%s: updated" % appInfoPlistPath, file = sys.stdout)
     
     # Set the SMAuthorizedClients value in each tool's "Info.plist".
 
@@ -383,7 +386,7 @@ def setreq(appPath, appInfoPlistPath, toolInfoPlistPaths):
     for toolInfoPlistPath in toolInfoPlistPaths:
         toolInfo = toolInfoPlistPathToToolInfoMap[toolInfoPlistPath]
         
-        needsUpdate = not toolInfo.has_key("SMAuthorizedClients")
+        needsUpdate = "SMAuthorizedClients" not in toolInfo
         if not needsUpdate:
             oldToolAppList = toolInfo["SMAuthorizedClients"]
             if not isinstance(oldToolAppList, list):
@@ -394,10 +397,9 @@ def setreq(appPath, appInfoPlistPath, toolInfoPlistPaths):
         if needsUpdate:
             toolInfo["SMAuthorizedClients"] = toolAppListSorted
             plistlib.writePlist(toolInfo, toolInfoPlistPath)
-            print >> sys.stdout, "%s: updated" % toolInfoPlistPath
+            print("%s: updated" % toolInfoPlistPath, file = sys.stdout)
 
 def main():
-    #pdb.set_trace()
     options, appArgs = getopt.getopt(sys.argv[1:], "d")
     
     debug = False
@@ -424,16 +426,16 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except CheckException, e:
+    except CheckException as e:
         if e.path is None:
-            print >> sys.stderr, "%s: %s" % (os.path.basename(sys.argv[0]), e.message)
+            print("%s: %s" % (os.path.basename(sys.argv[0]), e.message), file = sys.stderr)
         else:
             path = e.path
             if path.endswith("/"):
                 path = path[:-1]
-            print >> sys.stderr, "%s: %s" % (path, e.message)
+            print("%s: %s" % (path, e.message), file = sys.stderr)
         sys.exit(1)
-    except UsageException, e:
-        print >> sys.stderr, "usage: %s check  /path/to/app" % os.path.basename(sys.argv[0])
-        print >> sys.stderr, "       %s setreq /path/to/app /path/to/app/Info.plist /path/to/tool/Info.plist..." % os.path.basename(sys.argv[0])
+    except UsageException as e:
+        print("usage: %s check  /path/to/app" % os.path.basename(sys.argv[0]), file = sys.stderr)
+        print("       %s setreq /path/to/app /path/to/app/Info.plist /path/to/tool/Info.plist..." % os.path.basename(sys.argv[0]), file = sys.stderr)
         sys.exit(1)

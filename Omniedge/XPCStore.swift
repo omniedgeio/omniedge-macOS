@@ -18,7 +18,6 @@ class XPCStore{
         if  !FileManager.default.fileExists(atPath: "/Library/PrivilegedHelperTools/\(XPCConstant.HelperMachLabel)"){
             
             self.alertInstall("Omniedge needs to install Helper Tool to complete installation.")
-            
         }
         self.connectToXPC()
     }

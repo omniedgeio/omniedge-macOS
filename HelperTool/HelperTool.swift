@@ -35,14 +35,14 @@ class HelperToolImpl: HelperTool{
         NSLog("[SMJBS]: \(#function)")
         
         
-        let config = try! decoder.decode(NetworkConfig.self, from: networkConfig)
+        let config = try! decoder.decode(JoinDeviceMode.self, from: networkConfig)
         
         let deviceName = ProcessInfo.processInfo.hostName
         let communityName = config.communityName
         let encryptKey = config.secretKey
         var deviceMac = "DE:AD:BE:EF:F1:10"
-        let localIP = config.virtualIP
-        let superNode = config.addr
+        let localIP = config.virtualIp
+        let superNode = config.server.host
         
         
         
