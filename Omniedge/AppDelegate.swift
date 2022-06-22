@@ -30,6 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @IBOutlet weak var menuItemVirtualNetwork: NSMenuItem!
     var xpcStore: XPCStore?
     
+    @IBOutlet weak var myMetworkMenuItem: NSMenuItem!
+    
     let webServer = GCDWebServer()
     
     @IBOutlet weak var customeView: NSView!
@@ -182,11 +184,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     
                 }
             }
-           
-            
-            
-            
-            
         }
     }
     
@@ -417,8 +414,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     deviceInfoView.updateUI()
                     let menuItem = NSMenuItem()
                     menuItem.view = deviceInfoView
-                    submenu.addItem(menuItem)
-                    submenu.addItem(NSMenuItem.separator())
+//                    submenu.addItem(menuItem)
+//                    submenu.addItem(NSMenuItem.separator())
+                    
+                    let index = self.menu.index(of: self.myMetworkMenuItem)
+                    self.menu.insertItem(menuItem, at: index + 1)
+                
                 }
             }
             
@@ -444,8 +445,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                                 submenu.addItem(menuItem)
                                 
                                 submenu.addItem(NSMenuItem.separator())
-                                
-                                
                             }
                         }
                     }
@@ -453,7 +452,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
             
             //dirty fix align
-            
+
             if self.autoUpdate.state.toBool() {
                 self.switcherAlign.constant = 24
                 
@@ -531,7 +530,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func isTuntapInstalled() -> Bool {
-        let existed = FileManager.default.fileExists(atPath: "/dev/tap0")
         return FileManager.default.fileExists(atPath: "/dev/tap0")
     }
     
@@ -584,7 +582,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func monitorSessionCodeWSEvent(sessionCode: String, receiverHandler: @escaping (Data?) -> Void) {
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
-        self.webSocketSessionTask = urlSession.webSocketTask(with: URL(string: "ws://18.191.169.4:8081/login/session/\(sessionCode)")!)
+        guard let url = URL(string: "\(ApiEndPoint.wsEndPoint)/login/session/\(sessionCode)") else {
+            return
+        }
+        
+        self.webSocketSessionTask = urlSession.webSocketTask(with: url)
         self.webSocketSessionTask?.resume()
                 
         self.webSocketSessionTask?.receive { result in

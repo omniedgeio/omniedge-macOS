@@ -80,6 +80,7 @@
                         <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
                         <outlet property="menuItemVirtualNetwork" destination="71M-kJ-VyZ" id="lHw-dz-JkI"/>
+                        <outlet property="myMetworkMenuItem" destination="8zW-xY-iGF" id="bQh-ri-Mga"/>
                         <outlet property="networkSwitcher" destination="yAZ-Gy-8Cq" id="Cea-yt-kw0"/>
                         <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
                         <outlet property="switcherAlign" destination="ndD-vV-hvV" id="WOh-IM-9XE"/>

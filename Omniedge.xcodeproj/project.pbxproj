@@ -716,7 +716,7 @@
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_omniedge;
+				PROVISIONING_PROFILE_SPECIFIER = dev_omniedge_mac;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
