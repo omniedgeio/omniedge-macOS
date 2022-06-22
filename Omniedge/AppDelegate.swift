@@ -71,6 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private var virtualNetworkContainerMenu: NSMenu?
     private var deviceRegisterModel: DeviceRegisterModel?
     private var virtualNetworkMenuItems: [NSMenuItem] = []
+    private var deviceMenu: NSMenuItem?
     
     private static func createOAuth2(authUrl: String) -> OAuth2CodeGrant{
         return OAuth2CodeGrant(settings: [
@@ -414,12 +415,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     deviceInfoView.updateUI()
                     let menuItem = NSMenuItem()
                     menuItem.view = deviceInfoView
-//                    submenu.addItem(menuItem)
-//                    submenu.addItem(NSMenuItem.separator())
-                    
                     let index = self.menu.index(of: self.myMetworkMenuItem)
                     self.menu.insertItem(menuItem, at: index + 1)
-                
+                    self.deviceMenu = menuItem
                 }
             }
             
@@ -470,6 +468,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 self.menu.removeItem(menuItem)
             }
             self.virtualNetworkMenuItems.removeAll()
+            guard let deviceMenuItem = self.deviceMenu else {
+                return
+            }
+            self.menu.removeItem(deviceMenuItem)
+            self.deviceMenu = nil
         }
     }
     
@@ -607,21 +610,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
         }
         
-        let request: [String:String] = ["type":"auth:session"]
-        guard let jsonData = try? JSONEncoder().encode(request),
-              let jsonText = String(data: jsonData, encoding: .utf8)
-              else {
-            return
-        }
-        
-        self.webSocketSessionTask?.send(.string(jsonText)) { error in
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            print("successfully sent: \(jsonText)")
-        }
+//        let request: [String:String] = ["type":"auth:session"]
+//        guard let jsonData = try? JSONEncoder().encode(request),
+//              let jsonText = String(data: jsonData, encoding: .utf8)
+//              else {
+//            return
+//        }
+//
+//        self.webSocketSessionTask?.send(.string(jsonText)) { error in
+//            if error != nil {
+//                print(error!)
+//                return
+//            }
+//
+//            print("successfully sent: \(jsonText)")
+//        }
     }
         
     private func populateVirtalNetworkMenuItems() {
