@@ -50,6 +50,17 @@
 		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
 		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
+		4CA8043F288189AB005C7B53 /* VirtualNetworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8043E288189AB005C7B53 /* VirtualNetworkViewModel.swift */; };
+		4CA8044228818B4B005C7B53 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044128818B4B005C7B53 /* HttpService.swift */; };
+		4CA8044428818B57005C7B53 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044328818B57005C7B53 /* AppService.swift */; };
+		4CA8044628818B97005C7B53 /* XPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044528818B97005C7B53 /* XPCService.swift */; };
+		4CA8044828818BD1005C7B53 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044728818BD1005C7B53 /* BaseViewModel.swift */; };
+		4CA8044A28818C1A005C7B53 /* IViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044928818C1A005C7B53 /* IViewModel.swift */; };
+		4CA8044E28818D0E005C7B53 /* OmniMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044D28818D0E005C7B53 /* OmniMainMenu.swift */; };
+		4CA8045028818F24005C7B53 /* OmniMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044F28818F24005C7B53 /* OmniMenuItem.swift */; };
+		4CA80452288205BC005C7B53 /* TextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA80451288205BC005C7B53 /* TextMenuItem.swift */; };
+		4CA8045728820B03005C7B53 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8045628820B03005C7B53 /* Utils.swift */; };
+		4CA8045A28821074005C7B53 /* OmniLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8045928821074005C7B53 /* OmniLabel.swift */; };
 		4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E128375CFC0045D5C4 /* UserModel.swift */; };
 		4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E328375E4C0045D5C4 /* ServerModel.swift */; };
 		4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */; };
@@ -179,6 +190,17 @@
 		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
 		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		4CA8043E288189AB005C7B53 /* VirtualNetworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkViewModel.swift; sourceTree = "<group>"; };
+		4CA8044128818B4B005C7B53 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
+		4CA8044328818B57005C7B53 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		4CA8044528818B97005C7B53 /* XPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCService.swift; sourceTree = "<group>"; };
+		4CA8044728818BD1005C7B53 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		4CA8044928818C1A005C7B53 /* IViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IViewModel.swift; sourceTree = "<group>"; };
+		4CA8044D28818D0E005C7B53 /* OmniMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniMainMenu.swift; sourceTree = "<group>"; };
+		4CA8044F28818F24005C7B53 /* OmniMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniMenuItem.swift; sourceTree = "<group>"; };
+		4CA80451288205BC005C7B53 /* TextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMenuItem.swift; sourceTree = "<group>"; };
+		4CA8045628820B03005C7B53 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		4CA8045928821074005C7B53 /* OmniLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLabel.swift; sourceTree = "<group>"; };
 		4CE15D38283A6EBC0000E529 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		4CE405E128375CFC0045D5C4 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4CE405E328375E4C0045D5C4 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
@@ -262,6 +284,12 @@
 		0BBF0F7625AB52FC001E9B2C = {
 			isa = PBXGroup;
 			children = (
+				4CA8045828821061005C7B53 /* Wigets */,
+				4CA8045328820A04005C7B53 /* Extensions */,
+				4CA8044C28818CE7005C7B53 /* Views */,
+				4CA8044B28818C58005C7B53 /* Utils */,
+				4CA8044028818B3C005C7B53 /* Services */,
+				4CA8043D2881892D005C7B53 /* ViewModels */,
 				24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */,
 				4C5664F6282CEF8B00C14EEB /* Models */,
 				0BBF0F8125AB52FC001E9B2C /* Omniedge */,
@@ -331,6 +359,59 @@
 				4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4CA8043D2881892D005C7B53 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4CA8043E288189AB005C7B53 /* VirtualNetworkViewModel.swift */,
+				4CA8044728818BD1005C7B53 /* BaseViewModel.swift */,
+				4CA8044928818C1A005C7B53 /* IViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4CA8044028818B3C005C7B53 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4CA8044128818B4B005C7B53 /* HttpService.swift */,
+				4CA8044328818B57005C7B53 /* AppService.swift */,
+				4CA8044528818B97005C7B53 /* XPCService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4CA8044B28818C58005C7B53 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4CA8045628820B03005C7B53 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4CA8044C28818CE7005C7B53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CA8044D28818D0E005C7B53 /* OmniMainMenu.swift */,
+				4CA8044F28818F24005C7B53 /* OmniMenuItem.swift */,
+				4CA80451288205BC005C7B53 /* TextMenuItem.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4CA8045328820A04005C7B53 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4CA8045828821061005C7B53 /* Wigets */ = {
+			isa = PBXGroup;
+			children = (
+				4CA8045928821074005C7B53 /* OmniLabel.swift */,
+			);
+			path = Wigets;
 			sourceTree = "<group>";
 		};
 		4CE405E72838FCE30045D5C4 /* Views */ = {
@@ -479,18 +560,29 @@
 				0B9B789B25B4792900BB415D /* Util.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */,
+				4CA8045028818F24005C7B53 /* OmniMenuItem.swift in Sources */,
+				4CA8044828818BD1005C7B53 /* BaseViewModel.swift in Sources */,
 				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
+				4CA80452288205BC005C7B53 /* TextMenuItem.swift in Sources */,
 				4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */,
+				4CA8044A28818C1A005C7B53 /* IViewModel.swift in Sources */,
+				4CA8044E28818D0E005C7B53 /* OmniMainMenu.swift in Sources */,
 				4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */,
 				4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */,
 				4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */,
 				4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */,
+				4CA8044428818B57005C7B53 /* AppService.swift in Sources */,
 				4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */,
 				0BD772F025E25AFC0001282C /* Models.swift in Sources */,
+				4CA8043F288189AB005C7B53 /* VirtualNetworkViewModel.swift in Sources */,
+				4CA8045728820B03005C7B53 /* Utils.swift in Sources */,
 				4C2DF5BD284B8D4E00456AB3 /* JoinDeviceModel.swift in Sources */,
+				4CA8044628818B97005C7B53 /* XPCService.swift in Sources */,
+				4CA8044228818B4B005C7B53 /* HttpService.swift in Sources */,
 				0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */,
 				0B9B787A25B4717000BB415D /* Constants.swift in Sources */,
 				4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */,
+				4CA8045A28821074005C7B53 /* OmniLabel.swift in Sources */,
 				0B5A05FA25DD0F11000BFD54 /* DeviceInfoView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 			);
@@ -697,8 +789,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omniedge/Omniedge.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0.2.0;
 				DEVELOPMENT_TEAM = QTRXQATRPQ;
@@ -716,7 +808,7 @@
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dev_omniedge_mac;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -727,11 +819,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omniedge/Omniedge.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0.2.0;
-				DEVELOPMENT_TEAM = QTRXQATRPQ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -746,7 +838,7 @@
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.omniedge.mac.Omniedge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = dist_omniedge_mac;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
