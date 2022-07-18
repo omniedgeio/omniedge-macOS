@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 struct XPCConstant {
     static let HelperMachLabel = "io.omniedge.mac.Omniedge.HelperTool"
@@ -94,9 +95,10 @@ struct Constants {
     struct Margins {
         static let margin5: CGFloat = 5.0
         static let margin10: CGFloat = 10.0
+        static let margin15: CGFloat = 15.0
     }
     
     struct Size {
-        static let menuItemWidth250: CGFloat = 250
+        static let menuItemWidth233: CGFloat = 233
     }
 }

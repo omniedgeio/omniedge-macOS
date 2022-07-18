@@ -8,11 +8,9 @@
 import Cocoa
 import OGSwitch
 import SwiftUI
-import Sparkle
 import ServiceManagement
 import OAuth2
 import GCDWebServers
-import Bugsnag
 
 //@available(macOS 10.15, *)
 //@NSApplicationMain
@@ -687,13 +685,31 @@ import Bugsnag
 //    }
 //}
 
-@available(macOS 10.15, *)
-@NSApplicationMain
+// @available(macOS 10.15, *)
+@main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    private var mainMenu: OmniMainMenu?
+    private var omniService: IOmniService!
+    private var statusItem: NSStatusItem!
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        let locatorService = LocatorService.shareInstance()
+        self.registerServices(locatorService: locatorService)
+        self.omniService = OmniService(locatorService: locatorService)
+        self.omniService.initService()
+    }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        self.mainMenu = OmniMainMenu()
+        
+        self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        self.statusItem?.button?.image = NSImage(named: "StatusBarIcon")
+        self.statusItem.menu = OmniMainMenu(omniService: self.omniService)
+    }
+}
+
+extension AppDelegate {
+    
+    private func registerServices(locatorService: ILocatorService){
+        locatorService.register(instance: HttpService() as IHttpService)
     }
 }

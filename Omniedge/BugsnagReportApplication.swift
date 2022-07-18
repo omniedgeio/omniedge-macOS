@@ -6,15 +6,14 @@
 //
 
 import Cocoa
-import Bugsnag
 
 
-@objc(BugsnagReportApplication)
-class BugsnagReportApplication: NSApplication {
-    
-    func reportException(exception: NSException) {
-        Bugsnag.notify(exception)
-        super.reportException(exception)
-    }
-    
-}
+//@objc(BugsnagReportApplication)
+//class BugsnagReportApplication: NSApplication {
+//    
+//    func reportException(exception: NSException) {
+//        Bugsnag.notify(exception)
+//        super.reportException(exception)
+//    }
+//    
+//}
