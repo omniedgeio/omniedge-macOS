@@ -11,13 +11,13 @@ protocol OmniServiceDelegate: AnyObject {
     func didLoginSuccess()
     func didLoginFailed()
     func didLogout()
+    
+    func didNetworksLoaded(networks: [VirtualNetworkModel])
+    func didDeviceRegister(model: DeviceRegisterModel)
 }
 
 protocol IOmniService: IService {
     var delegate: OmniServiceDelegate? { get set }
-//    var httpService: IHttpService { get }
-//    var authService: IAuthService { get }
-//    var networkService: IVirtualNetworkService { get }
     var hasLoggedIn: Bool { get }
     
     func login()
@@ -102,8 +102,10 @@ class OmniService: IOmniService {
         
         let authService = AuthService(httpService: self.httpService)
         let networkService = VirtualNetworkService(httpService: self.httpService)
+        let deviceService = DeviceService(httpService: self.httpService)
         self.locatorService.register(instance: authService as IAuthService)
         self.locatorService.register(instance: networkService as IVirtualNetworkService)
+        self.locatorService.register(instance: deviceService as IDeviceService)
     }
     
     func login() {
@@ -140,19 +142,20 @@ extension OmniService: AuthServiceDelegate {
         }
 
         self.delegate?.didLoginSuccess()
+        self.registerLocalDevice()
         self.getRemoteNetworkList()
     }
 }
 
 extension OmniService: VirtualNetworkServiceDelegate {
     func didNetworkListLoaded(networks: [VirtualNetworkModel]) {
-        
+        self.delegate?.didNetworksLoaded(networks: networks)
     }
 }
 
 extension OmniService: DeviceServiceDelegate {
-    func didRegisteredDevice() {
-        
+    func didRegisteredDevice(model: DeviceRegisterModel) {
+        self.delegate?.didDeviceRegister(model: model)
     }
     
     func didJoinedDevice() {

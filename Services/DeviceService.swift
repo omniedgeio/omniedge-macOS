@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DeviceServiceDelegate: AnyObject {
-    func didRegisteredDevice()
+    func didRegisteredDevice(model: DeviceRegisterModel)
     func didJoinedDevice()
 }
 
@@ -91,7 +91,7 @@ class DeviceService: BaseService, IDeviceService {
     
     private func onDeviceRegister(model: DeviceRegisterModel) {
         self.deviceRegisterModel = model
-        self.delegate?.didRegisteredDevice()
+        self.delegate?.didRegisteredDevice(model: model)
     }
     
     private func onDeviceJoined(model: JoinDeviceMode) {

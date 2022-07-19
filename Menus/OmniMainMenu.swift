@@ -22,6 +22,7 @@ class OmniMainMenu: NSMenu {
     
     private var omniService: IOmniService
     private var menuItems: [OmniMenuItem] = []
+    private var myDeviceMenuItem: DetailMenuItem?
     
     init(omniService: IOmniService) {
         self.omniService = omniService
@@ -92,10 +93,21 @@ class OmniMainMenu: NSMenu {
     private func getMenuItemByTag(tag: Int) -> OmniMenuItem? {
         return self.menuItems.first(where: {$0.tag == tag})
     }
-}
-
-extension OmniMainMenu: NSMenuDelegate {
     
+    private func populateMyDeviceMenuItem(model: DeviceRegisterModel) {
+        let menuItem = DetailMenuItem(title: "My OmniNetwork    This Device")
+        menuItem.detail = "\(model.deviceName)  \(model.virtualIp ?? Constants.EmptyText)"
+        self.insertItem(menuItem, at: 2)
+        self.addItem(NSMenuItem.separator())
+        self.myDeviceMenuItem = menuItem
+    }
+    
+    private func populateNetworkList(networks: [VirtualNetworkModel]) {
+        let menuItem = NetworkMenuItem(networks: networks)
+        let insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
+        self.insertItem(menuItem, at: insertAtIndex)
+        self.addItem(NSMenuItem.separator())
+    }
 }
 
 extension OmniMainMenu: OmniServiceDelegate {
@@ -121,5 +133,17 @@ extension OmniMainMenu: OmniServiceDelegate {
         }
         
         menuItem.title = "Log in"
+    }
+    
+    func didNetworksLoaded(networks: [VirtualNetworkModel]) {
+        DispatchQueue.main.async {
+            self.populateNetworkList(networks: networks)
+        }
+    }
+    
+    func didDeviceRegister(model: DeviceRegisterModel) {
+        DispatchQueue.main.async {
+            self.populateMyDeviceMenuItem(model: model)
+        }
     }
 }

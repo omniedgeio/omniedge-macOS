@@ -87,6 +87,9 @@ struct Constants {
     static let EmptyText: String = ""
     
     struct Colors {
+        static let textColorInDarkMode = NSColor(red: 0xDA/0xFF, green: 0xDA/0xFF, blue: 0xDA/0xFF, alpha: 1.0)
+        static let textColorInLightMode = NSColor(red: 0x6C/0xFF, green: 0x6C/0xFF, blue: 0x6C/0xFF, alpha: 1.0)
+         
         static let C_F1F1F1 = NSColor(red: 0xF1/0xFF, green: 0xF1/0xFF, blue: 0xF1/0xFF, alpha: 1.0)
         static let C_6C6C6C = NSColor(red: 0x6C/0xFF, green: 0x6C/0xFF, blue: 0x6C/0xFF, alpha: 1.0)
         static let C_3D3D3D = NSColor(red: 0x3D/0xFF, green: 0x3D/0xFF, blue: 0x3D/0xFF, alpha: 1.0)
