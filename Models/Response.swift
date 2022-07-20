@@ -1,13 +1,12 @@
 //
-//  RestResponse.swift
+//  Response.swift
 //  Omniedge
 //
-//  Created by Yanbo Dang on 12/5/2022.
+//  Created by Yanbo Dang on 16/7/2022.
 //
 
 import Foundation
-
-struct RestResponse<T: Decodable>: Decodable {
+struct Response<T: Decodable>: Decodable {
     let code: Int
     let data: T
     

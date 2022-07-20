@@ -12,7 +12,6 @@
 		0B361064260E300100CFDEEB /* BugsnagReportApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */; };
 		0B3D99DC25DA953400344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DB25DA953400344C07 /* n2nMacOS */; };
 		0B3D99DF25DA953B00344C07 /* n2nMacOS in Frameworks */ = {isa = PBXBuildFile; productRef = 0B3D99DE25DA953B00344C07 /* n2nMacOS */; };
-		0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */; };
 		0B5A05BC25DB6A5B000BFD54 /* OGSwitch.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */; };
 		0B5A05BD25DB6A5B000BFD54 /* OAuth2.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */; };
 		0B5A05C025DB6A6C000BFD54 /* Sparkle.framework.dSYM in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5A05BF25DB6A6C000BFD54 /* Sparkle.framework.dSYM */; };
@@ -35,7 +34,6 @@
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
 		24D360C92855FC9500284253 /* SMJobBlessReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */; };
 		4C2DF5B9284A2A1F00456AB3 /* DeviceRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */; };
-		4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */; };
 		4C2DF5BD284B8D4E00456AB3 /* JoinDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */; };
 		4C2E5E9D28857930007092C9 /* DeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5E9C28857930007092C9 /* DeviceService.swift */; };
 		4C2E5E9F28858C42007092C9 /* Data+Omni.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5E9E28858C42007092C9 /* Data+Omni.swift */; };
@@ -45,10 +43,10 @@
 		4C2E5EA72886CF78007092C9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA62886CF78007092C9 /* BaseView.swift */; };
 		4C2E5EA92886D18F007092C9 /* NetworkContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */; };
 		4C2E5EAB2886DFBC007092C9 /* OmniButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */; };
-		4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F7282CEFBF00C14EEB /* AuthSession.swift */; };
-		4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5664F9282D011D00C14EEB /* RestResponse.swift */; };
 		4C8079F928882C930060D73D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8045628820B03005C7B53 /* Utils.swift */; };
 		4C8079FA288835B50060D73D /* JoinDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */; };
+		4C8079FC28883F780060D73D /* NetworkItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */; };
+		4C8079FE28883FE60060D73D /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8079FD28883FE60060D73D /* DeviceItemView.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
 		4CA8044228818B4B005C7B53 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044128818B4B005C7B53 /* HttpService.swift */; };
 		4CA8044428818B57005C7B53 /* OmniService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044328818B57005C7B53 /* OmniService.swift */; };
@@ -69,8 +67,6 @@
 		4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E128375CFC0045D5C4 /* UserModel.swift */; };
 		4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E328375E4C0045D5C4 /* ServerModel.swift */; };
 		4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */; };
-		4CE405E92838FD0F0045D5C4 /* VirtualNetworkContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */; };
-		4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */; };
 		EE4EC14827D394A30085210F /* GCDWebServers.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; };
 		EE4EC14927D394A30085210F /* GCDWebServers.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14727D394A30085210F /* GCDWebServers.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE4EC14B27D394A70085210F /* OAuth2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE4EC14A27D394A70085210F /* OAuth2.xcframework */; };
@@ -150,7 +146,6 @@
 /* Begin PBXFileReference section */
 		0B22165225CC448B00387622 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugsnagReportApplication.swift; sourceTree = "<group>"; };
-		0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniEdgeDataLoader.swift; sourceTree = "<group>"; };
 		0B5A05AC25DB67A5000BFD54 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/Mac/OAuth2.framework; sourceTree = "<group>"; };
 		0B5A05BA25DB6A5B000BFD54 /* OGSwitch.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OGSwitch.framework.dSYM; sourceTree = "<group>"; };
 		0B5A05BB25DB6A5B000BFD54 /* OAuth2.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = OAuth2.framework.dSYM; sourceTree = "<group>"; };
@@ -184,7 +179,6 @@
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
 		24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SMJobBlessReadMe.txt; sourceTree = "<group>"; };
 		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
-		4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
 		4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDeviceModel.swift; sourceTree = "<group>"; };
 		4C2E5E9C28857930007092C9 /* DeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		4C2E5E9E28858C42007092C9 /* Data+Omni.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Omni.swift"; sourceTree = "<group>"; };
@@ -194,8 +188,8 @@
 		4C2E5EA62886CF78007092C9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkContainerView.swift; sourceTree = "<group>"; };
 		4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniButtonCell.swift; sourceTree = "<group>"; };
-		4C5664F7282CEFBF00C14EEB /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
-		4C5664F9282D011D00C14EEB /* RestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestResponse.swift; sourceTree = "<group>"; };
+		4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkItemDetailView.swift; sourceTree = "<group>"; };
+		4C8079FD28883FE60060D73D /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		4CA8044128818B4B005C7B53 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
 		4CA8044328818B57005C7B53 /* OmniService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniService.swift; sourceTree = "<group>"; };
@@ -217,8 +211,6 @@
 		4CE405E128375CFC0045D5C4 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		4CE405E328375E4C0045D5C4 /* ServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		4CE405E528375ECD0045D5C4 /* VirtualNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkModel.swift; sourceTree = "<group>"; };
-		4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkContainerView.swift; sourceTree = "<group>"; };
-		4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualNetworkItemView.swift; sourceTree = "<group>"; };
 		EE4EC14627D394860085210F /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Build; path = Carthage/Build; sourceTree = "<group>"; };
 		EE4EC14727D394A30085210F /* GCDWebServers.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GCDWebServers.xcframework; path = Carthage/Build/GCDWebServers.xcframework; sourceTree = "<group>"; };
 		EE4EC14A27D394A70085210F /* OAuth2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OAuth2.xcframework; path = Carthage/Build/OAuth2.xcframework; sourceTree = "<group>"; };
@@ -293,14 +285,14 @@
 		0BBF0F7625AB52FC001E9B2C = {
 			isa = PBXGroup;
 			children = (
-				4CBE610C2882D17E00B464DD /* Models1 */,
+				4CBE610C2882D17E00B464DD /* Models */,
 				4CA8045828821061005C7B53 /* Views */,
 				4CA8045328820A04005C7B53 /* Extensions */,
 				4CA8044C28818CE7005C7B53 /* Menus */,
 				4CA8044B28818C58005C7B53 /* Utils */,
 				4CA8044028818B3C005C7B53 /* Services */,
+				0BBF0F9825AB580D001E9B2C /* Support */,
 				24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */,
-				4C5664F6282CEF8B00C14EEB /* Models */,
 				0BBF0F8125AB52FC001E9B2C /* Omniedge */,
 				0B7575B925B44FF900601DC7 /* HelperTool */,
 				0B9B787725B4717000BB415D /* Common */,
@@ -326,10 +318,7 @@
 		0BBF0F8125AB52FC001E9B2C /* Omniedge */ = {
 			isa = PBXGroup;
 			children = (
-				4CE405E72838FCE30045D5C4 /* Views */,
-				0BBF0F9825AB580D001E9B2C /* Support */,
 				0BBF0F8225AB52FC001E9B2C /* AppDelegate.swift */,
-				0B5A05A925DB6463000BFD54 /* OmniEdgeDataLoader.swift */,
 				0BBF0F8825AB52FD001E9B2C /* Main.storyboard */,
 				0B361063260E300100CFDEEB /* BugsnagReportApplication.swift */,
 			);
@@ -349,15 +338,7 @@
 				0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */,
 			);
 			name = Support;
-			sourceTree = "<group>";
-		};
-		4C5664F6282CEF8B00C14EEB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4C5664F7282CEFBF00C14EEB /* AuthSession.swift */,
-				4C5664F9282D011D00C14EEB /* RestResponse.swift */,
-			);
-			path = Models;
+			path = Omniedge;
 			sourceTree = "<group>";
 		};
 		4CA8044028818B3C005C7B53 /* Services */ = {
@@ -413,11 +394,13 @@
 				4C2E5EA42886CF2A007092C9 /* NetworkItemView.swift */,
 				4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */,
 				4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */,
+				4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */,
+				4C8079FD28883FE60060D73D /* DeviceItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4CBE610C2882D17E00B464DD /* Models1 */ = {
+		4CBE610C2882D17E00B464DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4CBE610D2882D18900B464DD /* Response.swift */,
@@ -429,17 +412,7 @@
 				4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */,
 				4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */,
 			);
-			path = Models1;
-			sourceTree = "<group>";
-		};
-		4CE405E72838FCE30045D5C4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4CE405E82838FD0F0045D5C4 /* VirtualNetworkContainerView.swift */,
-				4CE405EA2838FE3A0045D5C4 /* VirtualNetworkItemView.swift */,
-				4C2DF5BA284B7C0C00456AB3 /* DeviceItemView.swift */,
-			);
-			name = Views;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,22 +543,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
-				4C2DF5BB284B7C0C00456AB3 /* DeviceItemView.swift in Sources */,
 				4C2E5E9F28858C42007092C9 /* Data+Omni.swift in Sources */,
-				4CE405E92838FD0F0045D5C4 /* VirtualNetworkContainerView.swift in Sources */,
 				4CBE61162882E6E600B464DD /* AppService.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */,
 				4CA8045028818F24005C7B53 /* OmniMenuItem.swift in Sources */,
 				4CBE61052882BB3100B464DD /* IService.swift in Sources */,
-				0B5A05AA25DB6463000BFD54 /* OmniEdgeDataLoader.swift in Sources */,
 				4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */,
 				4C2E5EA52886CF2A007092C9 /* NetworkItemView.swift in Sources */,
 				4CA8044E28818D0E005C7B53 /* OmniMainMenu.swift in Sources */,
 				4CE405E228375CFC0045D5C4 /* UserModel.swift in Sources */,
-				4C5664F8282CEFBF00C14EEB /* AuthSession.swift in Sources */,
-				4C5664FA282D011D00C14EEB /* RestResponse.swift in Sources */,
-				4CE405EB2838FE3A0045D5C4 /* VirtualNetworkItemView.swift in Sources */,
 				4CBE610E2882D18900B464DD /* Response.swift in Sources */,
 				4CBE61032882B9E100B464DD /* LocatorService.swift in Sources */,
 				4C2E5E9D28857930007092C9 /* DeviceService.swift in Sources */,
@@ -608,6 +575,8 @@
 				4CA8045A28821074005C7B53 /* OmniLabel.swift in Sources */,
 				4CA804CB2882A2E5005C7B53 /* NetworkMenuItem.swift in Sources */,
 				4C2E5EA72886CF78007092C9 /* BaseView.swift in Sources */,
+				4C8079FE28883FE60060D73D /* DeviceItemView.swift in Sources */,
+				4C8079FC28883F780060D73D /* NetworkItemDetailView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 				4C2E5EA32886C6F4007092C9 /* ContentMenuItem.swift in Sources */,
 			);

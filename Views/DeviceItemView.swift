@@ -2,19 +2,19 @@
 //  DeviceItemView.swift
 //  Omniedge
 //
-//  Created by Yanbo Dang on 4/6/2022.
+//  Created by Yanbo Dang on 20/7/2022.
 //
 
 import Foundation
 import AppKit
 
-class DeviceItemView: NSView {
-
+class DeviceItemView: BaseView {
+    
     private var model: DeviceRegisterModel
     
     init(model: DeviceRegisterModel) {
         self.model = model
-        super.init(frame: .zero)
+        super.init()
         self.initView()
         self.initLayout()
     }
@@ -49,28 +49,16 @@ class DeviceItemView: NSView {
     }
     
     // Lazy loading
-    private lazy var titleLabel: NSTextField = {
-        let view = NSTextField()
+    private lazy var titleLabel: OmniLabel = {
+        let view = OmniLabel()
         view.stringValue = self.model.deviceName
-        view.usesSingleLineMode = false
-        view.isEditable = false
-        view.isBezeled = false
-        view.alignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        view.sizeToFit()
         return view
     }()
     
-    private lazy var ipRange: NSTextField = {
-        let view = NSTextField()
-        view.stringValue = self.model.virtualIp ?? ""
-        view.isEditable = false
-        view.isBezeled = false
-        view.alignment = .left
+    private lazy var ipRange: OmniLabel = {
+        let view = OmniLabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        view.sizeToFit()
         return view
     }()
     

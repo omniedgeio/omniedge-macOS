@@ -1,20 +1,19 @@
 //
-//  VirtualNetworkItemView.swift
+//  NetworkItemDetailView.swift
 //  Omniedge
 //
-//  Created by Yanbo Dang on 21/5/2022.
+//  Created by Yanbo Dang on 20/7/2022.
 //
 
-import Cocoa
+import Foundation
 import OGSwitch
 
-protocol VirtualNetworItemViewDelegate: AnyObject {
-    func didToggled(on: Bool, model: VirtualNetworkModel, contentView: VirtualNetworkItemView);
+protocol NetworItemDetailViewDelegate: AnyObject {
+    func didToggled(on: Bool, model: VirtualNetworkModel, contentView: NetworkItemDetailView);
 }
 
-class VirtualNetworkItemView: NSView {
-
-    weak public var delegate: VirtualNetworItemViewDelegate?
+class NetworkItemDetailView: BaseView {
+    weak public var delegate: NetworItemDetailViewDelegate?
     
     var swicher: OGSwitch {
         get{
@@ -28,7 +27,7 @@ class VirtualNetworkItemView: NSView {
     
     init(model: VirtualNetworkModel) {
         self.model = model
-        super.init(frame: .zero)
+        super.init()
         self.initView()
         self.initLayout()
     }

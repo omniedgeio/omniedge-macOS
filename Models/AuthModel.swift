@@ -1,13 +1,13 @@
 //
-//  AuthSession.swift
+//  AuthModel.swift
 //  Omniedge
 //
-//  Created by Yanbo Dang on 12/5/2022.
+//  Created by Yanbo Dang on 16/7/2022.
 //
 
 import Foundation
 
-struct AuthSession: Decodable {
+struct AuthModel: Decodable {
     
     let sessionId: String
     let authUrl: String
