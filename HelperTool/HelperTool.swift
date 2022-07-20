@@ -46,8 +46,8 @@ class HelperToolImpl: HelperTool{
         
         
         
-        if let intfIterator = FindEthernetInterfaces() {
-            if let macAddress = GetMACAddress(intfIterator) {
+        if let intfIterator = Utils.findEthernetInterfaces() {
+            if let macAddress = Utils.getMACAddress(intfIterator) {
                 let macAddressAsString = macAddress.map( { String(format:"%02x", $0) } )
                     .joined(separator: ":")
                 deviceMac = macAddressAsString

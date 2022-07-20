@@ -106,6 +106,9 @@ class OmniService: IOmniService {
         self.locatorService.register(instance: authService as IAuthService)
         self.locatorService.register(instance: networkService as IVirtualNetworkService)
         self.locatorService.register(instance: deviceService as IDeviceService)
+        
+        let xpcService: IXPCService = self.locatorService.resolve()
+        xpcService.installAndConnectHeperTool()
     }
     
     func login() {
