@@ -88,6 +88,13 @@ class OmniMainMenu: NSMenu {
         NSApp.terminate(self)
     }
     
+    private func reset() {
+        self.removeAllItems()
+        self.networkMenuItem.removeAll()
+        self.myDeviceMenuItem = nil
+        self.initMainMenu()
+    }
+    
     private func addMenuItem(title: String, action: Selector?, keyEquivalent: String, menuItemType: OmniMenuItemType) {
         let menuItem = OmniMenuItem(title: title, action: action, keyEquivalent: keyEquivalent)
         menuItem.target = self
@@ -136,11 +143,6 @@ class OmniMainMenu: NSMenu {
             networkIndex += 1
         }
         self.insertItem(NSMenuItem.separator(), at: insertAtIndex)
-        
-//        let menuItem = NetworkMenuItem(networks: networks)
-//        let insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
-//        self.insertItem(menuItem, at: insertAtIndex)
-//        self.addItem(NSMenuItem.separator())
     }
 }
 
@@ -170,6 +172,7 @@ extension OmniMainMenu: OmniServiceDelegate {
         }
         
         menuItem.title = "Log in"
+        self.reset()
     }
     
     func didNetworksLoaded(networks: [VirtualNetworkModel]) {
