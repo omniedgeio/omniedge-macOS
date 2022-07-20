@@ -10,17 +10,30 @@ import AppKit
 
 class OmniLabel: NSTextField {
     
+    private var clickGesture: NSClickGestureRecognizer
+    
     init() {
+        self.clickGesture = NSClickGestureRecognizer()
         super.init(frame: .zero)
+        self.initLabel()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addClick(target: AnyObject, action: Selector) {
+        self.clickGesture.target = target
+        self.clickGesture.action = action
+    }
+    
+    private func initLabel() {
         self.usesSingleLineMode = false
         self.isEditable = false
         self.isBezeled = false
         self.alignment = .left
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .clear
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.addGestureRecognizer(self.clickGesture)
     }
 }

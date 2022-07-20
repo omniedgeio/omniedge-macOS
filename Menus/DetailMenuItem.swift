@@ -61,7 +61,7 @@ class DetailMenuItem: ContentMenuItem {
     private lazy var titleLable: OmniLabel = {
         let view = OmniLabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = NSColor.yellow
+        // view.textColor = NSColor.yellow
         return view
     }()
     

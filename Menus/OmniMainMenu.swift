@@ -23,6 +23,7 @@ class OmniMainMenu: NSMenu {
     private var omniService: IOmniService
     private var menuItems: [OmniMenuItem] = []
     private var myDeviceMenuItem: DetailMenuItem?
+    private var networkMenuItem: [NSMenuItem] = []
     
     init(omniService: IOmniService) {
         self.omniService = omniService
@@ -36,6 +37,7 @@ class OmniMainMenu: NSMenu {
     }
     
     private func initMainMenu() {
+        self.delegate = self
         self.addMenuItem(title: "Login", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .login)
                                         
         self.addItem(NSMenuItem.separator())
@@ -71,6 +73,10 @@ class OmniMainMenu: NSMenu {
         
     }
     
+    @objc func didNetworkSelected(_ sender: Any) {
+        return
+    }
+    
     @objc func didAboutMenuItemClicked(_ sender: Any) {
         let service = NSSharingService(named: NSSharingService.Name.composeEmail)!
         service.recipients=["support@omniedge.io"]
@@ -103,11 +109,42 @@ class OmniMainMenu: NSMenu {
     }
     
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
-        let menuItem = NetworkMenuItem(networks: networks)
-        let insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
-        self.insertItem(menuItem, at: insertAtIndex)
-        self.addItem(NSMenuItem.separator())
+        self.networkMenuItem.forEach { item in
+            self.removeItem(item)
+        }
+        
+        self.networkMenuItem.removeAll()
+        var insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
+        
+        let seperator = NSMenuItem.separator()
+        self.networkMenuItem.append(seperator)
+        self.insertItem(seperator, at: insertAtIndex)
+        insertAtIndex += 1
+        
+        let itemNetworkLabel = OmniMenuItem(title: "My Virtual Networks", action: nil, keyEquivalent: Constants.EmptyText)
+        self.networkMenuItem.append(itemNetworkLabel)
+        self.insertItem(itemNetworkLabel, at: insertAtIndex)
+        insertAtIndex += 1
+        var networkIndex = 0
+        networks.forEach { model in
+            let menuItem = OmniMenuItem(title: model.vnName, action: #selector(didNetworkSelected(_:)), keyEquivalent: Constants.EmptyText)
+            menuItem.tag = networkIndex
+            menuItem.target = self
+            self.networkMenuItem.append(menuItem)
+            self.insertItem(menuItem, at: insertAtIndex)
+            insertAtIndex += 1
+            networkIndex += 1
+        }
+        self.insertItem(NSMenuItem.separator(), at: insertAtIndex)
+        
+//        let menuItem = NetworkMenuItem(networks: networks)
+//        let insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
+//        self.insertItem(menuItem, at: insertAtIndex)
+//        self.addItem(NSMenuItem.separator())
     }
+}
+
+extension OmniMainMenu: NSMenuDelegate {
 }
 
 extension OmniMainMenu: OmniServiceDelegate {
