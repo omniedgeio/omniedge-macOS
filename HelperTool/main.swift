@@ -8,20 +8,9 @@
 import Foundation
 import n2nMacOS
 
-NSLog("Hello,Log!")
-print("Hello, World!")
-
-
 let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
 
 NSLog("Version:\(version ?? "None")")
 XPCServer.shared.start()
-
-
 RunLoop.current.run()
-
-
-
-
-//RunLoop.current.run()
 

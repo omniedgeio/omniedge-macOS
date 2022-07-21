@@ -10,6 +10,7 @@ import AppKit
 
 protocol IXPCService: IService {
     func installAndConnectHeperTool()
+    func disconnect()
 }
 
 class XPCService: BaseService, IXPCService {
@@ -25,7 +26,8 @@ class XPCService: BaseService, IXPCService {
         self.connectToXPC()
     }
     
-    private func disconnect(){
+    func disconnect(){
+        self.helperTool?.disconnect()
         XPCConnection?.invalidationHandler = nil
         XPCConnection?.interruptionHandler = nil
         self.XPCConnection = nil

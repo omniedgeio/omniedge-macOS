@@ -44,8 +44,6 @@ class HelperToolImpl: HelperTool{
         let localIP = config.virtualIp
         let superNode = config.server.host
         
-        
-        
         if let intfIterator = Utils.findEthernetInterfaces() {
             if let macAddress = Utils.getMACAddress(intfIterator) {
                 let macAddressAsString = macAddress.map( { String(format:"%02x", $0) } )

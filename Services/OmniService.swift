@@ -22,6 +22,8 @@ protocol IOmniService: IService {
     
     func login()
     func logout()
+    
+    func terminate()
 }
 
 class OmniService: IOmniService {
@@ -122,6 +124,11 @@ class OmniService: IOmniService {
     
     func joinLocalDevice(networkUuid: String) {
         self.deviceService.joinDeviceInNetwork(networkUuid: networkUuid)
+    }
+    
+    func terminate() {
+        let xpcService: IXPCService = self.locatorService.resolve()
+        xpcService.disconnect()
     }
     
     // MARK: - Private functions -
