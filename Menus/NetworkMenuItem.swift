@@ -8,35 +8,28 @@
 import Foundation
 import AppKit
 
-class NetworkMenuItem: ContentMenuItem {
+class NetworkMenuItem: OmniMenuItem {
     
-    private var models: [VirtualNetworkModel]
-
-    init(networks: [VirtualNetworkModel]) {
-        self.models = networks
+    private var model: VirtualNetworkModel
+    
+    init(network: VirtualNetworkModel) {
+        self.model = network
         super.init()
         self.initMenu()
-        self.initLayout()
     }
     
     
     private func initMenu() {
-        self.contentView.addSubview(self.networkView)
+        self.title = model.vnName
+        self.action = #selector(didNetworkSelected)
+        self.target = self
+        self.submenu = NSMenu()
+        let menuItem = OmniMenuItem()
+        menuItem.view = NetworkItemDetailView(model: self.model)
+        self.submenu?.addItem(menuItem)
     }
     
-    private func initLayout() {
-        NSLayoutConstraint.activate([
-            self.networkView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: Constants.Margins.margin10),
-            self.networkView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -Constants.Margins.margin10),
-            self.networkView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            self.networkView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-        ])
+    @objc private func didNetworkSelected() {
+        return
     }
-    
-    // lazy loading
-    private lazy var networkView: NetworkContainerView = {
-        let view = NetworkContainerView(models: self.models)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
 }

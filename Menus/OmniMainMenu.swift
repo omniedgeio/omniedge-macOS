@@ -134,9 +134,7 @@ class OmniMainMenu: NSMenu {
         insertAtIndex += 1
         var networkIndex = 0
         networks.forEach { model in
-            let menuItem = OmniMenuItem(title: model.vnName, action: #selector(didNetworkSelected(_:)), keyEquivalent: Constants.EmptyText)
-            menuItem.tag = networkIndex
-            menuItem.target = self
+            let menuItem = NetworkMenuItem(network: model)
             self.networkMenuItem.append(menuItem)
             self.insertItem(menuItem, at: insertAtIndex)
             insertAtIndex += 1

@@ -10,8 +10,8 @@ import AppKit
 
 class ContentMenuItem: OmniMenuItem {
     
-    init() {
-        super.init(title: Constants.EmptyText, action: nil, keyEquivalent: Constants.EmptyText)
+    override init() {
+        super.init()
         self.initMenu()
         self.initLayout()
     }

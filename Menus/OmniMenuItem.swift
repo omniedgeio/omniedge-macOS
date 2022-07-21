@@ -10,6 +10,10 @@ import AppKit
 
 class OmniMenuItem: NSMenuItem {
 
+    init() {
+        super.init(title: Constants.EmptyText, action: nil, keyEquivalent: Constants.EmptyText)
+    }
+    
     override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
         super.init(title: string, action: selector, keyEquivalent: charCode)
     }

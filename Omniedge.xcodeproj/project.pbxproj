@@ -41,12 +41,10 @@
 		4C2E5EA32886C6F4007092C9 /* ContentMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA22886C6F4007092C9 /* ContentMenuItem.swift */; };
 		4C2E5EA52886CF2A007092C9 /* NetworkItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA42886CF2A007092C9 /* NetworkItemView.swift */; };
 		4C2E5EA72886CF78007092C9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA62886CF78007092C9 /* BaseView.swift */; };
-		4C2E5EA92886D18F007092C9 /* NetworkContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */; };
 		4C2E5EAB2886DFBC007092C9 /* OmniButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */; };
 		4C8079F928882C930060D73D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8045628820B03005C7B53 /* Utils.swift */; };
 		4C8079FA288835B50060D73D /* JoinDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2DF5BC284B8D4E00456AB3 /* JoinDeviceModel.swift */; };
 		4C8079FC28883F780060D73D /* NetworkItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */; };
-		4C8079FE28883FE60060D73D /* DeviceItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8079FD28883FE60060D73D /* DeviceItemView.swift */; };
 		4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
 		4CA8044228818B4B005C7B53 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044128818B4B005C7B53 /* HttpService.swift */; };
 		4CA8044428818B57005C7B53 /* OmniService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA8044328818B57005C7B53 /* OmniService.swift */; };
@@ -186,10 +184,8 @@
 		4C2E5EA22886C6F4007092C9 /* ContentMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuItem.swift; sourceTree = "<group>"; };
 		4C2E5EA42886CF2A007092C9 /* NetworkItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkItemView.swift; sourceTree = "<group>"; };
 		4C2E5EA62886CF78007092C9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkContainerView.swift; sourceTree = "<group>"; };
 		4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniButtonCell.swift; sourceTree = "<group>"; };
 		4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkItemDetailView.swift; sourceTree = "<group>"; };
-		4C8079FD28883FE60060D73D /* DeviceItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceItemView.swift; sourceTree = "<group>"; };
 		4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		4CA8044128818B4B005C7B53 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
 		4CA8044328818B57005C7B53 /* OmniService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniService.swift; sourceTree = "<group>"; };
@@ -392,10 +388,8 @@
 				4CA8045928821074005C7B53 /* OmniLabel.swift */,
 				4C2E5EA62886CF78007092C9 /* BaseView.swift */,
 				4C2E5EA42886CF2A007092C9 /* NetworkItemView.swift */,
-				4C2E5EA82886D18F007092C9 /* NetworkContainerView.swift */,
 				4C2E5EAA2886DFBB007092C9 /* OmniButtonCell.swift */,
 				4C8079FB28883F780060D73D /* NetworkItemDetailView.swift */,
-				4C8079FD28883FE60060D73D /* DeviceItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -557,7 +551,6 @@
 				4CBE61032882B9E100B464DD /* LocatorService.swift in Sources */,
 				4C2E5E9D28857930007092C9 /* DeviceService.swift in Sources */,
 				4C2E5EAB2886DFBC007092C9 /* OmniButtonCell.swift in Sources */,
-				4C2E5EA92886D18F007092C9 /* NetworkContainerView.swift in Sources */,
 				4CBE61182882E91F00B464DD /* VirtualNetworkService.swift in Sources */,
 				4CA8044428818B57005C7B53 /* OmniService.swift in Sources */,
 				4CE405E428375E4C0045D5C4 /* ServerModel.swift in Sources */,
@@ -575,7 +568,6 @@
 				4CA8045A28821074005C7B53 /* OmniLabel.swift in Sources */,
 				4CA804CB2882A2E5005C7B53 /* NetworkMenuItem.swift in Sources */,
 				4C2E5EA72886CF78007092C9 /* BaseView.swift in Sources */,
-				4C8079FE28883FE60060D73D /* DeviceItemView.swift in Sources */,
 				4C8079FC28883F780060D73D /* NetworkItemDetailView.swift in Sources */,
 				0B9B787B25B4717000BB415D /* Protocols.swift in Sources */,
 				4C2E5EA32886C6F4007092C9 /* ContentMenuItem.swift in Sources */,
