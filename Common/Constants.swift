@@ -23,8 +23,7 @@ struct CryptoConstants{
 }
 
 struct UserDefaultKeys{
-
-
+    
     static let AutoLaunch = "io.omniedge.mac.autolaunch"
     static let AutoUpdate = "io.omniedge.mac.autoupdate"
     static let IDToken = "io.omniedge.mac.id.token"
@@ -33,9 +32,6 @@ struct UserDefaultKeys{
     static let NetworkConfig = "io.omniedge.mac.network.config"
     static let PublicKey = "io.omniedge.mac.publickey"
     static let Ping = "io.omniedge.mac.ping"
-
-
-
 }
 
 

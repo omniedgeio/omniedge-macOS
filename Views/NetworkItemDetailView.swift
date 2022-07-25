@@ -9,7 +9,7 @@ import Foundation
 import OGSwitch
 
 protocol NetworItemDetailViewDelegate: AnyObject {
-    func didToggled(on: Bool, model: VirtualNetworkModel, contentView: NetworkItemDetailView);
+    func didToggled(on: Bool);
 }
 
 class NetworkItemDetailView: BaseView {
@@ -24,6 +24,14 @@ class NetworkItemDetailView: BaseView {
         super.init()
         self.initView()
         self.initLayout()
+    }
+    
+    func toggleOff() {
+        self.connSwitch.setOn(isOn: false, animated: true)
+    }
+    
+    func toggleOn() {
+        self.connSwitch.setOn(isOn: true, animated: true)
     }
     
     private func initView() {
@@ -88,7 +96,7 @@ class NetworkItemDetailView: BaseView {
     }
     
     @objc private func didToggled() {
-        self.delegate?.didToggled(on: self.connSwitch.isOn, model: self.model, contentView: self)
+        self.delegate?.didToggled(on: self.connSwitch.isOn)
     }
     
     // Lazy loading

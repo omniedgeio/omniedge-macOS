@@ -11,17 +11,18 @@ protocol OmniServiceDelegate: AnyObject {
     func didLoginSuccess()
     func didLoginFailed()
     func didLogout()
-    
     func didNetworksLoaded(networks: [VirtualNetworkModel])
     func didDeviceRegister(model: DeviceRegisterModel)
 }
 
 protocol IOmniService: IService {
     var delegate: OmniServiceDelegate? { get set }
+    var networkService: IVirtualNetworkService { get }
     var hasLoggedIn: Bool { get }
     
     func login()
     func logout()
+    func getCachedNetworkConfig() -> Data?
     
     func terminate()
 }
@@ -35,6 +36,19 @@ class OmniService: IOmniService {
     }
     
     weak var delegate: OmniServiceDelegate?
+    
+    var networkService: IVirtualNetworkService {
+        get {
+            guard let virtualNetworkService = self.curVirtualNetworkService else {
+                let networkService: IVirtualNetworkService = self.locatorService.resolve()
+                self.curVirtualNetworkService = networkService
+                self.curVirtualNetworkService?.delegate = self
+                return networkService
+            }
+            
+            return virtualNetworkService
+        }
+    }
     
     private var httpService: IHttpService {
         get {
@@ -62,37 +76,10 @@ class OmniService: IOmniService {
         }
     }
     
-    private var networkService: IVirtualNetworkService {
-        get {
-            guard let virtualNetworkService = self.curVirtualNetworkService else {
-                let networkService: IVirtualNetworkService = self.locatorService.resolve()
-                self.curVirtualNetworkService = networkService
-                self.curVirtualNetworkService?.delegate = self
-                return networkService
-            }
-            
-            return virtualNetworkService
-        }
-    }
-    
-    private var deviceService: IDeviceService {
-        get {
-            guard let deviceService = self.curDeviceService else {
-                let deviceService:IDeviceService = self.locatorService.resolve()
-                self.curDeviceService = deviceService
-                self.curDeviceService?.delegate = self
-                return deviceService
-            }
-            
-            return deviceService
-        }
-    }
-    
     private var locatorService: ILocatorService
     private var curHttpService: IHttpService?
     private var curAuthService: IAuthService?
     private var curVirtualNetworkService: IVirtualNetworkService?
-    private var curDeviceService: IDeviceService?
     
     private var token: String?
     
@@ -101,15 +88,13 @@ class OmniService: IOmniService {
     }
     
     func initService() {
-        
+        let xpcService: IXPCService = self.locatorService.resolve()
         let authService = AuthService(httpService: self.httpService)
-        let networkService = VirtualNetworkService(httpService: self.httpService)
-        let deviceService = DeviceService(httpService: self.httpService)
+        let networkService = VirtualNetworkService(httpService: self.httpService, xpcService: xpcService)
+        
         self.locatorService.register(instance: authService as IAuthService)
         self.locatorService.register(instance: networkService as IVirtualNetworkService)
-        self.locatorService.register(instance: deviceService as IDeviceService)
         
-        let xpcService: IXPCService = self.locatorService.resolve()
         xpcService.installAndConnectHeperTool()
     }
     
@@ -122,8 +107,14 @@ class OmniService: IOmniService {
         self.delegate?.didLogout()
     }
     
-    func joinLocalDevice(networkUuid: String) {
-        self.deviceService.joinDeviceInNetwork(networkUuid: networkUuid)
+    func joinLocalDevice(vnId: String) {
+        self.networkService.joinDeviceInNetwork(vnId: vnId)
+    }
+    
+    func getCachedNetworkConfig() -> Data? {
+        let cacheService: ICacheService = self.locatorService.resolve()
+        let networkConfigData = cacheService.getValue(forKey: UserDefaultKeys.NetworkConfig)
+        return networkConfigData as? Data
     }
     
     func terminate() {
@@ -137,7 +128,7 @@ class OmniService: IOmniService {
     }
     
     private func registerLocalDevice() {
-        self.deviceService.registerDevice()
+        self.networkService.registerDevice()
     }
 }
 
@@ -161,14 +152,21 @@ extension OmniService: VirtualNetworkServiceDelegate {
     func didNetworkListLoaded(networks: [VirtualNetworkModel]) {
         self.delegate?.didNetworksLoaded(networks: networks)
     }
-}
-
-extension OmniService: DeviceServiceDelegate {
-    func didRegisteredDevice(model: DeviceRegisterModel) {
-        self.delegate?.didDeviceRegister(model: model)
+    
+    func didJoinedDevice(data: Data) {
+        // save it
+        let cacheService: ICacheService = self.locatorService.resolve()
+        cacheService.saveValue(value: data, key: UserDefaultKeys.NetworkConfig)
+    
+        self.networkService.connectNetwork(dataOfNetworkConfig: data) { success in
+            if !success {
+                
+                Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
+            }
+        }
     }
     
-    func didJoinedDevice() {
-        
+    func didRegisteredDevice(model: DeviceRegisterModel) {
+        self.delegate?.didDeviceRegister(model: model)
     }
 }

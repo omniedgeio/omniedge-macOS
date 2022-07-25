@@ -119,4 +119,28 @@ class Utils {
 
         return macAddress
     }
+    
+    static func getDeviceInfo() -> DeviceModel? {
+        let deviceName = ProcessInfo.processInfo.hostName
+        // let osVersion = ProcessInfo.processInfo.operatingSystemVersionString
+        guard let hardwareUUID = self.getHardwareUUID() else {
+            return nil
+        }
+
+        return DeviceModel(deviceName: deviceName, deviceUuid: hardwareUUID, deviceOS: "macOS")
+    }
+    
+    static func getHardwareUUID() -> String? {
+        let dev = IOServiceMatching("IOPlatformExpertDevice")
+        let platformExpert: io_service_t = IOServiceGetMatchingService(kIOMasterPortDefault, dev)
+        let serialNumberAsCFString = IORegistryEntryCreateCFProperty(platformExpert, kIOPlatformUUIDKey as CFString, kCFAllocatorDefault, 0)
+        IOObjectRelease(platformExpert)
+        let ser: CFTypeRef? = serialNumberAsCFString?.takeUnretainedValue()
+
+        guard let result = ser as? String else {
+            return nil
+        }
+
+        return result
+    }
 }

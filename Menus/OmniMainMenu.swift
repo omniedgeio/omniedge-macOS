@@ -134,7 +134,7 @@ class OmniMainMenu: NSMenu {
         insertAtIndex += 1
         var networkIndex = 0
         networks.forEach { model in
-            let menuItem = NetworkMenuItem(network: model)
+            let menuItem = NetworkMenuItem(network: model, networkService: self.omniService.networkService)
             self.networkMenuItem.append(menuItem)
             self.insertItem(menuItem, at: insertAtIndex)
             insertAtIndex += 1
@@ -148,6 +148,7 @@ extension OmniMainMenu: NSMenuDelegate {
 }
 
 extension OmniMainMenu: OmniServiceDelegate {
+    
     func didLoginSuccess() {
         guard let menuItem = self.getMenuItemByTag(tag: OmniMenuItemType.login.rawValue) else {
             return

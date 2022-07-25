@@ -101,6 +101,10 @@ class HttpService: BaseService, IHttpService {
                 return
             }
             
+            #if DEBUG
+            data.printJson()
+            #endif
+            
             do {
 
                 let restReponse = try self.jsonDecoder.decode(Response<T>.self, from: data)

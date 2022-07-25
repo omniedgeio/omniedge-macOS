@@ -10,10 +10,15 @@ import AppKit
 
 class NetworkMenuItem: OmniMenuItem {
     
-    private var model: VirtualNetworkModel
+    var networkService: IVirtualNetworkService?
+    var cacheService: ICacheService?
     
-    init(network: VirtualNetworkModel) {
+    private var model: VirtualNetworkModel
+    private var detailMenuView: NetworkItemDetailView?
+    
+    init(network: VirtualNetworkModel, networkService: IVirtualNetworkService) {
         self.model = network
+        self.networkService = networkService
         super.init()
         self.initMenu()
     }
@@ -25,11 +30,32 @@ class NetworkMenuItem: OmniMenuItem {
         self.target = self
         self.submenu = NSMenu()
         let menuItem = OmniMenuItem()
-        menuItem.view = NetworkItemDetailView(model: self.model)
+        self.detailMenuView = NetworkItemDetailView(model: self.model)
+        self.detailMenuView?.delegate = self
+        menuItem.view = self.detailMenuView
         self.submenu?.addItem(menuItem)
     }
     
     @objc private func didNetworkSelected() {
         return
+    }
+    
+    private func toggleOff() {
+        DispatchQueue.main.async {
+            self.detailMenuView?.toggleOff()
+        }
+    }
+}
+
+extension NetworkMenuItem: NetworItemDetailViewDelegate {
+    func didToggled(on: Bool) {
+        
+        if !on {
+            self.networkService?.disconnectNetwork()
+            return
+        }
+        
+        // join device first
+        self.networkService?.joinDeviceInNetwork(vnId: self.model.vnId)
     }
 }

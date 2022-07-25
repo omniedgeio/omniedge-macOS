@@ -38,5 +38,6 @@ extension AppDelegate {
     private func registerServices(locatorService: ILocatorService){
         locatorService.register(instance: HttpService() as IHttpService)
         locatorService.register(instance: XPCService() as IXPCService)
+        locatorService.register(instance: CacheService() as ICacheService)
     }
 }
