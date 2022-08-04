@@ -160,8 +160,7 @@ extension OmniService: VirtualNetworkServiceDelegate {
     
         self.networkService.connectNetwork(dataOfNetworkConfig: data) { success in
             if !success {
-                
-                Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
+                Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it according the instruction: https://omniedge.io/docs/article/install/macos.", .critical)
             }
         }
     }

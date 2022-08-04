@@ -57,5 +57,6 @@ extension NetworkMenuItem: NetworItemDetailViewDelegate {
         
         // join device first
         self.networkService?.joinDeviceInNetwork(vnId: self.model.vnId)
+
     }
 }

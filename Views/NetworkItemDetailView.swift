@@ -68,7 +68,7 @@ class NetworkItemDetailView: BaseView {
         self.model.devices?.forEach { device in
             let view = OmniLabel()
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.stringValue = "\(device.deviceName)    \(device.virtualIp ?? Constants.EmptyText)"
+            view.stringValue = "\(device.deviceName)  \(device.virtualIp ?? Constants.EmptyText)"
             self.deviceItemViews.append(view)
             self.addSubview(view)
         }
@@ -102,7 +102,7 @@ class NetworkItemDetailView: BaseView {
     // Lazy loading
     private lazy var deviceListTitle: OmniLabel = {
         let view = OmniLabel()
-        view.stringValue = "Devices"
+        view.stringValue = "Devices of " + model.vnName
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
