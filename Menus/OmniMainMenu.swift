@@ -28,6 +28,7 @@ class OmniMainMenu: NSMenu {
     private var myDeviceMenuItem: DetailMenuItem?
     private var networkMenuItem: [NSMenuItem] = []
     
+    
     init(omniService: IOmniService) {
         self.omniService = omniService
         super.init(title: Constants.EmptyText)
@@ -45,11 +46,9 @@ class OmniMainMenu: NSMenu {
                                         
         self.addItem(NSMenuItem.separator())
         
-        self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
-        
-        self.addItem(NSMenuItem.separator())
-        
         self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .tuntapdriver)
+        
+        self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
         
         self.addItem(NSMenuItem.separator())
         
@@ -160,14 +159,27 @@ class OmniMainMenu: NSMenu {
     }
     
     private func populateMyDeviceMenuItem(model: DeviceRegisterModel) {
-        let menuItem = DetailMenuItem(title:"This Device connected info:")
-        menuItem.detail = "Virutal Network:"+"\(model.virtualIp ?? Constants.EmptyText)"+"\nIP:"+"\(model.virtualIp ?? Constants.EmptyText)"
+        
+        //put isconnected in condition
+        var connected_status="";
+        if (connected_status=="online"){
+            connected_status="Online"
+        }
+        else if (connected_status=="Offline") {
+            connected_status="Offline"
+        }
+        else {
+            connected_status=""
+        }
+        let menuItem = DetailMenuItem(title:"This device: "+connected_status)
+        menuItem.detail = "Name:"+"\(model.deviceName)"+"\nVirutal Network:"+"\(model.virtualIp ?? Constants.EmptyText)"+"\nIP address :"+"\(model.virtualIp ?? Constants.EmptyText)"
         self.insertItem(menuItem, at: 2)
         self.addItem(NSMenuItem.separator())
         self.myDeviceMenuItem = menuItem
     }
     
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
+        
         self.networkMenuItem.forEach { item in
             self.removeItem(item)
         }
