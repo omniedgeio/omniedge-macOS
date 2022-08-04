@@ -160,8 +160,8 @@ class OmniMainMenu: NSMenu {
     }
     
     private func populateMyDeviceMenuItem(model: DeviceRegisterModel) {
-        let menuItem = DetailMenuItem(title:"This Device")
-        menuItem.detail = "\(model.deviceName)  \(model.virtualIp ?? Constants.EmptyText)"
+        let menuItem = DetailMenuItem(title:"This Device connected info:")
+        menuItem.detail = "Virutal Network:"+"\(model.virtualIp ?? Constants.EmptyText)"+"\nIP:"+"\(model.virtualIp ?? Constants.EmptyText)"
         self.insertItem(menuItem, at: 2)
         self.addItem(NSMenuItem.separator())
         self.myDeviceMenuItem = menuItem
