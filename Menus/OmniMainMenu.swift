@@ -14,6 +14,7 @@ class OmniMainMenu: NSMenu {
         case unknown = 0
         case login
         case dashboard
+        case tuntap
         case autoUpdate
         case update
         case about
@@ -43,6 +44,8 @@ class OmniMainMenu: NSMenu {
         self.addItem(NSMenuItem.separator())
         
         self.addMenuItem(title: "Dashboard", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
+        
+        self.addMenuItem(title: "Install Tun/Tap Driver", action: #selector(didInstallTunTapDriver(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .tuntap)
         
         self.addItem(NSMenuItem.separator())
         
@@ -74,6 +77,10 @@ class OmniMainMenu: NSMenu {
     }
     
     @objc func didNetworkSelected(_ sender: Any) {
+        return
+    }
+    
+    @objc func didInstallTunTapDriver(_ sender: Any) {
         return
     }
     
