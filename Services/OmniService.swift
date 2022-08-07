@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 protocol OmniServiceDelegate: AnyObject {
     func didLoginSuccess()
@@ -105,6 +106,9 @@ class OmniService: IOmniService {
     func logout() {
         self.token = nil
         self.delegate?.didLogout()
+        DispatchQueue.main.async {
+            (NSApplication.shared.delegate as? AppDelegate)?.didLogin(login: false)
+        }
     }
     
     func joinLocalDevice(vnId: String) {
@@ -135,16 +139,21 @@ class OmniService: IOmniService {
 extension OmniService: AuthServiceDelegate {
     func didLoginCompleted(token: String?) {
         self.curHttpService?.token = token
-        
         self.token = token
+        var loggedIn = false
+        
         if token == nil {
             self.delegate?.didLoginFailed()
-            return
+        } else {
+            self.delegate?.didLoginSuccess()
+            self.registerLocalDevice()
+            self.getRemoteNetworkList()
+            loggedIn = true
         }
 
-        self.delegate?.didLoginSuccess()
-        self.registerLocalDevice()
-        self.getRemoteNetworkList()
+        DispatchQueue.main.async {
+            (NSApplication.shared.delegate as? AppDelegate)?.didLogin(login: loggedIn)
+        }
     }
 }
 
@@ -160,8 +169,7 @@ extension OmniService: VirtualNetworkServiceDelegate {
     
         self.networkService.connectNetwork(dataOfNetworkConfig: data) { success in
             if !success {
-                
-                Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it form  omniedge.dmg.", .critical)
+                Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it according the instruction: https://omniedge.io/docs/article/install/macos.", .critical)
             }
         }
     }

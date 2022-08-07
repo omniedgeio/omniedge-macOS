@@ -14,9 +14,11 @@ class OmniMainMenu: NSMenu {
         case unknown = 0
         case login
         case dashboard
-        case tuntap
+        case tuntapdriver
         case autoUpdate
         case update
+        case sourceCode
+        case discussion
         case about
         case quit
     }
@@ -25,6 +27,7 @@ class OmniMainMenu: NSMenu {
     private var menuItems: [OmniMenuItem] = []
     private var myDeviceMenuItem: DetailMenuItem?
     private var networkMenuItem: [NSMenuItem] = []
+    
     
     init(omniService: IOmniService) {
         self.omniService = omniService
@@ -43,15 +46,22 @@ class OmniMainMenu: NSMenu {
                                         
         self.addItem(NSMenuItem.separator())
         
-        self.addMenuItem(title: "Dashboard", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
+        self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .tuntapdriver)
         
-        self.addMenuItem(title: "Install Tun/Tap Driver", action: #selector(didInstallTunTapDriver(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .tuntap)
+        self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
         
         self.addItem(NSMenuItem.separator())
         
         self.addMenuItem(title: "Auto update", action: #selector(didAutoUpdateMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .autoUpdate)
         self.addMenuItem(title: "Check for update", action: #selector(didUpdateMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .update)
-        self.addMenuItem(title: "About OmniEdge", action: #selector(didAboutMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .about)
+        
+        self.addItem(NSMenuItem.separator())
+        
+        self.addMenuItem(title: "Source code", action: #selector(didSourceCodeMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .sourceCode)
+        
+        self.addMenuItem(title: "Discussion", action: #selector(diddiscussionMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .discussion)
+        
+        self.addMenuItem(title: "About", action: #selector(didAboutMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .about)
         self.addMenuItem(title: "Quit", action: #selector(didQuitMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .quit)
     }
     
@@ -67,6 +77,18 @@ class OmniMainMenu: NSMenu {
     @objc func didDashboardMenuItemClicked(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "https://omniedge.io/dashboard")!)
     }
+    @objc func didSourceCodeMenuItemClicked(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/omniedgeio/omniedge")!)
+    }
+    @objc func didtuntapdriverMenuItemClicked(_ sender: Any) {
+        // check if the tuntapInstalled
+        if !self.hasTuntapInstalled() {
+            //Instal Tun/Tap Driver
+        }
+        else {
+            //Uninstall Tun/Tap Driver
+        }
+    }
     
     @objc func didAutoUpdateMenuItemClicked(_ sender: Any) {
         
@@ -80,15 +102,17 @@ class OmniMainMenu: NSMenu {
         return
     }
     
-    @objc func didInstallTunTapDriver(_ sender: Any) {
-        return
+    @objc func diddiscussionMenuItemClicked(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/omniedgeio/omniedge/discussions")!)
     }
     
     @objc func didAboutMenuItemClicked(_ sender: Any) {
-        let service = NSSharingService(named: NSSharingService.Name.composeEmail)!
-        service.recipients=["support@omniedge.io"]
-        service.subject="OmniEdge macOS Support"
-        service.perform(withItems: [""])
+        NSWorkspace.shared.open(URL(string: "https://github.com/omniedgeio/omniedge#-omniedge-")!)
+        
+//        let service = NSSharingService(named: NSSharingService.Name.composeEmail)!
+//        service.recipients=["support@omniedge.io"]
+//        service.subject="OmniEdge macOS Support"
+//        service.perform(withItems: [""])
     }
     
     @objc func didQuitMenuItemClicked(_ sender: Any) {
@@ -102,7 +126,23 @@ class OmniMainMenu: NSMenu {
         self.initMainMenu()
     }
     
-    private func addMenuItem(title: String, action: Selector?, keyEquivalent: String, menuItemType: OmniMenuItemType) {
+    private func addMenuItemtuntap(title: String, action: Selector?, keyEquivalent: String, menuItemType: OmniMenuItemType) {
+        var title:String
+        // check if the tuntapInstalled
+        if !self.hasTuntapInstalled() {
+            title="Install Tun/Tap Driver"
+        }
+        else {
+            title="Uninstall Tun/Tap Driver"
+        }
+        let menuItem = OmniMenuItem(title: title, action: action, keyEquivalent: keyEquivalent)
+        menuItem.target = self
+        menuItem.tag = menuItemType.rawValue
+        self.menuItems.append(menuItem)
+        self.addItem(menuItem)
+    }
+    
+    private func addMenuItem(title: String,action: Selector?, keyEquivalent: String, menuItemType: OmniMenuItemType) {
         let menuItem = OmniMenuItem(title: title, action: action, keyEquivalent: keyEquivalent)
         menuItem.target = self
         menuItem.tag = menuItemType.rawValue
@@ -114,15 +154,32 @@ class OmniMainMenu: NSMenu {
         return self.menuItems.first(where: {$0.tag == tag})
     }
     
+    private func hasTuntapInstalled() -> Bool {
+        return FileManager.default.fileExists(atPath: "/dev/tap0")
+    }
+    
     private func populateMyDeviceMenuItem(model: DeviceRegisterModel) {
-        let menuItem = DetailMenuItem(title: "My OmniNetwork    This Device")
-        menuItem.detail = "\(model.deviceName)  \(model.virtualIp ?? Constants.EmptyText)"
+        
+        //put isconnected in condition
+        var connected_status="";
+        if (connected_status=="online"){
+            connected_status="Online"
+        }
+        else if (connected_status=="Offline") {
+            connected_status="Offline"
+        }
+        else {
+            connected_status=""
+        }
+        let menuItem = DetailMenuItem(title:"This device: "+connected_status)
+        menuItem.detail = "Name:"+"\(model.deviceName)"+"\nVirutal Network:"+"\(model.virtualIp ?? Constants.EmptyText)"+"\nIP address :"+"\(model.virtualIp ?? Constants.EmptyText)"
         self.insertItem(menuItem, at: 2)
         self.addItem(NSMenuItem.separator())
         self.myDeviceMenuItem = menuItem
     }
     
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
+        
         self.networkMenuItem.forEach { item in
             self.removeItem(item)
         }

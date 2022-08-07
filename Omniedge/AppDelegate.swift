@@ -31,6 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         self.omniService.terminate()
     }
+    
+    func didLogin(login: Bool) {
+        let imageName = login ? "Connected" : "Disconnected"
+        self.statusItem.button?.image = NSImage(named: imageName)
+    }
 }
 
 extension AppDelegate {
