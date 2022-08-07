@@ -1,3 +1,4 @@
+github "Alamofire/Alamofire" "5.6.1"
 github "OskarGroth/OGSwitch" "2.9.2"
 github "p2/OAuth2" "4.2.0"
 github "swisspol/GCDWebServer" "3.5.4"

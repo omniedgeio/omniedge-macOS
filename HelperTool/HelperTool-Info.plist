@@ -14,7 +14,7 @@
 	<string>1.0</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string>identifier &quot;io.omniedge.mac.Omniedge&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: Youyang Zhang (TRQDV45QZV)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "io.omniedge.mac.Omniedge" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Yanbo Dang (HY4FX274Q4)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
 </dict>
 </plist>

@@ -3,147 +3,20 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
-                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
-                        <items>
-                            <menuItem title="Omniedge" id="1Xt-HY-uBw">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Omniedge" systemMenu="apple" id="uQy-DD-JDr">
-                                    <items>
-                                        <menuItem title="LoginItem" id="5kV-Vb-QxS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="logInOutItem:" target="Voe-Tx-rLC" id="DRq-Dg-5Az"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="KhA-eo-Irz"/>
-                                        <menuItem title="MyOmniNetwork" id="8zW-xY-iGF">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Virtual Network List" id="71M-kJ-VyZ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Virtual Network List" id="hP7-C2-QoT">
-                                                <items>
-                                                    <menuItem title="Device List" id="Lo5-bz-trT">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <menu key="submenu" title="Device List" id="O5T-yq-XyO">
-                                                            <items>
-                                                                <menuItem title="Switcher" id="BPC-xX-3vL">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                </menuItem>
-                                                                <menuItem title="Item" id="Lhw-70-p4H">
-                                                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                                                </menuItem>
-                                                            </items>
-                                                        </menu>
-                                                    </menuItem>
-                                                    <menuItem title="Item" id="WhD-9Y-TD6">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Sw8-fF-lxy"/>
-                                        <menuItem title="Dashboard ... " id="fQW-U9-T6K">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="dashboard:" target="Voe-Tx-rLC" id="r8f-sJ-Fk1"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Yuy-tw-tPK"/>
-                                        <menuItem title="Auto update" state="on" id="BOF-NM-1cW">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="pressAutoUpdate:" target="Voe-Tx-rLC" id="HmJ-fx-85k"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                                        <menuItem title="Check for updates" id="4sb-4s-VLi" userLabel="Check for Updates">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="jTS-Xj-efU"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Talk to us" id="lG8-F8-J6P">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="talktous:" target="Voe-Tx-rLC" id="S93-rr-IQU"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="About" id="FLo-lu-sTi">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="gSg-m2-JL8"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Quit" keyEquivalent="q" id="fRw-bA-hJf">
-                                            <connections>
-                                                <action selector="terminate:" target="Ady-hI-5gd" id="sxt-VO-cyl"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                        </items>
-                    </menu>
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6"/>
                     <connections>
-                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="wSO-4s-vFa"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Omniedge" customModuleProvider="target">
-                    <connections>
-                        <outlet property="autoUpdate" destination="BOF-NM-1cW" id="23Z-zG-Rgz"/>
-                        <outlet property="customeView" destination="jnN-yL-9YP" id="Rnx-Bd-Peh"/>
-                        <outlet property="deviceList" destination="Lo5-bz-trT" id="pCg-ZU-IwZ"/>
-                        <outlet property="firstMenuItem" destination="BPC-xX-3vL" id="RSw-JB-AUL"/>
-                        <outlet property="loginItem" destination="5kV-Vb-QxS" id="ash-6V-TUR"/>
-                        <outlet property="menu" destination="uQy-DD-JDr" id="dgF-xh-v1j"/>
-                        <outlet property="networkSwitcher" destination="yAZ-Gy-8Cq" id="Cea-yt-kw0"/>
-                        <outlet property="switchLabel" destination="Slv-7L-Yrd" id="8bA-dF-39W"/>
-                        <outlet property="switcherAlign" destination="ndD-vV-hvV" id="WOh-IM-9XE"/>
-                        <outlet property="updater" destination="nNc-dx-0De" id="rj3-jW-U2Y"/>
-                        <outlet property="virtualnetworkList" destination="71M-kJ-VyZ" id="tST-yu-qMG"/>
-                    </connections>
-                </customObject>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Omniedge" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="nNc-dx-0De" customClass="SUUpdater"/>
-                <customView id="jnN-yL-9YP" userLabel="Switcher">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <subviews>
-                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="yAZ-Gy-8Cq" customClass="OGSwitch" customModule="OGSwitch">
-                            <rect key="frame" x="153" y="6" width="35" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="35" id="Cqn-Az-ooV"/>
-                                <constraint firstAttribute="height" constant="20" id="RZM-QY-Blt"/>
-                            </constraints>
-                            <connections>
-                                <action selector="switchPressed:" target="Voe-Tx-rLC" id="ugw-6D-bHt"/>
-                            </connections>
-                        </customView>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Slv-7L-Yrd">
-                            <rect key="frame" x="12" y="8" width="24" height="16"/>
-                            <textFieldCell key="cell" lineBreakMode="clipping" title="Off" id="yBR-bs-wHh">
-                                <font key="font" usesAppearanceFont="YES"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="yAZ-Gy-8Cq" secondAttribute="trailing" constant="12" id="AcJ-n0-OMQ"/>
-                        <constraint firstItem="yAZ-Gy-8Cq" firstAttribute="centerY" secondItem="jnN-yL-9YP" secondAttribute="centerY" id="HXZ-ty-AIn"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="centerY" secondItem="yAZ-Gy-8Cq" secondAttribute="centerY" id="Qmn-y9-r5y"/>
-                        <constraint firstItem="Slv-7L-Yrd" firstAttribute="leading" secondItem="jnN-yL-9YP" secondAttribute="leading" constant="14" id="ndD-vV-hvV"/>
-                    </constraints>
-                </customView>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
