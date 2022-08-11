@@ -15,6 +15,7 @@ protocol VirtualNetworkServiceDelegate: AnyObject {
 
 protocol IVirtualNetworkService {
     var delegate: VirtualNetworkServiceDelegate? { get set }
+    var curConnectedNetworkId: String? { get }
     func loadNetworks()
     func connectNetwork(dataOfNetworkConfig: Data, completed: @escaping (_ successed: Bool) -> Void)
     func disconnectNetwork()
@@ -26,11 +27,18 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     
     weak var delegate: VirtualNetworkServiceDelegate?
     
+    var curConnectedNetworkId: String? {
+        get {
+            return self.lastConnectedVNId
+        }
+    }
+    
     private var httpService: IHttpService
     private var xpcService: IXPCService
     private var deviceRegisterModel: DeviceRegisterModel?
     private var deviceJoinedModel: JoinDeviceMode?
     private var deviceModel: DeviceModel?
+    private var lastConnectedVNId: String?
     
     init(httpService: IHttpService, xpcService: IXPCService) {
         self.httpService = httpService
@@ -86,6 +94,12 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     }
     
     func joinDeviceInNetwork(vnId: String) {
+        if self.lastConnectedVNId != nil && self.lastConnectedVNId! != vnId {
+            self.disconnectNetwork()
+        }
+        
+        self.lastConnectedVNId = vnId
+        
         guard let deviceId = self.deviceRegisterModel?.deviceId else {
             return
         }
