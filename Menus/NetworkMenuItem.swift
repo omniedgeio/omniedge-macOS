@@ -29,6 +29,7 @@ class NetworkMenuItem: OmniMenuItem {
         self.action = #selector(didNetworkSelected)
         self.target = self
         self.submenu = NSMenu()
+        self.submenu?.delegate = self
         let menuItem = OmniMenuItem()
         self.detailMenuView = NetworkItemDetailView(model: self.model)
         self.detailMenuView?.delegate = self
@@ -58,5 +59,17 @@ extension NetworkMenuItem: NetworItemDetailViewDelegate {
         // join device first
         self.networkService?.joinDeviceInNetwork(vnId: self.model.vnId)
 
+    }
+}
+
+extension NetworkMenuItem: NSMenuDelegate {
+    func menuWillOpen(_ menu: NSMenu) {
+        guard let curVnId = self.networkService?.curConnectedNetworkId else {
+            return
+        }
+        
+        if curVnId != self.model.vnId {
+            self.toggleOff()
+        }
     }
 }
