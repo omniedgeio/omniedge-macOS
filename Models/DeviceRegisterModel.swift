@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DeviceRegisterModel: Decodable {
+struct DeviceRegisterModel: Codable {
     let deviceId: String
     let hardwareId: String
     let platform: String

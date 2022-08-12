@@ -10,7 +10,7 @@ import Foundation
 protocol VirtualNetworkServiceDelegate: AnyObject {
     func didNetworkListLoaded(networks: [VirtualNetworkModel])
     func didRegisteredDevice(model: DeviceRegisterModel)
-    func didJoinedDevice(data: Data)
+    func didJoinedDevice(model: JoinDeviceMode)
 }
 
 protocol IVirtualNetworkService {
@@ -39,6 +39,7 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     private var deviceJoinedModel: JoinDeviceMode?
     private var deviceModel: DeviceModel?
     private var lastConnectedVNId: String?
+    private var networks: [VirtualNetworkModel] = []
     
     init(httpService: IHttpService, xpcService: IXPCService) {
         self.httpService = httpService
@@ -74,7 +75,13 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
             return
         }
         
-        self.xpcService.connect(dataOfNetworkConfig: dataOfNetworkConfig)
+        self.xpcService.connect(dataOfNetworkConfig: dataOfNetworkConfig) { (success, error) in
+            completed(success)
+            guard let error = error else {
+                return
+            }
+            print(error)
+        }
     }
     
     func disconnectNetwork() {
@@ -98,8 +105,6 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
             self.disconnectNetwork()
         }
         
-        self.lastConnectedVNId = vnId
-        
         guard let deviceId = self.deviceRegisterModel?.deviceId else {
             return
         }
@@ -109,7 +114,7 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
             [weak self] (result: Result< Response<JoinDeviceMode>, Error>) in
             switch result {
             case .success(let response):
-                self?.onDeviceJoined(model: response.data)
+                self?.onDeviceJoined(model: response.data, virtualNetworkId: vnId)
             case .failure(let error):
                 self?.handleError(error: error)
             }
@@ -118,6 +123,8 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     
     // MARK: - Private functions -
     private func didLoadNetworkList(networks: [VirtualNetworkModel]) {
+        self.networks.removeAll()
+        self.networks.append(contentsOf: networks)
         self.delegate?.didNetworkListLoaded(networks: networks)
     }
     
@@ -130,13 +137,16 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
         self.delegate?.didRegisteredDevice(model: model)
     }
     
-    private func onDeviceJoined(model: JoinDeviceMode) {
+    private func onDeviceJoined(model: JoinDeviceMode, virtualNetworkId: String) {
+        self.lastConnectedVNId = virtualNetworkId
+        let vnName = self.networks.first { item in
+            item.vnId == virtualNetworkId
+        }?.vnName
         self.deviceJoinedModel = model
-        do {
-            let data = try JSONEncoder().encode(model)
-            self.delegate?.didJoinedDevice(data: data)
-        } catch let error {
-            self.handleError(error: error)
-        }
+        self.deviceJoinedModel?.setVnId(vnId: virtualNetworkId)
+        self.deviceJoinedModel?.setVnName(vnName: vnName ?? String.Empty)
+
+        
+        self.delegate?.didJoinedDevice(model: self.deviceJoinedModel!)
     }
 }

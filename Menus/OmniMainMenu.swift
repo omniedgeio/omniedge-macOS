@@ -31,7 +31,7 @@ class OmniMainMenu: NSMenu {
     
     init(omniService: IOmniService) {
         self.omniService = omniService
-        super.init(title: Constants.EmptyText)
+        super.init(title: String.Empty)
         self.omniService.delegate = self
         self.initMainMenu()
     }
@@ -42,27 +42,27 @@ class OmniMainMenu: NSMenu {
     
     private func initMainMenu() {
         self.delegate = self
-        self.addMenuItem(title: "Login", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .login)
+        self.addMenuItem(title: "Login", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .login)
                                         
         self.addItem(NSMenuItem.separator())
         
-        self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .tuntapdriver)
+        self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .tuntapdriver)
         
-        self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .dashboard)
-        
-        self.addItem(NSMenuItem.separator())
-        
-        self.addMenuItem(title: "Auto update", action: #selector(didAutoUpdateMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .autoUpdate)
-        self.addMenuItem(title: "Check for update", action: #selector(didUpdateMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .update)
+        self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .dashboard)
         
         self.addItem(NSMenuItem.separator())
         
-        self.addMenuItem(title: "Source code", action: #selector(didSourceCodeMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .sourceCode)
+        self.addMenuItem(title: "Auto update", action: #selector(didAutoUpdateMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .autoUpdate)
+        self.addMenuItem(title: "Check for update", action: #selector(didUpdateMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .update)
         
-        self.addMenuItem(title: "Discussion", action: #selector(diddiscussionMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .discussion)
+        self.addItem(NSMenuItem.separator())
         
-        self.addMenuItem(title: "About", action: #selector(didAboutMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .about)
-        self.addMenuItem(title: "Quit", action: #selector(didQuitMenuItemClicked(_:)), keyEquivalent: Constants.EmptyText, menuItemType: .quit)
+        self.addMenuItem(title: "Source code", action: #selector(didSourceCodeMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .sourceCode)
+        
+        self.addMenuItem(title: "Discussion", action: #selector(diddiscussionMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .discussion)
+        
+        self.addMenuItem(title: "About", action: #selector(didAboutMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .about)
+        self.addMenuItem(title: "Quit", action: #selector(didQuitMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .quit)
     }
     
     @objc func didLoginMenuItemClicked(_ sender: Any) {
@@ -158,24 +158,29 @@ class OmniMainMenu: NSMenu {
         return FileManager.default.fileExists(atPath: "/dev/tap0")
     }
     
-    private func populateMyDeviceMenuItem(model: DeviceRegisterModel) {
+    private func populateMyDeviceMenuItem(deviceModel: DeviceRegisterModel?, joinedModel: JoinDeviceMode?, connected: Bool) {
         
-        //put isconnected in condition
-        var connected_status="";
-        if (connected_status=="online"){
-            connected_status="Online"
+        let connectedStatus = connected ? "Online" : "Offline"
+        if self.myDeviceMenuItem == nil {
+            let menuItem = DetailMenuItem(title:"This device: \(connectedStatus)")
+            self.myDeviceMenuItem = menuItem
+            self.insertItem(menuItem, at: 2)
+            self.addItem(NSMenuItem.separator())
+            self.myDeviceMenuItem = menuItem
+            self.insertItem(NSMenuItem.separator(), at: 3)
         }
-        else if (connected_status=="Offline") {
-            connected_status="Offline"
+        
+        guard let menuItem = self.myDeviceMenuItem else {
+            return
         }
-        else {
-            connected_status=""
-        }
-        let menuItem = DetailMenuItem(title:"This device: "+connected_status)
-        menuItem.detail = "Name:"+"\(model.deviceName)"+"\nVirutal Network:"+"\(model.virtualIp ?? Constants.EmptyText)"+"\nIP address :"+"\(model.virtualIp ?? Constants.EmptyText)"
-        self.insertItem(menuItem, at: 2)
-        self.addItem(NSMenuItem.separator())
-        self.myDeviceMenuItem = menuItem
+        
+        menuItem.title = "This device: \(connectedStatus)"
+        
+        let deviceName = deviceModel?.deviceName ?? String.Empty
+        let vnName = joinedModel?.vnName ?? String.Empty
+        let ipAddr = joinedModel?.virtualIp ?? String.Empty
+        
+        menuItem.detail = "Name:"+"\(deviceName)"+"\nVirutal Network:"+"\(vnName)"+"\nIP address :"+"\(ipAddr)"
     }
     
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
@@ -185,14 +190,14 @@ class OmniMainMenu: NSMenu {
         }
         
         self.networkMenuItem.removeAll()
-        var insertAtIndex = self.myDeviceMenuItem == nil ? 2 : 4
+        var insertAtIndex = self.myDeviceMenuItem == nil ? 3 : 5
         
         let seperator = NSMenuItem.separator()
         self.networkMenuItem.append(seperator)
         self.insertItem(seperator, at: insertAtIndex)
         insertAtIndex += 1
         
-        let itemNetworkLabel = OmniMenuItem(title: "My Virtual Networks", action: nil, keyEquivalent: Constants.EmptyText)
+        let itemNetworkLabel = OmniMenuItem(title: "My Virtual Networks", action: nil, keyEquivalent: String.Empty)
         self.networkMenuItem.append(itemNetworkLabel)
         self.insertItem(itemNetworkLabel, at: insertAtIndex)
         insertAtIndex += 1
@@ -212,7 +217,7 @@ extension OmniMainMenu: NSMenuDelegate {
 }
 
 extension OmniMainMenu: OmniServiceDelegate {
-    
+
     func didLoginSuccess() {
         guard let menuItem = self.getMenuItemByTag(tag: OmniMenuItemType.login.rawValue) else {
             return
@@ -244,9 +249,15 @@ extension OmniMainMenu: OmniServiceDelegate {
         }
     }
     
-    func didDeviceRegister(model: DeviceRegisterModel) {
+    func didDeviceJoined(deviceModel: DeviceRegisterModel?, joinedModel: JoinDeviceMode?, connected: Bool) {
         DispatchQueue.main.async {
-            self.populateMyDeviceMenuItem(model: model)
+        
+            self.populateMyDeviceMenuItem(deviceModel: deviceModel, joinedModel: joinedModel, connected: connected)
         }
+    }
+    
+    
+    func didError(error: OmError) {
+        print(error)
     }
 }

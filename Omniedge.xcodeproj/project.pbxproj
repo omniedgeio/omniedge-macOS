@@ -32,6 +32,10 @@
 		0BBF0F8725AB52FD001E9B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8625AB52FD001E9B2C /* Assets.xcassets */; };
 		0BBF0F8A25AB52FD001E9B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BBF0F8825AB52FD001E9B2C /* Main.storyboard */; };
 		0BD772F825E26F7A0001282C /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD772F725E26F7A0001282C /* SwiftyPing */; };
+		246A216B28A6700C000FE8CD /* OmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A216A28A6700C000FE8CD /* OmError.swift */; };
+		246A216C28A6700C000FE8CD /* OmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A216A28A6700C000FE8CD /* OmError.swift */; };
+		246A216E28A68335000FE8CD /* String+Omni.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A216D28A68335000FE8CD /* String+Omni.swift */; };
+		246A216F28A68335000FE8CD /* String+Omni.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A216D28A68335000FE8CD /* String+Omni.swift */; };
 		24D360C92855FC9500284253 /* SMJobBlessReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */; };
 		24F18D3F288BEFF1006D4CDC /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F18D3E288BEFF1006D4CDC /* CacheService.swift */; };
 		24F18D40288D82A9006D4CDC /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1C68F283A5C8600A9E723 /* DeviceModel.swift */; };
@@ -176,6 +180,8 @@
 		0BBF0F8925AB52FD001E9B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0BBF0F8B25AB52FD001E9B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BBF0F8C25AB52FD001E9B2C /* Omniedge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omniedge.entitlements; sourceTree = "<group>"; };
+		246A216A28A6700C000FE8CD /* OmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmError.swift; sourceTree = "<group>"; };
+		246A216D28A68335000FE8CD /* String+Omni.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Omni.swift"; sourceTree = "<group>"; };
 		24D360C82855FC9500284253 /* SMJobBlessReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SMJobBlessReadMe.txt; sourceTree = "<group>"; };
 		24F18D3E288BEFF1006D4CDC /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		4C2DF5B8284A2A1F00456AB3 /* DeviceRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegisterModel.swift; sourceTree = "<group>"; };
@@ -359,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				4CA8045628820B03005C7B53 /* Utils.swift */,
+				246A216A28A6700C000FE8CD /* OmError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -379,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				4C2E5E9E28858C42007092C9 /* Data+Omni.swift */,
+				246A216D28A68335000FE8CD /* String+Omni.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -528,8 +536,10 @@
 				4C8079F928882C930060D73D /* Utils.swift in Sources */,
 				0B9B789725B4773A00BB415D /* HelperTool.swift in Sources */,
 				24F18D40288D82A9006D4CDC /* DeviceModel.swift in Sources */,
+				246A216F28A68335000FE8CD /* String+Omni.swift in Sources */,
 				0B9B788025B4718200BB415D /* Constants.swift in Sources */,
 				0B9B788125B4718200BB415D /* Protocols.swift in Sources */,
+				246A216C28A6700C000FE8CD /* OmError.swift in Sources */,
 				0B7575BB25B44FF900601DC7 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,11 +549,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBF0F8325AB52FC001E9B2C /* AppDelegate.swift in Sources */,
+				246A216E28A68335000FE8CD /* String+Omni.swift in Sources */,
 				4C2E5E9F28858C42007092C9 /* Data+Omni.swift in Sources */,
 				4CBE61162882E6E600B464DD /* AppService.swift in Sources */,
 				0B22165325CC448B00387622 /* Extensions.swift in Sources */,
 				4CA1C690283A5C8600A9E723 /* DeviceModel.swift in Sources */,
 				4CA8045028818F24005C7B53 /* OmniMenuItem.swift in Sources */,
+				246A216B28A6700C000FE8CD /* OmError.swift in Sources */,
 				4CBE61052882BB3100B464DD /* IService.swift in Sources */,
 				4CE405E628375ECD0045D5C4 /* VirtualNetworkModel.swift in Sources */,
 				4C2E5EA52886CF2A007092C9 /* NetworkItemView.swift in Sources */,

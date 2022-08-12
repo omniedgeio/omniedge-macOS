@@ -32,6 +32,9 @@ struct UserDefaultKeys{
     static let NetworkConfig = "io.omniedge.mac.network.config"
     static let PublicKey = "io.omniedge.mac.publickey"
     static let Ping = "io.omniedge.mac.ping"
+    
+    static let JoinedDevice = "io.omniedge.mac.device.joined"
+    static let RegisterDevice = "io.omniedge.mac.device.reg"
 }
 
 
@@ -80,8 +83,6 @@ struct OmniError: Error {
 
 
 struct Constants {
-    static let EmptyText: String = ""
-    
     struct Colors {
         static let textColorInDarkMode = NSColor(red: 0xDA/0xFF, green: 0xDA/0xFF, blue: 0xDA/0xFF, alpha: 1.0)
         static let textColorInLightMode = NSColor(red: 0x6C/0xFF, green: 0x6C/0xFF, blue: 0x6C/0xFF, alpha: 1.0)

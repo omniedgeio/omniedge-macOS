@@ -14,6 +14,8 @@ struct JoinDeviceMode: Codable {
     let virtualIp: String
     let subnetMask: String
     let server: ServerThumbModel
+    var vnName: String?
+    var vnId: String?
     
     enum CodingKeys: String, CodingKey {
         case communityName = "community_name"
@@ -21,6 +23,16 @@ struct JoinDeviceMode: Codable {
         case virtualIp = "virtual_ip"
         case subnetMask = "subnet_mask"
         case server
+        case vnName
+        case vnId
+    }
+    
+    mutating func setVnName(vnName: String) {
+        self.vnName = vnName
+    }
+    
+    mutating func setVnId(vnId: String) {
+        self.vnId = vnId
     }
 }
 

@@ -13,7 +13,8 @@ protocol OmniServiceDelegate: AnyObject {
     func didLoginFailed()
     func didLogout()
     func didNetworksLoaded(networks: [VirtualNetworkModel])
-    func didDeviceRegister(model: DeviceRegisterModel)
+    func didError(error: OmError)
+    func didDeviceJoined(deviceModel: DeviceRegisterModel?, joinedModel: JoinDeviceMode?, connected: Bool)
 }
 
 protocol IOmniService: IService {
@@ -81,11 +82,13 @@ class OmniService: IOmniService {
     private var curHttpService: IHttpService?
     private var curAuthService: IAuthService?
     private var curVirtualNetworkService: IVirtualNetworkService?
+    private var cacheService: ICacheService
     
     private var token: String?
     
     init(locatorService: ILocatorService) {
         self.locatorService = locatorService
+        self.cacheService = self.locatorService.resolve()
     }
     
     func initService() {
@@ -126,6 +129,24 @@ class OmniService: IOmniService {
         xpcService.disconnect()
     }
     
+    private func updateDevice(connected: Bool) {
+        let registedDeviceData: Data? = self.cacheService.getValue(forKey: UserDefaultKeys.RegisterDevice) as? Data
+        let joinedDeviceData: Data? = self.cacheService.getValue(forKey: UserDefaultKeys.JoinedDevice) as? Data
+        
+        var registerDevice: DeviceRegisterModel?
+        var joinedDevice: JoinDeviceMode?
+        
+        if registedDeviceData != nil {
+            registerDevice = try? JSONDecoder().decode(DeviceRegisterModel.self, from: registedDeviceData!)
+        }
+        
+        if joinedDeviceData != nil {
+            joinedDevice = try? JSONDecoder().decode(JoinDeviceMode.self, from: joinedDeviceData!)
+        }
+        
+        self.delegate?.didDeviceJoined(deviceModel: registerDevice, joinedModel: joinedDevice, connected: connected)
+    }
+    
     // MARK: - Private functions -
     private func getRemoteNetworkList() {
         self.networkService.loadNetworks()
@@ -145,6 +166,7 @@ extension OmniService: AuthServiceDelegate {
         if token == nil {
             self.delegate?.didLoginFailed()
         } else {
+            self.updateDevice(connected: false)
             self.delegate?.didLoginSuccess()
             self.registerLocalDevice()
             self.getRemoteNetworkList()
@@ -162,19 +184,50 @@ extension OmniService: VirtualNetworkServiceDelegate {
         self.delegate?.didNetworksLoaded(networks: networks)
     }
     
-    func didJoinedDevice(data: Data) {
+    func didJoinedDevice(model: JoinDeviceMode) {
+        var data: Data?
+        do {
+            data = try JSONEncoder().encode(model)
+            
+        } catch let error {
+            self.delegate?.didError(error: .other(error))
+            return
+        }
+        
+        guard let data = data else {
+            return
+        }
+        
         // save it
-        let cacheService: ICacheService = self.locatorService.resolve()
-        cacheService.saveValue(value: data, key: UserDefaultKeys.NetworkConfig)
+        self.cacheService.saveValue(value: data, key: UserDefaultKeys.JoinedDevice)
     
-        self.networkService.connectNetwork(dataOfNetworkConfig: data) { success in
+        self.networkService.connectNetwork(dataOfNetworkConfig: data) {
+            [weak self] success in
             if !success {
                 Utils.alert(title: "Tuntap not detected", description: "Tuntap is required to enable the network, please install it according the instruction: https://omniedge.io/docs/article/install/macos.", .critical)
             }
+            
+            self?.updateDevice(connected: success)
         }
     }
-    
+
     func didRegisteredDevice(model: DeviceRegisterModel) {
-        self.delegate?.didDeviceRegister(model: model)
+        var data: Data?
+        do {
+            data = try JSONEncoder().encode(model)
+            
+        } catch let error {
+            self.delegate?.didError(error: .other(error))
+            return
+        }
+        
+        guard let data = data else {
+            return
+        }
+        
+        // save it
+        self.cacheService.saveValue(value: data, key: UserDefaultKeys.RegisterDevice)
+        
+        self.updateDevice(connected: false)
     }
 }

@@ -68,7 +68,7 @@ class NetworkItemDetailView: BaseView {
         self.model.devices?.forEach { device in
             let view = OmniLabel()
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.stringValue = "\(device.deviceName)  \(device.virtualIp ?? Constants.EmptyText)"
+            view.stringValue = "\(device.deviceName)  \(device.virtualIp ?? String.Empty)"
             self.deviceItemViews.append(view)
             self.addSubview(view)
         }

@@ -11,7 +11,7 @@ import AppKit
 class OmniMenuItem: NSMenuItem {
 
     init() {
-        super.init(title: Constants.EmptyText, action: nil, keyEquivalent: Constants.EmptyText)
+        super.init(title: String.Empty, action: nil, keyEquivalent: String.Empty)
     }
     
     override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
