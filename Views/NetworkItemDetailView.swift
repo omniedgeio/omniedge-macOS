@@ -50,12 +50,12 @@ class NetworkItemDetailView: BaseView {
             self.connSwitch.heightAnchor.constraint(equalToConstant: 20),
             
             self.deviceListTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.Margins.margin5),
-            self.deviceListTitle.topAnchor.constraint(equalTo: self.connSwitch.bottomAnchor, constant: Constants.Margins.margin5),
-            self.deviceListTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.Margins.margin5),
+            self.deviceListTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.Margins.margin5),
+            self.deviceListTitle.trailingAnchor.constraint(equalTo: self.connSwitch.leadingAnchor, constant: Constants.Margins.margin5),
             
             self.seperator.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.seperator.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.seperator.topAnchor.constraint(equalTo: self.deviceListTitle.bottomAnchor, constant: Constants.Margins.margin5),
+            self.seperator.topAnchor.constraint(equalTo: self.connSwitch.bottomAnchor, constant: Constants.Margins.margin5),
             self.seperator.heightAnchor.constraint(equalToConstant: 1.0),
             
             self.widthAnchor.constraint(equalToConstant: 290)

@@ -13,16 +13,14 @@ var isConnected = false
 
 class HelperToolImpl: HelperTool{
    
-    
-
-    
     func isConnect(completion: @escaping (Bool) -> Void) {
         completion(keepRunning == 1 && isConnected)
     }
     
     func version(completion: @escaping (String) -> Void) {
         
-        completion(XPCConstant.HelperToolVersion)
+        let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+        completion(buildNumber)
     }
     
     
