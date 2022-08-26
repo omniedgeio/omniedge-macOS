@@ -46,7 +46,7 @@ class OmniMainMenu: NSMenu {
                                         
         self.addItem(NSMenuItem.separator())
         
-        self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .tuntapdriver)
+//        self.addMenuItemtuntap(title: "Install Tun/Tap Driver", action: #selector(didtuntapdriverMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .tuntapdriver)
         
         self.addMenuItem(title: "Dashboard ...", action: #selector(didDashboardMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .dashboard)
         
@@ -108,11 +108,6 @@ class OmniMainMenu: NSMenu {
     
     @objc func didAboutMenuItemClicked(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "https://github.com/omniedgeio/omniedge#-omniedge-")!)
-        
-//        let service = NSSharingService(named: NSSharingService.Name.composeEmail)!
-//        service.recipients=["support@omniedge.io"]
-//        service.subject="OmniEdge macOS Support"
-//        service.perform(withItems: [""])
     }
     
     @objc func didQuitMenuItemClicked(_ sender: Any) {
