@@ -75,6 +75,8 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
             return
         }
         
+        self.terminateActiveTapConnection()
+        print("Start connection");
         self.xpcService.connect(dataOfNetworkConfig: dataOfNetworkConfig) { (success, error) in
             completed(success)
             guard let error = error else {
@@ -148,5 +150,64 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
 
         
         self.delegate?.didJoinedDevice(model: self.deviceJoinedModel!)
+    }
+    
+    private func terminateActiveTapConnection() {
+        for _ in 0 ..< 6 {
+            let output = runShellAndOutput("ifconfig | grep tap0 | head -c 4")
+            if output?.starts(with: "tap") ?? false {
+                print("Detected an active tap connection, terminate it");
+                self.disconnectNetwork()
+                sleep(1)
+                //usleep(useconds_t(5 * 1000) * 100)
+                print("after 1s delay, check it again");
+            } else {
+                print("No active connection found");
+                break
+            }
+        }
+    }
+    
+    @discardableResult
+    // func runShellAndOutput(_ command: String) -> (Int32, String?) {
+    func runShellAndOutput(_ command: String) -> String? {
+        let task = Process()
+        task.launchPath = "/bin/bash"
+        task.arguments = ["-c", command]
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        
+        task.waitUntilExit()
+        
+        return output
+        // return (task.terminationStatus, output)
+    }
+
+    @discardableResult
+    func runShellWithArgsAndOutput(_ args: String...) -> (Int32, String?) {
+        let task = Process()
+
+        task.launchPath = "/usr/bin/env"
+        task.arguments = args
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        
+        task.launch()
+        
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let output = String(data: data, encoding: .utf8)
+        
+        task.waitUntilExit()
+        
+        return (task.terminationStatus, output)
     }
 }

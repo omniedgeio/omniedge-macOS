@@ -53,16 +53,13 @@ class XPCService: BaseService, IXPCService {
         XPCConnection?.resume()
         
         self.helperTool = XPCConnection?.remoteObjectProxy as? HelperTool
-        self.helperTool?.version(completion: checkHelperVersion)
+        // self.helperTool?.version(completion: checkHelperVersion)
     }
     
     private func checkHelperVersion(ver: String){
-        NSLog("Current Helper verions:\(ver)")
-        
         if ver != XPCConstant.HelperToolVersion{
             DispatchQueue.main.async {
                 self.alertInstall("Omniedge needs to upgrade Helper Tool.")
-                
             }
         }
     }
@@ -119,6 +116,5 @@ class XPCService: BaseService, IXPCService {
         }
         
         self.connectToXPC()
-        
     }
 }
