@@ -42,7 +42,7 @@ class OmniMainMenu: NSMenu {
     
     private func initMainMenu() {
         self.delegate = self
-        self.addMenuItem(title: "Login", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .login)
+        self.addMenuItem(title: "Log in", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .login)
                                         
         self.addItem(NSMenuItem.separator())
         
@@ -118,6 +118,8 @@ class OmniMainMenu: NSMenu {
         self.removeAllItems()
         self.networkMenuItem.removeAll()
         self.myDeviceMenuItem = nil
+        self.menuItems.removeAll()
+        self.menuItems = []
         self.initMainMenu()
     }
     
