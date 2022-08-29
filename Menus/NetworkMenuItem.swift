@@ -31,7 +31,7 @@ class NetworkMenuItem: OmniMenuItem {
         self.submenu = NSMenu()
         self.submenu?.delegate = self
         let menuItem = OmniMenuItem()
-        self.detailMenuView = NetworkItemDetailView(model: self.model)
+        self.detailMenuView = NetworkItemDetailView(model: self.model, enableConnection: !(self.networkService?.failedRegisteDev ?? false))
         self.detailMenuView?.delegate = self
         menuItem.view = self.detailMenuView
         self.submenu?.addItem(menuItem)

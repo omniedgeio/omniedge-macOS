@@ -17,7 +17,7 @@ class BaseService {
         
     }
     
-    func handleError(error: Error){
+    func handleError(error: OmError){
         print(error)
     }
 }

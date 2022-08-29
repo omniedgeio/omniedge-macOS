@@ -10,10 +10,10 @@ import Foundation
 protocol IHttpService: IService {
     var token: String? { get set }
     
-    func sendGetRequest<T: Decodable>(url: String, completed: @escaping (Result<Response<T>, Error>) -> Void)
-    func sendPostRequest<T: Decodable, S: Encodable>(url: String, payload: S, completed: @escaping (Result<Response<T>, Error>) -> Void)
+    func sendGetRequest<T: Decodable>(url: String, completed: @escaping (Result<Response<T>, OmError>) -> Void)
+    func sendPostRequest<T: Decodable, S: Encodable>(url: String, payload: S, completed: @escaping (Result<Response<T>, OmError>) -> Void)
     
-    func listenSocket(url: String, received: @escaping (Result<Data?, Error>) -> Void)
+    func listenSocket(url: String, received: @escaping (Result<Data?, OmError>) -> Void)
 }
 
 class HttpService: BaseService, IHttpService {
@@ -41,22 +41,22 @@ class HttpService: BaseService, IHttpService {
         self.jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
     }
     
-    func sendGetRequest<T: Decodable>(url: String, completed: @escaping (Result<Response<T>, Error>) -> Void) {
+    func sendGetRequest<T: Decodable>(url: String, completed: @escaping (Result<Response<T>, OmError>) -> Void) {
         
         guard let session = self.session,
               let request = self.generateRequest(url: url, httpMethodType: .httpGet) else {
-            // TODO: call completed
+            completed(.failure(.invalidUrl))
             return
         }
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {
-                completed(.failure(error!))
+                completed(.failure(.other(error!)))
                 return
             }
             
             guard let data = data else {
-                // TODO: call completed
+                completed(.failure(.invalidRsp))
                 return
             }
             
@@ -68,17 +68,17 @@ class HttpService: BaseService, IHttpService {
                 let response = try self.jsonDecoder.decode(Response<T>.self, from: data)
                 completed(.success(response))
             } catch let error {
-                completed(.failure(error))
+                completed(.failure(.other(error)))
             }
         }
         
         task.resume()
     }
     
-    func sendPostRequest<T: Decodable, S: Encodable>(url: String, payload: S, completed: @escaping (Result<Response<T>, Error>) -> Void) {
+    func sendPostRequest<T: Decodable, S: Encodable>(url: String, payload: S, completed: @escaping (Result<Response<T>, OmError>) -> Void) {
         guard let session = self.session,
               var request = self.generateRequest(url: url, httpMethodType: .httpPost) else {
-            // TODO: call completed
+            completed(.failure(.invalidUrl))
             return
         }
         
@@ -87,13 +87,13 @@ class HttpService: BaseService, IHttpService {
             request.httpBody = jsonData
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         } catch let error {
-            completed(.failure(error))
+            completed(.failure(.other(error)))
             return
         }
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if error != nil {
-                completed(.failure(error!))
+                completed(.failure(.other(error!)))
                 return
             }
             
@@ -111,11 +111,11 @@ class HttpService: BaseService, IHttpService {
                 if(restReponse.code == 200) {
                     completed(.success(restReponse))
                 } else {
-                    completed(.failure(OmniError(errorCode: restReponse.code, message: nil)))
+                    completed(.failure(.errCode(restReponse.code, restReponse.message ?? String.Empty)))
                 }
             } catch let error {
                 print(error)
-                completed(.failure(error))
+                completed(.failure(.other(error)))
             }
         }
         
@@ -124,7 +124,7 @@ class HttpService: BaseService, IHttpService {
     
     
     
-    func listenSocket(url: String, received: @escaping (Result<Data?, Error>) -> Void ) {
+    func listenSocket(url: String, received: @escaping (Result<Data?, OmError>) -> Void ) {
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         guard let url = URL(string: url) else {
             return
@@ -137,12 +137,12 @@ class HttpService: BaseService, IHttpService {
             case .success(let message):
                 self.didReceivedSocketMessage(message: message, completed: received)
             case .failure(let error):
-                self.handleError(error: error)
+                self.handleError(error: .other(error))
             }
         }
     }
     
-    private func didReceivedSocketMessage(message: URLSessionWebSocketTask.Message, completed: (Result<Data?, Error>) -> Void ) {
+    private func didReceivedSocketMessage(message: URLSessionWebSocketTask.Message, completed: (Result<Data?, OmError>) -> Void ) {
         switch message {
         case .string(let msg):
             completed(.success(msg.data(using: .utf8)))
@@ -154,8 +154,7 @@ class HttpService: BaseService, IHttpService {
     }
     
     private func generateRequest(url: String, httpMethodType: HttpMethodType) -> URLRequest? {
-        guard let url = URL(string: ApiEndPoint.baseApi + url) else {
-            // TODO: call completed
+        guard let url = URL(string: ApiEndPoint.baseApi + url) else {            
             return nil
         }
         

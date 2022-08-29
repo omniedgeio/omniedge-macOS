@@ -10,6 +10,7 @@ import Foundation
 protocol ICacheService {
     func saveValue(value: Any?, key: String)
     func getValue(forKey: String) -> Any?
+    func clearValueForKey(key: String)
 }
 
 class CacheService: BaseService, ICacheService {
@@ -23,5 +24,10 @@ class CacheService: BaseService, ICacheService {
     
     func getValue(forKey: String) -> Any? {
         return self.userDefault.value(forKey: forKey)
+    }
+    
+    func clearValueForKey(key: String) {
+        self.userDefault.removeObject(forKey: key)
+        self.userDefault.synchronize()
     }
 }

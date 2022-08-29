@@ -42,7 +42,7 @@ class OmniMainMenu: NSMenu {
     
     private func initMainMenu() {
         self.delegate = self
-        self.addMenuItem(title: "Login", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .login)
+        self.addMenuItem(title: "Log in", action: #selector(didLoginMenuItemClicked(_:)), keyEquivalent: String.Empty, menuItemType: .login)
                                         
         self.addItem(NSMenuItem.separator())
         
@@ -118,6 +118,8 @@ class OmniMainMenu: NSMenu {
         self.removeAllItems()
         self.networkMenuItem.removeAll()
         self.myDeviceMenuItem = nil
+        self.menuItems.removeAll()
+        self.menuItems = []
         self.initMainMenu()
     }
     
@@ -176,6 +178,14 @@ class OmniMainMenu: NSMenu {
         let ipAddr = joinedModel?.virtualIp ?? String.Empty
         
         menuItem.detail = "Name:"+"\(deviceName)"+"\nVirutal Network:"+"\(vnName)"+"\nIP address :"+"\(ipAddr)"
+    }
+    
+    private func removeMyDeviceMenuItem() {
+        guard let menuItem = self.myDeviceMenuItem else {
+            return
+        }
+        
+        self.removeItem(menuItem)
     }
     
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
@@ -248,6 +258,12 @@ extension OmniMainMenu: OmniServiceDelegate {
         DispatchQueue.main.async {
         
             self.populateMyDeviceMenuItem(deviceModel: deviceModel, joinedModel: joinedModel, connected: connected)
+        }
+    }
+    
+    func clearRegistedDevice() {
+        DispatchQueue.main.async {
+            self.removeMyDeviceMenuItem()
         }
     }
     

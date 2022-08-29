@@ -8,5 +8,8 @@
 import Foundation
 
 enum OmError: Error {
+    case invalidRsp
+    case invalidUrl
+    case errCode(Int, String)
     case other(Error)
 }

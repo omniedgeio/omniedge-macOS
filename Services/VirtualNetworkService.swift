@@ -11,9 +11,12 @@ protocol VirtualNetworkServiceDelegate: AnyObject {
     func didNetworkListLoaded(networks: [VirtualNetworkModel])
     func didRegisteredDevice(model: DeviceRegisterModel)
     func didJoinedDevice(model: JoinDeviceMode)
+    func didRegisteredDeviceFailed()
 }
 
 protocol IVirtualNetworkService {
+    var failedRegisteDev: Bool { get }
+    
     var delegate: VirtualNetworkServiceDelegate? { get set }
     var curConnectedNetworkId: String? { get }
     func loadNetworks()
@@ -33,6 +36,12 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
         }
     }
     
+    var failedRegisteDev: Bool {
+        get {
+            return self.registerDevFailed
+        }
+    }
+    
     private var httpService: IHttpService
     private var xpcService: IXPCService
     private var deviceRegisterModel: DeviceRegisterModel?
@@ -40,6 +49,7 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     private var deviceModel: DeviceModel?
     private var lastConnectedVNId: String?
     private var networks: [VirtualNetworkModel] = []
+    private var registerDevFailed: Bool = false
     
     init(httpService: IHttpService, xpcService: IXPCService) {
         self.httpService = httpService
@@ -54,13 +64,13 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     func loadNetworks() {
         
         self.httpService.sendGetRequest(url: ApiEndPoint.virtualNetworkList, completed: {
-            [weak self] (result: Result<Response<[VirtualNetworkModel]>, Error>) in
+            [weak self] (result: Result<Response<[VirtualNetworkModel]>, OmError>) in
             switch result {
             case .success(let response):
                 if(response.code == 200) {
                     self?.didLoadNetworkList(networks: response.data)
                 } else {
-                    self?.handleError(error: OmniError(errorCode: response.code, message: nil))
+                    self?.handleError(error: .errCode(response.code, response.message ?? String.Empty))
                 }
             case .failure(let error):
                 self?.handleError(error: error)
@@ -92,11 +102,13 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     
     func registerDevice() {
         self.httpService.sendPostRequest(url: ApiEndPoint.registerDevice, payload: self.deviceModel) {
-            [weak self] (result: Result<Response<DeviceRegisterModel>, Error>) in
+            [weak self] (result: Result<Response<DeviceRegisterModel>, OmError>) in
             switch result {
             case .success(let response):
                 self?.onDeviceRegister(model: response.data)
             case .failure(let error):
+                self?.registerDevFailed = true
+                self?.delegate?.didRegisteredDeviceFailed()
                 self?.handleError(error: error)
             }
         }
@@ -113,7 +125,7 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
         let payload: [String: String] = ["deviceId" : deviceId]
         let joinUrl = "\(ApiEndPoint.virtualNetworkList)\(vnId)/devices/\(deviceId)/join";
         self.httpService.sendPostRequest(url: joinUrl, payload: payload) {
-            [weak self] (result: Result< Response<JoinDeviceMode>, Error>) in
+            [weak self] (result: Result< Response<JoinDeviceMode>, OmError>) in
             switch result {
             case .success(let response):
                 self?.onDeviceJoined(model: response.data, virtualNetworkId: vnId)
@@ -124,7 +136,11 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     }
     
     // MARK: - Private functions -
-    private func didLoadNetworkList(networks: [VirtualNetworkModel]) {
+    private func didLoadNetworkList(networks: [VirtualNetworkModel]?) {
+        guard let networks = networks else {
+            return
+        }
+
         self.networks.removeAll()
         self.networks.append(contentsOf: networks)
         self.delegate?.didNetworkListLoaded(networks: networks)
@@ -134,12 +150,20 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
         return FileManager.default.fileExists(atPath: "/dev/tap0")
     }
     
-    private func onDeviceRegister(model: DeviceRegisterModel) {
+    private func onDeviceRegister(model: DeviceRegisterModel?) {
+        guard let model = model else {
+            return
+        }
+        registerDevFailed = false
         self.deviceRegisterModel = model
         self.delegate?.didRegisteredDevice(model: model)
     }
     
-    private func onDeviceJoined(model: JoinDeviceMode, virtualNetworkId: String) {
+    private func onDeviceJoined(model: JoinDeviceMode?, virtualNetworkId: String) {
+        guard let model = model else {
+            return
+        }
+
         self.lastConnectedVNId = virtualNetworkId
         let vnName = self.networks.first { item in
             item.vnId == virtualNetworkId
@@ -170,7 +194,7 @@ class VirtualNetworkService: BaseService, IVirtualNetworkService {
     
     @discardableResult
     // func runShellAndOutput(_ command: String) -> (Int32, String?) {
-    func runShellAndOutput(_ command: String) -> String? {
+    private func runShellAndOutput(_ command: String) -> String? {
         let task = Process()
         task.launchPath = "/bin/bash"
         task.arguments = ["-c", command]

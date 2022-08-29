@@ -15,6 +15,7 @@ protocol OmniServiceDelegate: AnyObject {
     func didNetworksLoaded(networks: [VirtualNetworkModel])
     func didError(error: OmError)
     func didDeviceJoined(deviceModel: DeviceRegisterModel?, joinedModel: JoinDeviceMode?, connected: Bool)
+    func clearRegistedDevice()
 }
 
 protocol IOmniService: IService {
@@ -179,7 +180,7 @@ extension OmniService: AuthServiceDelegate {
     }
 }
 
-extension OmniService: VirtualNetworkServiceDelegate {
+extension OmniService: VirtualNetworkServiceDelegate {    
     func didNetworkListLoaded(networks: [VirtualNetworkModel]) {
         self.delegate?.didNetworksLoaded(networks: networks)
     }
@@ -209,6 +210,12 @@ extension OmniService: VirtualNetworkServiceDelegate {
             
             self?.updateDevice(connected: success)
         }
+    }
+    
+    func didRegisteredDeviceFailed() {
+        self.cacheService.clearValueForKey(key: UserDefaultKeys.RegisterDevice)
+        self.updateDevice(connected: false)
+        self.delegate?.clearRegistedDevice()
     }
 
     func didRegisteredDevice(model: DeviceRegisterModel) {

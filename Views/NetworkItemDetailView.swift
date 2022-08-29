@@ -18,9 +18,11 @@ class NetworkItemDetailView: BaseView {
     private var seperatorBottomCopnstraint: NSLayoutConstraint?
     private var model: VirtualNetworkModel
     private var deviceItemViews: [OmniLabel] = []
+    private var enableConnection: Bool = true
     
-    init(model: VirtualNetworkModel) {
+    init(model: VirtualNetworkModel, enableConnection: Bool) {
         self.model = model
+        self.enableConnection = enableConnection
         super.init()
         self.initView()
         self.initLayout()
@@ -40,6 +42,7 @@ class NetworkItemDetailView: BaseView {
         self.addSubview(self.connSwitch)
         self.addSubview(self.seperator)
         self.createDeviceItemView()
+        self.connSwitch.isHidden = !self.enableConnection
     }
     
     private func initLayout() {
