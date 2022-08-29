@@ -643,7 +643,7 @@
 		0B7575BE25B44FF900601DC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "Developer ID Installer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 100002;
 				DEVELOPMENT_TEAM = QTRXQATRPQ;

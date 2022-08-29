@@ -42,11 +42,16 @@ class AuthService: BaseService, IAuthService {
     func login() {
         
         self.httpService.sendGetRequest(url: ApiEndPoint.authSession, completed: {
-            [weak self] (result: Result<Response<AuthModel>, Error>) in
+            [weak self] (result: Result<Response<AuthModel>, OmError>) in
             switch result {
             case .success(let response):
-                self?.monitorSessionCodeWSEvent(sessionCode: response.data.sessionId)
-                self?.onAuthurized(model: response.data)
+                if let authModel = response.data {
+                    self?.monitorSessionCodeWSEvent(sessionCode: authModel.sessionId)
+                    self?.onAuthurized(model: authModel)
+                } else {
+                    self?.handleError(error: .invalidRsp)
+                }
+
             case .failure(let error):
                 self?.handleError(error: error)
             }
@@ -84,8 +89,7 @@ class AuthService: BaseService, IAuthService {
             let token = result["token"]
             self.delegate?.didLoginCompleted(token: token)
         } catch let error {
-            self.handleError(error: error)
+            self.handleError(error: .other(error))
         }
-        
     }
 }

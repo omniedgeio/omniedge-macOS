@@ -11,7 +11,7 @@ struct ServerModel: Decodable {
     let serverId: String
     let serverName: String
     let hostAddr: String
-    let countryCode: String
+    let countryCode: String?
     let type: Int
     
     enum CodingKeys: String, CodingKey {

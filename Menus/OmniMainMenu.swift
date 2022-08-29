@@ -178,6 +178,14 @@ class OmniMainMenu: NSMenu {
         menuItem.detail = "Name:"+"\(deviceName)"+"\nVirutal Network:"+"\(vnName)"+"\nIP address :"+"\(ipAddr)"
     }
     
+    private func removeMyDeviceMenuItem() {
+        guard let menuItem = self.myDeviceMenuItem else {
+            return
+        }
+        
+        self.removeItem(menuItem)
+    }
+    
     private func populateNetworkList(networks: [VirtualNetworkModel]) {
         
         self.networkMenuItem.forEach { item in
@@ -248,6 +256,12 @@ extension OmniMainMenu: OmniServiceDelegate {
         DispatchQueue.main.async {
         
             self.populateMyDeviceMenuItem(deviceModel: deviceModel, joinedModel: joinedModel, connected: connected)
+        }
+    }
+    
+    func clearRegistedDevice() {
+        DispatchQueue.main.async {
+            self.removeMyDeviceMenuItem()
         }
     }
     
